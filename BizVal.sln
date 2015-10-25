@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{D10F9A6F-42A9-47C3-B57B-1A4A4736DA4A}"
+	ProjectSection(SolutionItems) = preProject
+		FxCop.ruleset = FxCop.ruleset
+		Settings.StyleCop = Settings.StyleCop
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal.App", "BizVal.App\BizVal.App.csproj", "{035055B3-EEF0-4D5A-8240-FE22F894F6BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{035055B3-EEF0-4D5A-8240-FE22F894F6BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{035055B3-EEF0-4D5A-8240-FE22F894F6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{035055B3-EEF0-4D5A-8240-FE22F894F6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{035055B3-EEF0-4D5A-8240-FE22F894F6BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
