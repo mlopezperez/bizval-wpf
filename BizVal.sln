@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{D10F9A6F-42A9-47C3-B57B-1A4A4736DA4A}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,7 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		Settings.StyleCop = Settings.StyleCop
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal.App", "BizVal.App\BizVal.App.csproj", "{035055B3-EEF0-4D5A-8240-FE22F894F6BE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BDA6FED0-6D31-47EF-BBFA-E587F0652812}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal.Services.Tests", "tests\BizVal.Services.Tests\BizVal.Services.Tests.csproj", "{765C6085-7E12-4009-9E58-BCE2D49E8D99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal", "src\BizVal\BizVal.csproj", "{795DA232-6083-48B6-9E49-17ED6A67E6AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal.App", "src\BizVal.App\BizVal.App.csproj", "{035055B3-EEF0-4D5A-8240-FE22F894F6BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal.Services", "src\BizVal.Services\BizVal.Services.csproj", "{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +25,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{765C6085-7E12-4009-9E58-BCE2D49E8D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765C6085-7E12-4009-9E58-BCE2D49E8D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765C6085-7E12-4009-9E58-BCE2D49E8D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765C6085-7E12-4009-9E58-BCE2D49E8D99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{795DA232-6083-48B6-9E49-17ED6A67E6AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{795DA232-6083-48B6-9E49-17ED6A67E6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{795DA232-6083-48B6-9E49-17ED6A67E6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{795DA232-6083-48B6-9E49-17ED6A67E6AA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{035055B3-EEF0-4D5A-8240-FE22F894F6BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{035055B3-EEF0-4D5A-8240-FE22F894F6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{035055B3-EEF0-4D5A-8240-FE22F894F6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{035055B3-EEF0-4D5A-8240-FE22F894F6BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{765C6085-7E12-4009-9E58-BCE2D49E8D99} = {BDA6FED0-6D31-47EF-BBFA-E587F0652812}
 	EndGlobalSection
 EndGlobal
