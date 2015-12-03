@@ -49,6 +49,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\BizVal.Services\BizVal.Services.csproj">
+      <Project>{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}</Project>
+      <Name>BizVal.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\BizVal\BizVal.csproj">
+      <Project>{795da232-6083-48b6-9e49-17ed6a67e6aa}</Project>
+      <Name>BizVal</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

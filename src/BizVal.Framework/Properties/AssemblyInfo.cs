@@ -5,15 +5,14 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BizVal.Services")]
+[assembly: AssemblyTitle("BizVal.Framework")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Hewlett-Packard")]
-[assembly: AssemblyProduct("BizVal.Services")]
+[assembly: AssemblyProduct("BizVal.Framework")]
 [assembly: AssemblyCopyright("Copyright © Hewlett-Packard 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: InternalsVisibleTo("BizVal.Services.Tests")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -21,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("878f637d-80ca-4350-891d-0aa9d93aeff8")]
+[assembly: Guid("c54db3fe-be88-453f-8f0a-6437fbefa35c")]
 
 // Version information for an assembly consists of the following four values:
 //

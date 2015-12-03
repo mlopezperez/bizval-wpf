@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}</ProjectGuid>
+    <ProjectGuid>{0659840A-E7FD-462B-B866-7DBF64841BC3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BizVal.Services</RootNamespace>
-    <AssemblyName>BizVal.Services</AssemblyName>
+    <RootNamespace>BizVal.Framework</RootNamespace>
+    <AssemblyName>BizVal.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,18 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompanyValuator.cs" />
+    <Compile Include="Contract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BizVal.Framework\BizVal.Framework.csproj">
-      <Project>{0659840a-e7fd-462b-b866-7dbf64841bc3}</Project>
-      <Name>BizVal.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BizVal\BizVal.csproj">
-      <Project>{795DA232-6083-48B6-9E49-17ED6A67E6AA}</Project>
-      <Name>BizVal</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
