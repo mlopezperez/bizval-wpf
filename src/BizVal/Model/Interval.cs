@@ -41,29 +41,11 @@ namespace BizVal.Model
             return string.Format("LowerBound: {0}, UpperBound: {1}", this.LowerBound, this.UpperBound);
         }
 
-        public static Interval operator +(Interval interval, int number)
-        {
-            return number + interval;
-        }
-
         public static Interval operator +(Interval interval, float number)
         {
             return number + interval;
         }
 
-        public static Interval operator +(int number, Interval interval)
-        {
-            Interval result = null;
-            if (interval != null)
-            {
-                result = new Interval()
-                {
-                    LowerBound = interval.LowerBound + number,
-                    UpperBound = interval.UpperBound + number,
-                };
-            }
-            return result;
-        }
 
         public static Interval operator +(float number, Interval interval)
         {
@@ -75,6 +57,7 @@ namespace BizVal.Model
                     LowerBound = interval.LowerBound + number,
                     UpperBound = interval.UpperBound + number,
                 };
+                CheckReorderInterval(result);
             }
             return result;
         }
@@ -89,13 +72,9 @@ namespace BizVal.Model
                     LowerBound = interval1.LowerBound + interval2.LowerBound,
                     UpperBound = interval1.UpperBound + interval2.UpperBound,
                 };
+                CheckReorderInterval(result);
             }
             return result;
-        }
-
-        public static Interval operator *(Interval interval, int number)
-        {
-            return number * interval;
         }
 
         public static Interval operator *(Interval interval, float number)
@@ -103,19 +82,6 @@ namespace BizVal.Model
             return number * interval;
         }
 
-        public static Interval operator *(int number, Interval interval)
-        {
-            Interval result = null;
-            if (interval != null)
-            {
-                result = new Interval()
-                {
-                    LowerBound = interval.LowerBound * number,
-                    UpperBound = interval.UpperBound * number,
-                };
-            }
-            return result;
-        }
 
         public static Interval operator *(float number, Interval interval)
         {
@@ -127,6 +93,7 @@ namespace BizVal.Model
                     LowerBound = interval.LowerBound * number,
                     UpperBound = interval.UpperBound * number,
                 };
+                CheckReorderInterval(result);
             }
             return result;
         }
@@ -141,24 +108,12 @@ namespace BizVal.Model
                     LowerBound = interval1.LowerBound * interval2.LowerBound,
                     UpperBound = interval1.UpperBound * interval2.UpperBound,
                 };
+                CheckReorderInterval(result);
             }
             return result;
         }
 
 
-        public static Interval operator /(Interval interval, int number)
-        {
-            Interval result = null;
-            if (interval != null)
-            {
-                result = new Interval()
-                {
-                    LowerBound = interval.LowerBound / number,
-                    UpperBound = interval.UpperBound / number,
-                };
-            }
-            return result;
-        }
 
         public static Interval operator /(Interval interval, float number)
         {
@@ -170,6 +125,22 @@ namespace BizVal.Model
                     LowerBound = interval.LowerBound / number,
                     UpperBound = interval.UpperBound / number,
                 };
+                CheckReorderInterval(result);
+            }
+            return result;
+        }
+
+        public static Interval operator /(float number, Interval interval)
+        {
+            Interval result = null;
+            if (interval != null)
+            {
+                result = new Interval()
+                {
+                    LowerBound = number / interval.LowerBound,
+                    UpperBound = number / interval.UpperBound,
+                };
+                CheckReorderInterval(result);
             }
             return result;
         }
@@ -184,6 +155,7 @@ namespace BizVal.Model
                     LowerBound = interval1.LowerBound / interval2.LowerBound,
                     UpperBound = interval1.UpperBound / interval2.UpperBound,
                 };
+                CheckReorderInterval(result);
             }
             return result;
         }
@@ -198,8 +170,19 @@ namespace BizVal.Model
                     LowerBound = (float)Math.Pow(interval.LowerBound, number),
                     UpperBound = (float)Math.Pow(interval.UpperBound, number),
                 };
+                CheckReorderInterval(result);
             }
             return result;
+        }
+
+        private static void CheckReorderInterval(Interval result)
+        {
+            if (result.LowerBound > result.UpperBound)
+            {
+                var lowerBound = result.LowerBound;
+                result.LowerBound = result.UpperBound;
+                result.UpperBound = lowerBound;
+            }
         }
 
 

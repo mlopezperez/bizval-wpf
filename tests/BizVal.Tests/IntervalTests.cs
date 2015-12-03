@@ -182,8 +182,8 @@ namespace BizVal.Tests
             Interval i2 = new Interval(2f, 10f);
             var result = i1/i2;
             Assert.NotNull(result);
-            Assert.AreEqual(1.1f, result.LowerBound);
-            Assert.AreEqual(.55f, result.UpperBound);
+            Assert.AreEqual(1.1f, result.UpperBound);
+            Assert.AreEqual(.55f, result.LowerBound);
         }
     }
 }
