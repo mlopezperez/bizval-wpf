@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace BizVal
 {
+    [Serializable]
     public class ValuationException: Exception
     {
         public ValuationException()
