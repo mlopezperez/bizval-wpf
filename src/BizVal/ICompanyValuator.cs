@@ -6,6 +6,6 @@ namespace BizVal
     public interface ICompanyValuator
     {
         Interval Cashflow(IList<Interval> expectedCashflows, IList<Interval> expectedWaccs);
-        Interval MixedAnalysis(float substantialValue, IList<Interval> expectedBenefits, IList<Interval> expectedInterests);
+        Interval MixedAnalysis(decimal substantialValue, IList<Interval> expectedBenefits, IList<Interval> expectedInterests);
     }
 }

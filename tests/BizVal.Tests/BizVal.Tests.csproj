@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntervalTests.cs" />
+    <Compile Include="Model\IntervalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TermSetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

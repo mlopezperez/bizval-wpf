@@ -2,7 +2,7 @@
 using BizVal.Model;
 using NUnit.Framework;
 
-namespace BizVal.Tests
+namespace BizVal.Tests.Model
 {
     [TestFixture]
     public class IntervalTests
@@ -10,7 +10,7 @@ namespace BizVal.Tests
         [Test]
         public void CreateIntervalWithBadBoundaries()
         {
-            Assert.Throws<ArgumentException>(() => new Interval(10f, 2f));
+            Assert.Throws<ArgumentException>(() => new Interval(10m, 2m));
         }
 
         [Test]
@@ -21,9 +21,9 @@ namespace BizVal.Tests
         }
 
         [Test]
-        public void SumFloatAndNullIntervalTest()
+        public void SumdecimalAndNullIntervalTest()
         {
-            var result = 0f + (Interval)null;
+            var result = 0m + (Interval)null;
             Assert.Null(result);
         }
 
@@ -39,7 +39,7 @@ namespace BizVal.Tests
         [Test]
         public void SumZeroIntegerAndIntervalTest()
         {
-            var result = 0 + new Interval(1f, 1f);
+            var result = 0 + new Interval(1m, 1m);
             Assert.NotNull(result);
             Assert.AreEqual(1f, result.LowerBound);
             Assert.AreEqual(1f, result.UpperBound);
@@ -48,34 +48,34 @@ namespace BizVal.Tests
         [Test]
         public void SumNonZeroIntegerAndIntervalTest()
         {
-            var result = 5 + new Interval(1f, 1f);
+            var result = 5 + new Interval(1m, 1m);
             Assert.NotNull(result);
             Assert.AreEqual(6f, result.LowerBound);
             Assert.AreEqual(6f, result.UpperBound);
         }
 
         [Test]
-        public void SumFloatAndEmptyIntervalTest()
+        public void SumdecimalAndEmptyIntervalTest()
         {
-            var result = 0f + new Interval();
+            var result = 0m + new Interval();
             Assert.NotNull(result);
             Assert.AreEqual(0f, result.LowerBound);
             Assert.AreEqual(0f, result.UpperBound);
         }
 
         [Test]
-        public void SumZeroFloatAndIntervalTest()
+        public void SumZerodecimalAndIntervalTest()
         {
-            var result = 0f + new Interval(1f, 1f);
+            var result = 0m + new Interval(1m, 1m);
             Assert.NotNull(result);
             Assert.AreEqual(1f, result.LowerBound);
             Assert.AreEqual(1f, result.UpperBound);
         }
 
         [Test]
-        public void SumNonZeroFloatAndIntervalTest()
+        public void SumNonZerodecimalAndIntervalTest()
         {
-            var result = 2.45f + new Interval(1f, 1f);
+            var result = 2.45m + new Interval(1m, 1m);
             Assert.NotNull(result);
             Assert.AreEqual(3.45f, result.LowerBound);
             Assert.AreEqual(3.45f, result.UpperBound);
@@ -89,9 +89,9 @@ namespace BizVal.Tests
         }
 
         [Test]
-        public void ProductFloatAndNullIntervalTest()
+        public void ProductdecimalAndNullIntervalTest()
         {
-            var result = 0f * (Interval)null;
+            var result = 0 * (Interval)null;
             Assert.Null(result);
         }
 
@@ -107,7 +107,7 @@ namespace BizVal.Tests
         [Test]
         public void ProductZeroIntegerAndIntervalTest()
         {
-            var result = 1 * new Interval(3f, 3f);
+            var result = 1 * new Interval(3, 3);
             Assert.NotNull(result);
             Assert.AreEqual(3f, result.LowerBound);
             Assert.AreEqual(3f, result.UpperBound);
@@ -116,7 +116,7 @@ namespace BizVal.Tests
         [Test]
         public void ProductNonZeroIntegerAndIntervalTest()
         {
-            var result = 2 * new Interval(0.2f, 0.2f);
+            var result = 2 * new Interval(0.2m, 0.2m);
             Assert.NotNull(result);
             Assert.AreEqual(0.4f, result.LowerBound);
             Assert.AreEqual(0.4f, result.UpperBound);
@@ -143,8 +143,8 @@ namespace BizVal.Tests
         [Test]
         public void SumTwoIntervals()
         {
-            Interval i1 = new Interval(1f, 2.2f);
-            Interval i2 = new Interval(0f, 2.1f);
+            Interval i1 = new Interval(1, 2.2m);
+            Interval i2 = new Interval(0, 2.1m);
             var result = i1 + i2;
             Assert.NotNull(result);
             Assert.AreEqual(1f, result.LowerBound);
@@ -172,15 +172,15 @@ namespace BizVal.Tests
         {
             Interval i1 = new Interval();
             Interval i2 = null;
-            Assert.IsNull(i1/i2);
+            Assert.IsNull(i1 / i2);
         }
 
         [Test]
         public void DivideIntervals()
         {
-            Interval i1 = new Interval(2.2f, 5.5f);
-            Interval i2 = new Interval(2f, 10f);
-            var result = i1/i2;
+            Interval i1 = new Interval(2.2m, 5.5m);
+            Interval i2 = new Interval(2, 10);
+            var result = i1 / i2;
             Assert.NotNull(result);
             Assert.AreEqual(1.1f, result.UpperBound);
             Assert.AreEqual(.55f, result.LowerBound);

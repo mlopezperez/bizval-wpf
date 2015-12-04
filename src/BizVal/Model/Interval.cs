@@ -4,15 +4,15 @@ namespace BizVal.Model
 {
     public class Interval
     {
-        public float LowerBound { get; set; }
+        public decimal LowerBound { get; set; }
 
-        public float UpperBound { get; set; }
+        public decimal UpperBound { get; set; }
 
         public Interval()
         {
         }
 
-        public Interval(float lowerBound, float upperBound)
+        public Interval(decimal lowerBound, decimal upperBound)
         {
             if (lowerBound > upperBound)
             {
@@ -41,13 +41,13 @@ namespace BizVal.Model
             return string.Format("LowerBound: {0}, UpperBound: {1}", this.LowerBound, this.UpperBound);
         }
 
-        public static Interval operator +(Interval interval, float number)
+        public static Interval operator +(Interval interval, decimal number)
         {
             return number + interval;
         }
 
 
-        public static Interval operator +(float number, Interval interval)
+        public static Interval operator +(decimal number, Interval interval)
         {
             Interval result = null;
             if (interval != null)
@@ -77,13 +77,13 @@ namespace BizVal.Model
             return result;
         }
 
-        public static Interval operator *(Interval interval, float number)
+        public static Interval operator *(Interval interval, decimal number)
         {
             return number * interval;
         }
 
 
-        public static Interval operator *(float number, Interval interval)
+        public static Interval operator *(decimal number, Interval interval)
         {
             Interval result = null;
             if (interval != null)
@@ -115,7 +115,7 @@ namespace BizVal.Model
 
 
 
-        public static Interval operator /(Interval interval, float number)
+        public static Interval operator /(Interval interval, decimal number)
         {
             Interval result = null;
             if (interval != null)
@@ -130,7 +130,7 @@ namespace BizVal.Model
             return result;
         }
 
-        public static Interval operator /(float number, Interval interval)
+        public static Interval operator /(decimal number, Interval interval)
         {
             Interval result = null;
             if (interval != null)
@@ -160,15 +160,15 @@ namespace BizVal.Model
             return result;
         }
 
-        public static Interval operator ^(Interval interval, float number)
+        public static Interval operator ^(Interval interval, decimal number)
         {
             Interval result = null;
             if (interval != null)
             {
                 result = new Interval()
                 {
-                    LowerBound = (float)Math.Pow(interval.LowerBound, number),
-                    UpperBound = (float)Math.Pow(interval.UpperBound, number),
+                    LowerBound = (decimal)Math.Pow((double) interval.LowerBound, (double) number),
+                    UpperBound = (decimal)Math.Pow((double) interval.UpperBound, (double) number),
                 };
                 CheckReorderInterval(result);
             }

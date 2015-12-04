@@ -39,9 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CwAggregator.cs" />
+    <Compile Include="Model\Expertise.cs" />
     <Compile Include="ICompanyValuator.cs" />
+    <Compile Include="ICwAggregator.cs" />
     <Compile Include="Model\Interval.cs" />
+    <Compile Include="Model\TermSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\Term.cs" />
+    <Compile Include="Model\TwoTuple.cs" />
     <Compile Include="ValuationException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

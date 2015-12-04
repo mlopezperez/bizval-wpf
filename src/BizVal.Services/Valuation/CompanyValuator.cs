@@ -2,7 +2,7 @@
 using BizVal.Framework;
 using BizVal.Model;
 
-namespace BizVal.Services
+namespace BizVal.Services.Valuation
 {
     internal class CompanyValuator : ICompanyValuator
     {
@@ -24,7 +24,7 @@ namespace BizVal.Services
             return result;
         }
 
-        public Interval MixedAnalysis(float substantialValue, IList<Interval> expectedBenefits, IList<Interval> expectedInterests)
+        public Interval MixedAnalysis(decimal substantialValue, IList<Interval> expectedBenefits, IList<Interval> expectedInterests)
         {
             Contract.NotNull(expectedBenefits, "expectedBenefits;");
             Contract.NotNull(expectedInterests, "expectedInterests");
