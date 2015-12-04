@@ -43,6 +43,7 @@
     <Compile Include="Model\Expertise.cs" />
     <Compile Include="ICompanyValuator.cs" />
     <Compile Include="ICwAggregator.cs" />
+    <Compile Include="Model\Hierarchy.cs" />
     <Compile Include="Model\Interval.cs" />
     <Compile Include="Model\TermSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

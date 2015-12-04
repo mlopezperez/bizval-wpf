@@ -10,5 +10,14 @@
             this.Index = index;
             this.Name = name;
         }
+
+        public TwoTuple Theta()
+        {
+            return new TwoTuple
+            {
+                Alpha = 0m,
+                Term = this
+            };
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BizVal.Model;
+﻿using BizVal.Framework;
+using BizVal.Model;
 
 namespace BizVal.Services.CwAggregation
 {
@@ -8,12 +9,12 @@ namespace BizVal.Services.CwAggregation
 
         public CwAggregator(IExpertiseStandardizer standardizer)
         {
-            this.standardizer = standardizer;
+            this.standardizer = Contract.NotNull(standardizer, "standardizer");
         }
 
         Interval ICwAggregator.AggregateByExpertone(Expertise expertise)
         {
-            //var standardExpertise = this.standardizer.Standardize(expertise);
+            var standardExpertise = this.standardizer.Standardize(expertise);
             // Get cardinalities
             // Create expertone
             // Get R-Expertone
