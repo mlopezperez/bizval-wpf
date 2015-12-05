@@ -1,18 +1,65 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace BizVal.Model
 {
-    public class Hierarchy : ICollection<TermSet>
+    public class Hierarchy : ICollection<LabelSet>
     {
-        private readonly SortedList<int, TermSet> levels;
+        private readonly SortedList<int, LabelSet> levels;
+
+        /// <summary>
+        /// Gets the <see cref="LabelSet"/> with the specified key.
+        /// </summary>
+        /// <value>
+        /// The <see cref="LabelSet"/>.
+        /// </value>
+        /// <param name="key">The key.</param>
+        /// <returns>The label set.</returns>
+        public LabelSet this[int key]
+        {
+            get { return this.levels[key]; }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Hierarchy"/> class.
         /// </summary>
         public Hierarchy()
         {
-            this.levels = new SortedList<int, TermSet>();
+            this.levels = new SortedList<int, LabelSet>();
+        }
+
+        /// <summary>
+        /// Translates the specified source.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="gSource">The g source.</param>
+        /// <param name="gFinish">The g goal.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">Source level or destination level does not exist in current hierarchy</exception>
+        public TwoTuple Translate(TwoTuple source, int gSource, int gFinish)
+        {
+            if (!this.ContainsLevel(gSource) || !this.ContainsLevel(gFinish) || gSource > gFinish)
+            {
+                throw new ArgumentException("Source level or destination level does not exist in current hierarchy");
+            }
+
+            var sourceLevel = this.levels[gSource];
+            var destinationLevel = this.levels[gFinish];
+            decimal beta = (sourceLevel.DeltaInv(source) * (destinationLevel.Count - 1)) / (sourceLevel.Count - 1);
+
+            TwoTuple result = destinationLevel.Delta(beta);
+            return result;
+        }
+
+        /// <summary>
+        /// Determines whether current hierarchy contains a level with the given cardinality.
+        /// </summary>
+        /// <param name="cardinality">The cardinality.</param>
+        /// <returns>True if the hierarchy contains a level with the given cardinality.</returns>
+        public bool ContainsLevel(int cardinality)
+        {
+            return this.levels.ContainsKey(cardinality);
         }
 
         /// <summary>
@@ -21,7 +68,7 @@ namespace BizVal.Model
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
         /// </returns>
-        public IEnumerator<TermSet> GetEnumerator()
+        public IEnumerator<LabelSet> GetEnumerator()
         {
             return this.levels.Values.GetEnumerator();
         }
@@ -41,9 +88,9 @@ namespace BizVal.Model
         /// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1" />.
         /// </summary>
         /// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-        public void Add(TermSet item)
+        public void Add(LabelSet item)
         {
-            this.levels.Add(item.G, item);
+            this.levels.Add(item.Count, item);
         }
 
         /// <summary>
@@ -61,9 +108,9 @@ namespace BizVal.Model
         /// <returns>
         /// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
         /// </returns>
-        public bool Contains(TermSet item)
+        public bool Contains(LabelSet item)
         {
-            return this.levels.ContainsKey(item.G);
+            return this.levels.ContainsKey(item.Count);
         }
 
         /// <summary>
@@ -71,7 +118,7 @@ namespace BizVal.Model
         /// </summary>
         /// <param name="array">The array.</param>
         /// <param name="arrayIndex">Index of the array.</param>
-        public void CopyTo(TermSet[] array, int arrayIndex)
+        public void CopyTo(LabelSet[] array, int arrayIndex)
         {
             this.levels.Values.CopyTo(array, arrayIndex);
         }
@@ -83,9 +130,9 @@ namespace BizVal.Model
         /// <returns>
         /// true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
         /// </returns>
-        public bool Remove(TermSet item)
+        public bool Remove(LabelSet item)
         {
-            return this.levels.Remove(item.G);
+            return this.levels.Remove(item.Count);
         }
 
         /// <summary>

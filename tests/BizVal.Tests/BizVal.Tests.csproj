@@ -43,9 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\HierarchyTests.cs" />
     <Compile Include="Model\IntervalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TermSetTests.cs" />
+    <Compile Include="Model\LabelSetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

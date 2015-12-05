@@ -5,9 +5,26 @@ using System.Linq;
 
 namespace BizVal.Model
 {
-    public class TermSet : ICollection<Term>
+    /// <summary>
+    /// Encapsulates a set of linguistic labels and its related functions.
+    /// </summary>
+    /// <seealso cref="System.Collections.Generic.ICollection{BizVal.Model.Label}" />
+    public class LabelSet : ICollection<Label>
     {
-        private readonly SortedList<int, Term> terms;
+        private readonly SortedList<int, Label> labels;
+
+        /// <summary>
+        /// Gets the <see cref="Label"/> with the specified key.
+        /// </summary>
+        /// <value>
+        /// The <see cref="Label"/>.
+        /// </value>
+        /// <param name="key">The key.</param>
+        /// <returns>The label.</returns>
+        public Label this[int key]
+        {
+            get { return this.labels[key]; }
+        }
 
         /// <summary>
         /// Gets the index of the greater term in the set.
@@ -19,7 +36,7 @@ namespace BizVal.Model
         {
             get
             {
-                var last = this.terms.Values.LastOrDefault();
+                var last = this.labels.Values.LastOrDefault();
                 return last == null ? 0 : last.Index;
             }
         }
@@ -29,7 +46,7 @@ namespace BizVal.Model
         /// </summary>
         public int Count
         {
-            get { return this.terms.Count; }
+            get { return this.labels.Count; }
         }
 
         /// <summary>
@@ -41,11 +58,11 @@ namespace BizVal.Model
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TermSet"/> class.
+        /// Initializes a new instance of the <see cref="LabelSet"/> class.
         /// </summary>
-        public TermSet()
+        public LabelSet()
         {
-            this.terms = new SortedList<int, Term>();
+            this.labels = new SortedList<int, Label>();
         }
 
         /// <summary>
@@ -64,7 +81,7 @@ namespace BizVal.Model
             var termIndex = (int)Math.Round(beta, MidpointRounding.ToEven);
             var result = new TwoTuple()
             {
-                Term = this.terms[termIndex],
+                Label = this.labels[termIndex],
                 Alpha = beta - termIndex
             };
 
@@ -79,12 +96,12 @@ namespace BizVal.Model
         /// <exception cref="System.ArgumentException">2-Tuple not valid to get a numeric value from it with the current set.</exception>
         public decimal DeltaInv(TwoTuple tuple)
         {
-            if ((tuple.Term == null) || tuple.Term.Index > this.G || tuple.Term.Index < 0)
+            if ((tuple.Label == null) || tuple.Label.Index > this.G || tuple.Label.Index < 0)
             {
                 throw new ArgumentException("2-Tuple not valid to get a numeric value from it with the current set.");
             }
 
-            var result = tuple.Term.Index + tuple.Alpha;
+            var result = tuple.Label.Index + tuple.Alpha;
             return result;
         }
 
@@ -94,9 +111,9 @@ namespace BizVal.Model
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
         /// </returns>
-        public IEnumerator<Term> GetEnumerator()
+        public IEnumerator<Label> GetEnumerator()
         {
-            return this.terms.Values.GetEnumerator();
+            return this.labels.Values.GetEnumerator();
         }
 
         /// <summary>
@@ -107,16 +124,16 @@ namespace BizVal.Model
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.terms.Values.GetEnumerator();
+            return this.labels.Values.GetEnumerator();
         }
 
         /// <summary>
         /// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1" />.
         /// </summary>
         /// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-        public void Add(Term item)
+        public void Add(Label item)
         {
-            this.terms.Add(item.Index, item);
+            this.labels.Add(item.Index, item);
         }
 
         /// <summary>
@@ -124,7 +141,7 @@ namespace BizVal.Model
         /// </summary>
         public void Clear()
         {
-            this.terms.Clear();
+            this.labels.Clear();
         }
 
         /// <summary>
@@ -134,9 +151,9 @@ namespace BizVal.Model
         /// <returns>
         /// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
         /// </returns>
-        public bool Contains(Term item)
+        public bool Contains(Label item)
         {
-            return this.terms.ContainsKey(item.Index);
+            return this.labels.ContainsKey(item.Index);
         }
 
         /// <summary>
@@ -144,9 +161,9 @@ namespace BizVal.Model
         /// </summary>
         /// <param name="array">The array.</param>
         /// <param name="arrayIndex">Index of the array.</param>
-        public void CopyTo(Term[] array, int arrayIndex)
+        public void CopyTo(Label[] array, int arrayIndex)
         {
-            this.terms.Values.CopyTo(array, arrayIndex);
+            this.labels.Values.CopyTo(array, arrayIndex);
         }
 
         /// <summary>
@@ -156,9 +173,9 @@ namespace BizVal.Model
         /// <returns>
         /// true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
         /// </returns>
-        public bool Remove(Term item)
+        public bool Remove(Label item)
         {
-            return this.terms.Remove(item.Index);
+            return this.labels.Remove(item.Index);
         }
     }
 }

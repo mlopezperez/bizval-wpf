@@ -11,11 +11,11 @@
         public decimal Alpha { get; set; }
 
         /// <summary>
-        /// Gets or sets the term.
+        /// Gets or sets the label.
         /// </summary>
         /// <value>
-        /// The term.
+        /// The label.
         /// </value>
-        public Term Term { get; set; }
+        public Label Label { get; set; }
     }
 }

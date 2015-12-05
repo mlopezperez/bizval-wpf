@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BizVal.Model;
 using NUnit.Framework;
 
-namespace BizVal.Tests
+namespace BizVal.Tests.Model
 {
     [TestFixture]
-    public class TermSetTests
+    public class LabelSetTests
     {
         [Test]
         public void DeltaThrowsIfBetaLowerThanZero()
@@ -32,8 +28,8 @@ namespace BizVal.Tests
             var result = set.Delta(1);
 
             Assert.NotNull(result);
-            Assert.NotNull(result.Term);
-            Assert.AreEqual(1, result.Term.Index);
+            Assert.NotNull(result.Label);
+            Assert.AreEqual(1, result.Label.Index);
 
             Assert.AreEqual(0, result.Alpha);
         }
@@ -45,8 +41,8 @@ namespace BizVal.Tests
             var result = set.Delta(0);
 
             Assert.NotNull(result);
-            Assert.NotNull(result.Term);
-            Assert.AreEqual(0, result.Term.Index);
+            Assert.NotNull(result.Label);
+            Assert.AreEqual(0, result.Label.Index);
 
             Assert.AreEqual(0, result.Alpha);
         }
@@ -58,8 +54,8 @@ namespace BizVal.Tests
             var result = set.Delta(2);
 
             Assert.NotNull(result);
-            Assert.NotNull(result.Term);
-            Assert.AreEqual(2, result.Term.Index);
+            Assert.NotNull(result.Label);
+            Assert.AreEqual(2, result.Label.Index);
 
             Assert.AreEqual(0, result.Alpha);
         }
@@ -71,8 +67,8 @@ namespace BizVal.Tests
             var result = set.Delta(1.7m);
 
             Assert.NotNull(result);
-            Assert.NotNull(result.Term);
-            Assert.AreEqual(2, result.Term.Index);
+            Assert.NotNull(result.Label);
+            Assert.AreEqual(2, result.Label.Index);
 
             Assert.AreEqual(-0.3f, result.Alpha);
         }
@@ -84,8 +80,8 @@ namespace BizVal.Tests
             var result = set.Delta(1.5m);
 
             Assert.NotNull(result);
-            Assert.NotNull(result.Term);
-            Assert.AreEqual(2, result.Term.Index);
+            Assert.NotNull(result.Label);
+            Assert.AreEqual(2, result.Label.Index);
 
             Assert.AreEqual(-0.5f, result.Alpha);
         }
@@ -97,8 +93,8 @@ namespace BizVal.Tests
             var result = set.Delta(1.499m);
 
             Assert.NotNull(result);
-            Assert.NotNull(result.Term);
-            Assert.AreEqual(1, result.Term.Index);
+            Assert.NotNull(result.Label);
+            Assert.AreEqual(1, result.Label.Index);
 
             Assert.AreEqual(0.499f, result.Alpha);
         }
@@ -110,7 +106,7 @@ namespace BizVal.Tests
             var result = set.DeltaInv(new TwoTuple()
             {
                 Alpha = -0.5m,
-                Term = new Term(1, "Medio")
+                Label = new Label(1, "Medio")
             });
 
             Assert.AreEqual(0.5m, result);
@@ -123,7 +119,7 @@ namespace BizVal.Tests
             var result = set.DeltaInv(new TwoTuple()
             {
                 Alpha = 0m,
-                Term = new Term(0, "Poco")
+                Label = new Label(0, "Poco")
             });
 
             Assert.AreEqual(0, result);
@@ -136,7 +132,7 @@ namespace BizVal.Tests
             var result = set.DeltaInv(new TwoTuple()
             {
                 Alpha = 0m,
-                Term = new Term(2, "Mucho")
+                Label = new Label(2, "Mucho")
             });
 
             Assert.AreEqual(2, result);
@@ -151,7 +147,7 @@ namespace BizVal.Tests
                 set.DeltaInv(new TwoTuple()
                 {
                     Alpha = 0m,
-                    Term = new Term(-1, "Invalid")
+                    Label = new Label(-1, "Invalid")
                 }));
         }
 
@@ -164,17 +160,17 @@ namespace BizVal.Tests
                 set.DeltaInv(new TwoTuple()
                 {
                     Alpha = 0m,
-                    Term = new Term(3, "Invalid")
+                    Label = new Label(3, "Invalid")
                 }));
         }
 
 
-        private TermSet GetTermSet()
+        private LabelSet GetTermSet()
         {
-            var termSet = new TermSet();
-            termSet.Add(new Term(0, "Poco"));
-            termSet.Add(new Term(1, "Medio"));
-            termSet.Add(new Term(2, "Mucho"));
+            var termSet = new LabelSet();
+            termSet.Add(new Label(0, "Poco"));
+            termSet.Add(new Label(1, "Medio"));
+            termSet.Add(new Label(2, "Mucho"));
 
             return termSet;
         }

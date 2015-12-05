@@ -4,14 +4,35 @@ namespace BizVal.Model
 {
     public class Interval
     {
+        /// <summary>
+        /// Gets or sets the lower bound.
+        /// </summary>
+        /// <value>
+        /// The lower bound.
+        /// </value>
         public decimal LowerBound { get; set; }
 
+        /// <summary>
+        /// Gets or sets the upper bound.
+        /// </summary>
+        /// <value>
+        /// The upper bound.
+        /// </value>
         public decimal UpperBound { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Interval"/> class.
+        /// </summary>
         public Interval()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Interval"/> class.
+        /// </summary>
+        /// <param name="lowerBound">The lower bound.</param>
+        /// <param name="upperBound">The upper bound.</param>
+        /// <exception cref="System.ArgumentException">Lower bound is greater then upper bound</exception>
         public Interval(decimal lowerBound, decimal upperBound)
         {
             if (lowerBound > upperBound)
@@ -28,6 +49,12 @@ namespace BizVal.Model
             return this.LowerBound.Equals(other.LowerBound) && this.UpperBound.Equals(other.UpperBound);
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             unchecked
@@ -36,6 +63,12 @@ namespace BizVal.Model
             }
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return string.Format("LowerBound: {0}, UpperBound: {1}", this.LowerBound, this.UpperBound);
@@ -167,8 +200,8 @@ namespace BizVal.Model
             {
                 result = new Interval()
                 {
-                    LowerBound = (decimal)Math.Pow((double) interval.LowerBound, (double) number),
-                    UpperBound = (decimal)Math.Pow((double) interval.UpperBound, (double) number),
+                    LowerBound = (decimal)Math.Pow((double)interval.LowerBound, (double)number),
+                    UpperBound = (decimal)Math.Pow((double)interval.UpperBound, (double)number),
                 };
                 CheckReorderInterval(result);
             }
