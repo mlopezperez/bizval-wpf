@@ -1,11 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BizVal.Model
 {
-    public class Expertise
+    public class Expertise<T> where T : IComparable<T>
     {
         public Interval Interval { get; set; }
-        public Dictionary<TwoTuple, int> LowerBoundCardinalities { get; set; }
-        public Dictionary<TwoTuple, int> UpperBoundCardinalities { get; set; }
+        public Dictionary<T, Cardinality> Cardinalities { get; set; }
+
+        public Expertise(Interval interval)
+        {
+            this.Cardinalities = new Dictionary<T, Cardinality>();
+            this.Interval = interval;
+        }
     }
 }

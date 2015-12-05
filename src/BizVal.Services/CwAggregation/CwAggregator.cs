@@ -12,7 +12,7 @@ namespace BizVal.Services.CwAggregation
             this.standardizer = Contract.NotNull(standardizer, "standardizer");
         }
 
-        Interval ICwAggregator.AggregateByExpertone(Expertise expertise)
+        Interval ICwAggregator.AggregateByExpertone(LinguisticExpertise expertise)
         {
             var standardExpertise = this.standardizer.Standardize(expertise);
             // Get cardinalities

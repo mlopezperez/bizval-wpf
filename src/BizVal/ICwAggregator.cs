@@ -4,6 +4,6 @@ namespace BizVal
 {
     public interface ICwAggregator
     {
-        Interval AggregateByExpertone(Expertise expertise);
+        Interval AggregateByExpertone(LinguisticExpertise expertise);
     }
 }

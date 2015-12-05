@@ -1,6 +1,8 @@
-﻿namespace BizVal.Model
+﻿using System;
+
+namespace BizVal.Model
 {
-    public class TwoTuple
+    public class TwoTuple : IComparable<TwoTuple>
     {
         /// <summary>
         /// Gets or sets the alpha.
@@ -17,5 +19,17 @@
         /// The label.
         /// </value>
         public Label Label { get; set; }
+
+        public int CompareTo(TwoTuple other)
+        {
+            if (this.Label != other.Label)
+            {
+                return this.Label.CompareTo(other.Label);
+            }
+            else
+            {
+                return this.Alpha.CompareTo(other.Alpha);
+            }
+        }
     }
 }

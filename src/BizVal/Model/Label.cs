@@ -1,9 +1,11 @@
-﻿namespace BizVal.Model
+﻿using System;
+
+namespace BizVal.Model
 {
     /// <summary>
     /// Encapsulates a linguistic label and its related functions.
     /// </summary>
-    public class Label
+    public class Label : IComparable<Label>
     {
         /// <summary>
         /// Gets or sets the index.
@@ -43,6 +45,11 @@
                 Alpha = 0m,
                 Label = this
             };
+        }
+
+        public int CompareTo(Label other)
+        {
+            return this.Index.CompareTo(other.Index);
         }
     }
 }

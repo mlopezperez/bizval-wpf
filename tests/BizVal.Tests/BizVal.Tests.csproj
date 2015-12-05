@@ -36,13 +36,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ExpertoneTests.cs" />
     <Compile Include="Model\HierarchyTests.cs" />
     <Compile Include="Model\IntervalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,6 +4,11 @@ namespace BizVal.Services
 {
     interface IExpertiseStandardizer
     {
-        Expertise Standardize(Expertise expertise);
+        /// <summary>
+        /// Standardizes the specified expertise.
+        /// </summary>
+        /// <param name="expertise">The expertise.</param>
+        /// <returns>A standarized expertise.</returns>
+        LinguisticExpertise Standardize(LinguisticExpertise expertise);
     }
 }

@@ -32,17 +32,16 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CwAggregator.cs" />
+    <Compile Include="Model\Cardinality.cs" />
     <Compile Include="Model\Expertise.cs" />
+    <Compile Include="Model\LinguisticExpertise.cs" />
     <Compile Include="ICompanyValuator.cs" />
     <Compile Include="ICwAggregator.cs" />
+    <Compile Include="Model\Expertone.cs" />
+    <Compile Include="Model\ExpertoneItem.cs" />
     <Compile Include="Model\Hierarchy.cs" />
     <Compile Include="Model\Interval.cs" />
     <Compile Include="Model\LabelSet.cs" />
@@ -50,6 +49,12 @@
     <Compile Include="Model\Label.cs" />
     <Compile Include="Model\TwoTuple.cs" />
     <Compile Include="ValuationException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BizVal.Framework\BizVal.Framework.csproj">
+      <Project>{0659840a-e7fd-462b-b866-7dbf64841bc3}</Project>
+      <Name>BizVal.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

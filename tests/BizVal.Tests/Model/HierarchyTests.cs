@@ -1,7 +1,6 @@
 ﻿using System;
 using BizVal.Model;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace BizVal.Tests.Model
 {
@@ -32,21 +31,18 @@ namespace BizVal.Tests.Model
         [Test]
         public void TranslateTuples()
         {
-            var tuple = new TwoTuple()
-            {
-                Alpha = 0m,
-                Label = new Label(4, "")
-            };
-
             var hierarchy = this.GetTestHierarchy();
+            var label = hierarchy[7][4];
+            var tuple = label.Theta();
             var newTuple = hierarchy.Translate(tuple, 7, 9);
 
             Assert.NotNull(newTuple);
             Assert.NotNull(newTuple.Label);
+            Assert.AreEqual(newTuple.Label, hierarchy[9][5]);
             Assert.AreEqual(5, newTuple.Label.Index);
 
             // 0.33 expressed as fraction to get periodic decimal.
-            Assert.AreEqual(1m/3m, newTuple.Alpha);
+            Assert.AreEqual(1m / 3m, newTuple.Alpha);
         }
 
 

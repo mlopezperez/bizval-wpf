@@ -44,6 +44,11 @@ namespace BizVal.Model
             this.UpperBound = upperBound;
         }
 
+        /// <summary>
+        /// Equalses the specified other.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns></returns>
         protected bool Equals(Interval other)
         {
             return this.LowerBound.Equals(other.LowerBound) && this.UpperBound.Equals(other.UpperBound);
