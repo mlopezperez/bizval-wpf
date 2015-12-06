@@ -10,5 +10,10 @@
             this.LowerItem = lowerBound;
             this.UpperItem = upperBound;
         }
+
+        public override string ToString()
+        {
+            return string.Format("LowerItem: {0}, UpperItem: {1}", this.LowerItem, this.UpperItem);
+        }
     }
 }

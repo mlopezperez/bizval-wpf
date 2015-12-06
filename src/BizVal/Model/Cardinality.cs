@@ -11,5 +11,10 @@
             this.Lower = lowerCardinality;
             this.Upper = upperCardinality;
         }
+
+        public override string ToString()
+        {
+            return string.Format("Lower: {0}, Upper: {1}", this.Lower, this.Upper);
+        }
     }
 }

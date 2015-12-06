@@ -21,6 +21,24 @@ namespace BizVal.Model
             get { return this.items.Values.Select(item => item.UpperItem).ToList(); }
         }
 
+        public List<decimal> LowerRItems
+        {
+            get
+            {
+                var returnValue = this.items.Values.Select(item => this.Interval.LowerBound + (this.Interval.Width * item.LowerItem)).ToList();
+                return returnValue;
+            }
+        }
+
+        public List<decimal> UpperRItems
+        {
+            get
+            {
+                var returnValue = this.items.Values.Select(item => this.Interval.LowerBound + (this.Interval.Width * item.UpperItem)).ToList();
+                return returnValue;
+            }
+        }
+
         public Expertone(Expertise<T> expertise)
         {
             Contract.NotNull(expertise, "expertise");
@@ -50,8 +68,8 @@ namespace BizVal.Model
         {
             var result = new Interval()
             {
-                LowerBound = this.GetExpectedValue(this.LowerItems),
-                UpperBound = this.GetExpectedValue(this.UpperItems)
+                LowerBound = this.GetExpectedValue(this.LowerRItems),
+                UpperBound = this.GetExpectedValue(this.UpperRItems)
             };
             return result;
         }
@@ -59,11 +77,11 @@ namespace BizVal.Model
         private decimal GetExpectedValue(IList<decimal> expertoneItems)
         {
             var result = 0m;
-            for (int i = 1; i < expertoneItems.Count; i++)
+            for (int i = 0; i < expertoneItems.Count; i++)
             {
                 result = result + expertoneItems[i];
             }
-            result = decimal.Divide(result, expertoneItems.Count);
+            result = decimal.Divide(result, expertoneItems.Count - 1);
             return result;
         }
     }

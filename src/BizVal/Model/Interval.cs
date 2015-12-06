@@ -27,6 +27,11 @@ namespace BizVal.Model
         {
         }
 
+        public decimal Width
+        {
+            get { return this.UpperBound - this.LowerBound; }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Interval"/> class.
         /// </summary>
