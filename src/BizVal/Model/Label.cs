@@ -23,6 +23,8 @@ namespace BizVal.Model
         /// </value>
         public string Name { get; set; }
 
+        public LabelSet LabelSet { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Label"/> class.
         /// </summary>
@@ -32,6 +34,7 @@ namespace BizVal.Model
         {
             this.Index = index;
             this.Name = name;
+
         }
 
         /// <summary>
@@ -40,11 +43,12 @@ namespace BizVal.Model
         /// <returns>A 2-tuple for the label value.</returns>
         public TwoTuple Theta()
         {
-            return new TwoTuple
-            {
-                Alpha = 0m,
-                Label = this
-            };
+            return new TwoTuple(this, 0m);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{1}-{0}", this.Index, this.Name);
         }
 
         public int CompareTo(Label other)

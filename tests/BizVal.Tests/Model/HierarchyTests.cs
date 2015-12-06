@@ -11,21 +11,21 @@ namespace BizVal.Tests.Model
         public void TranslateThrowsIfSourceLevelNotPresent()
         {
             var hierarchy = this.GetTestHierarchy();
-            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(), 1, 5));
+            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(new Label(0, string.Empty), 0), 1, 5));
         }
 
         [Test]
         public void TranslateThrowsIfFinishLevelNotPresent()
         {
             var hierarchy = this.GetTestHierarchy();
-            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(), 5, 10));
+            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(new Label(0, string.Empty), 0), 5, 10));
         }
 
         [Test]
         public void TranslateThrowsIfFinishLevelLowerThanSource()
         {
             var hierarchy = this.GetTestHierarchy();
-            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(), 7, 5));
+            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(new Label(0, string.Empty), 0), 7, 5));
         }
 
         [Test]

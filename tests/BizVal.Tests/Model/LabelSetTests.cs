@@ -103,11 +103,7 @@ namespace BizVal.Tests.Model
         public void DeltaInvGetsNumericValue()
         {
             var set = this.GetTermSet();
-            var result = set.DeltaInv(new TwoTuple()
-            {
-                Alpha = -0.5m,
-                Label = new Label(1, "Medio")
-            });
+            var result = set.DeltaInv(new TwoTuple(set[1], -0.5m));
 
             Assert.AreEqual(0.5m, result);
         }
@@ -116,11 +112,7 @@ namespace BizVal.Tests.Model
         public void DeltaInvGetsNumericValueLowerLimit()
         {
             var set = this.GetTermSet();
-            var result = set.DeltaInv(new TwoTuple()
-            {
-                Alpha = 0m,
-                Label = new Label(0, "Poco")
-            });
+            var result = set.DeltaInv(new TwoTuple(set[0], 0m));
 
             Assert.AreEqual(0, result);
         }
@@ -129,12 +121,7 @@ namespace BizVal.Tests.Model
         public void DeltaInvGetsNumericValueUpperLimit()
         {
             var set = this.GetTermSet();
-            var result = set.DeltaInv(new TwoTuple()
-            {
-                Alpha = 0m,
-                Label = new Label(2, "Mucho")
-            });
-
+            var result = set.DeltaInv(new TwoTuple(set[2], 0m));
             Assert.AreEqual(2, result);
         }
 
@@ -144,11 +131,7 @@ namespace BizVal.Tests.Model
             var set = this.GetTermSet();
 
             Assert.Throws<ArgumentException>(() =>
-                set.DeltaInv(new TwoTuple()
-                {
-                    Alpha = 0m,
-                    Label = new Label(-1, "Invalid")
-                }));
+                set.DeltaInv(new TwoTuple(new Label(-1, "Invalid"), 0m)));
         }
 
         [Test]
@@ -157,11 +140,7 @@ namespace BizVal.Tests.Model
             var set = this.GetTermSet();
 
             Assert.Throws<ArgumentException>(() =>
-                set.DeltaInv(new TwoTuple()
-                {
-                    Alpha = 0m,
-                    Label = new Label(3, "Invalid")
-                }));
+               set.DeltaInv(new TwoTuple(new Label(3, "Invalid"), 0m)));
         }
 
 

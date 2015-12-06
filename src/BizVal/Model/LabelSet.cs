@@ -11,7 +11,7 @@ namespace BizVal.Model
     /// <seealso cref="System.Collections.Generic.ICollection{BizVal.Model.Label}" />
     public class LabelSet : ICollection<Label>
     {
-        private readonly SortedList<int, Label> labels;
+        private readonly SortedDictionary<int, Label> labels;
 
         /// <summary>
         /// Gets the <see cref="Label"/> with the specified key.
@@ -62,7 +62,7 @@ namespace BizVal.Model
         /// </summary>
         public LabelSet()
         {
-            this.labels = new SortedList<int, Label>();
+            this.labels = new SortedDictionary<int, Label>();
         }
 
         /// <summary>
@@ -79,11 +79,7 @@ namespace BizVal.Model
             }
 
             var termIndex = (int)Math.Round(beta, MidpointRounding.ToEven);
-            var result = new TwoTuple()
-            {
-                Label = this.labels[termIndex],
-                Alpha = beta - termIndex
-            };
+            var result = new TwoTuple(this.labels[termIndex], beta - termIndex);
 
             return result;
         }
@@ -134,6 +130,7 @@ namespace BizVal.Model
         public void Add(Label item)
         {
             this.labels.Add(item.Index, item);
+            item.LabelSet = this;
         }
 
         /// <summary>

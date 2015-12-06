@@ -1,4 +1,5 @@
 ﻿using System;
+using BizVal.Framework;
 
 namespace BizVal.Model
 {
@@ -12,6 +13,11 @@ namespace BizVal.Model
         /// </value>
         public decimal Alpha { get; set; }
 
+        public override string ToString()
+        {
+            return string.Format("({0}, {1})", this.Label, this.Alpha);
+        }
+
         /// <summary>
         /// Gets or sets the label.
         /// </summary>
@@ -19,6 +25,12 @@ namespace BizVal.Model
         /// The label.
         /// </value>
         public Label Label { get; set; }
+
+        public TwoTuple(Label label, decimal alpha)
+        {
+            this.Alpha = alpha;
+            this.Label = Contract.NotNull(label, "label");
+        }
 
         public int CompareTo(TwoTuple other)
         {

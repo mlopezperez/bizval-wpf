@@ -40,7 +40,6 @@ namespace BizVal.Services.Tests
         }
 
         [Test]
-        [Ignore("Ignored until results are validated")]
         public void CashflowReturnsProperValue()
         {
             ICompanyValuator valuator = new CompanyValuator();
@@ -58,12 +57,11 @@ namespace BizVal.Services.Tests
 
             var result = valuator.Cashflow(expectedCashflows, expectedWaccs);
 
-            //var expectedResult = new Interval(8971, 17122);
-            var expectedResult = new Interval(8359.1860m, 15343.2012m);
+            var expectedResult = new Interval(8359m, 15343m);
 
             Assert.NotNull(result);
-            Assert.AreEqual(expectedResult.LowerBound, result.LowerBound);
-            Assert.AreEqual(expectedResult.UpperBound, result.UpperBound);
+            Assert.AreEqual(expectedResult.LowerBound, Math.Round(result.LowerBound));
+            Assert.AreEqual(expectedResult.UpperBound, Math.Round(result.UpperBound));
         }
 
         [Test]
@@ -131,7 +129,6 @@ namespace BizVal.Services.Tests
         }
 
         [Test]
-        [Ignore("Get results with no round error")]
         public void MixedAnalysisReturnsProperValue()
         {
             ICompanyValuator valuator = new CompanyValuator();
@@ -151,11 +148,11 @@ namespace BizVal.Services.Tests
 
             var result = valuator.MixedAnalysis(substantialValue, expectedBenefits, expectedInterests);
 
-            var expectedResult = new Interval(12047, 14212);
+            var expectedResult = new Interval(11913m, 14046m);
 
             Assert.NotNull(result);
-            Assert.AreEqual(expectedResult.LowerBound, result.LowerBound);
-            Assert.AreEqual(expectedResult.UpperBound, result.UpperBound);
+            Assert.AreEqual(expectedResult.LowerBound, Math.Round(result.LowerBound));
+            Assert.AreEqual(expectedResult.UpperBound, Math.Round(result.UpperBound));
         }
     }
 }
