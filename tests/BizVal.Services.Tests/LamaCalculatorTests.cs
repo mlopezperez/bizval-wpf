@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BizVal.Model;
+using BizVal.Services.CwAggregation;
 using NUnit.Framework;
 
 namespace BizVal.Services.Tests

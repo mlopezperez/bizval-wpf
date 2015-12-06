@@ -37,8 +37,9 @@ namespace BizVal.Model
         /// <param name="gFinish">The g goal.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentException">Source level or destination level does not exist in current hierarchy</exception>
-        public TwoTuple Translate(TwoTuple source, int gSource, int gFinish)
+        public TwoTuple Translate(TwoTuple source, int gFinish)
         {
+            var gSource = source.Label.LabelSet.Count;
             if (!this.ContainsLevel(gSource) || !this.ContainsLevel(gFinish) || gSource > gFinish)
             {
                 throw new ArgumentException("Source level or destination level does not exist in current hierarchy");

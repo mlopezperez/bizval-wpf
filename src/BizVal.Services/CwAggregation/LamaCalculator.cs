@@ -1,18 +1,28 @@
-﻿using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BizVal.Framework;
 using BizVal.Model;
 
-namespace BizVal.Services
+namespace BizVal.Services.CwAggregation
 {
-    class LamaCalculator : ILamaCalculator
+    internal sealed class LamaCalculator : ILamaCalculator
     {
-        public TwoTuple LinguisticLama(SortedList<TwoTuple, int> cardinalities, LabelSet referenceLabelSet)
+        public TwoTuple LinguisticLama(IDictionary<TwoTuple, int> cardinalities, LabelSet referenceLabelSet)
         {
             Contract.NotNull(cardinalities, "cardinalities");
             Contract.NotNull(referenceLabelSet, "referenceLabelSet");
-            TwoTuple result = referenceLabelSet.Delta(this.GetBeta(cardinalities, referenceLabelSet));
+            var sortedCardinalities = this.GetSortedCardinalities(cardinalities);
+            TwoTuple result = referenceLabelSet.Delta(this.GetBeta(sortedCardinalities, referenceLabelSet));
+            return result;
+        }
+
+        private SortedList<TwoTuple, int> GetSortedCardinalities(IDictionary<TwoTuple, int> cardinalities)
+        {
+            var result = new SortedList<TwoTuple, int>();
+            foreach (var cardinality in cardinalities)
+            {
+                result.Add(cardinality.Key, cardinality.Value);
+            }
             return result;
         }
 

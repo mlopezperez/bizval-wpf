@@ -5,7 +5,7 @@ namespace BizVal.Services
 {
     internal interface ILamaCalculator
     {
-        TwoTuple LinguisticLama(SortedList<TwoTuple, int> cardinalities, LabelSet referenceLabelSet);
+        TwoTuple LinguisticLama(IDictionary<TwoTuple, int> cardinalities, LabelSet referenceLabelSet);
     }
 
 

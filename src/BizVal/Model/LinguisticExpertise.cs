@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace BizVal.Model
+﻿namespace BizVal.Model
 {
-    public class LinguisticExpertise
+    public class LinguisticExpertise : Expertise<TwoTuple>
     {
-        public Interval Interval { get; set; }
-        public Dictionary<TwoTuple, int> LowerBoundCardinalities { get; set; }
-        public Dictionary<TwoTuple, int> UpperBoundCardinalities { get; set; }
+        public LinguisticExpertise(Interval interval)
+            : base(interval)
+        {
+        }
     }
 }

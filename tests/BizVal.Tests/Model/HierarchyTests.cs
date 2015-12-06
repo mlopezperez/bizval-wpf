@@ -8,24 +8,17 @@ namespace BizVal.Tests.Model
     public class HierarchyTests
     {
         [Test]
-        public void TranslateThrowsIfSourceLevelNotPresent()
-        {
-            var hierarchy = this.GetTestHierarchy();
-            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(new Label(0, string.Empty), 0), 1, 5));
-        }
-
-        [Test]
         public void TranslateThrowsIfFinishLevelNotPresent()
         {
             var hierarchy = this.GetTestHierarchy();
-            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(new Label(0, string.Empty), 0), 5, 10));
+            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(hierarchy[5][0], 0), 10));
         }
 
         [Test]
         public void TranslateThrowsIfFinishLevelLowerThanSource()
         {
             var hierarchy = this.GetTestHierarchy();
-            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(new Label(0, string.Empty), 0), 7, 5));
+            Assert.Throws<ArgumentException>(() => hierarchy.Translate(new TwoTuple(hierarchy[7][0], 0), 5));
         }
 
         [Test]
@@ -34,7 +27,7 @@ namespace BizVal.Tests.Model
             var hierarchy = this.GetTestHierarchy();
             var label = hierarchy[7][4];
             var tuple = label.Theta();
-            var newTuple = hierarchy.Translate(tuple, 7, 9);
+            var newTuple = hierarchy.Translate(tuple, 9);
 
             Assert.NotNull(newTuple);
             Assert.NotNull(newTuple.Label);
@@ -43,6 +36,21 @@ namespace BizVal.Tests.Model
 
             // 0.33 expressed as fraction to get periodic decimal.
             Assert.AreEqual(1m / 3m, newTuple.Alpha);
+        }
+
+        [Test]
+        public void TranslateTupleToSameLevelReturnsSame()
+        {
+            var hierarchy = this.GetTestHierarchy();
+            var label = hierarchy[7][4];
+            var tuple = label.Theta();
+            var newTuple = hierarchy.Translate(tuple, 7);
+
+            Assert.NotNull(newTuple);
+            Assert.NotNull(newTuple.Label);
+            Assert.AreEqual(newTuple.Label, hierarchy[7][4]);
+
+            Assert.AreEqual(0m, newTuple.Alpha);
         }
 
 
