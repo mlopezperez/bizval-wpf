@@ -34,11 +34,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICwCompanyValuator.cs" />
     <Compile Include="Model\Cardinality.cs" />
     <Compile Include="Model\Expertise.cs" />
     <Compile Include="Model\LinguisticExpertise.cs" />
     <Compile Include="ICompanyValuator.cs" />
-    <Compile Include="ICwAggregator.cs" />
+    <Compile Include="IAggregator.cs" />
     <Compile Include="Model\Expertone.cs" />
     <Compile Include="Model\ExpertoneItem.cs" />
     <Compile Include="Model\Hierarchy.cs" />

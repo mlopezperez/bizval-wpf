@@ -2,7 +2,10 @@
 
 namespace BizVal
 {
-    public interface ICwAggregator
+    /// <summary>
+    /// Interface defining methods to aggregate linguistic information.
+    /// </summary>
+    public interface IAggregator
     {
         /// <summary>
         /// Aggregates the linguistic information privided in the expertise using the expertone method.

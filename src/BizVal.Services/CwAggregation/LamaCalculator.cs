@@ -5,12 +5,25 @@ using BizVal.Model;
 
 namespace BizVal.Services.CwAggregation
 {
+    /// <summary>
+    /// Implements the LAMA operator.
+    /// </summary>
+    /// <seealso cref="BizVal.Services.ILamaCalculator" />
     internal sealed class LamaCalculator : ILamaCalculator
     {
+        /// <summary>
+        /// Aggregates linguistic information using LAMA operator
+        /// </summary>
+        /// <param name="cardinalities">The cardinalities of the 2-tuples to aggregate.</param>
+        /// <param name="referenceLabelSet">The reference label set.</param>
+        /// <returns>
+        /// A representative value of the information in 2-tuple representation.
+        /// </returns>
         public TwoTuple LinguisticLama(IDictionary<TwoTuple, int> cardinalities, LabelSet referenceLabelSet)
         {
             Contract.NotNull(cardinalities, "cardinalities");
             Contract.NotNull(referenceLabelSet, "referenceLabelSet");
+
             var sortedCardinalities = this.GetSortedCardinalities(cardinalities);
             TwoTuple result = referenceLabelSet.Delta(this.GetBeta(sortedCardinalities, referenceLabelSet));
             return result;

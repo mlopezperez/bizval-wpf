@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace BizVal.Model
 {
+    /// <summary>
+    /// Encapsulates a linguistic hierarchy with several levels.
+    /// </summary>
+    /// <seealso cref="System.Collections.Generic.ICollection{BizVal.Model.LabelSet}" />
     public class Hierarchy : ICollection<LabelSet>
     {
         private readonly SortedList<int, LabelSet> levels;
@@ -33,7 +37,6 @@ namespace BizVal.Model
         /// Translates the specified source.
         /// </summary>
         /// <param name="source">The source.</param>
-        /// <param name="gSource">The g source.</param>
         /// <param name="gFinish">The g goal.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentException">Source level or destination level does not exist in current hierarchy</exception>

@@ -2,6 +2,9 @@
 
 namespace BizVal.Model
 {
+    /// <summary>
+    /// Encapsulates a numeric interval.
+    /// </summary>
     public class Interval
     {
         /// <summary>

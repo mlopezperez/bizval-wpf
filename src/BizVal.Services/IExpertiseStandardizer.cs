@@ -2,6 +2,9 @@
 
 namespace BizVal.Services
 {
+    /// <summary>
+    /// Interface defining methods to standardize an expertise to a given label set.
+    /// </summary>
     interface IExpertiseStandardizer
     {
         /// <summary>

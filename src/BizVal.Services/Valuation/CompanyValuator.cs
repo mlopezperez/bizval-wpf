@@ -4,8 +4,21 @@ using BizVal.Model;
 
 namespace BizVal.Services.Valuation
 {
+    /// <summary>
+    /// Implements methods to valuate a company. 
+    /// </summary>
+    /// <seealso cref="BizVal.ICompanyValuator" />
     internal class CompanyValuator : ICompanyValuator
     {
+        /// <summary>
+        /// Calcualates a company value using the discounted cashflow method.
+        /// </summary>
+        /// <param name="expectedCashflows">The expected cashflows.</param>
+        /// <param name="expectedWaccs">The expected waccs.</param>
+        /// <returns>
+        /// An interval with the possible value of the company.
+        /// </returns>
+        /// <exception cref="BizVal.ValuationException">Number of expected cashflow intervals mismatches number of expected WACCs intervals.</exception>
         Interval ICompanyValuator.Cashflow(IList<Interval> expectedCashflows, IList<Interval> expectedWaccs)
         {
             Contract.NotNull(expectedCashflows, "expectedCashflows");
@@ -24,6 +37,16 @@ namespace BizVal.Services.Valuation
             return result;
         }
 
+        /// <summary>
+        /// Calcualates a company value using the mixed analysis method.
+        /// </summary>
+        /// <param name="substantialValue">The substantial value.</param>
+        /// <param name="expectedBenefits">The expected benefits.</param>
+        /// <param name="expectedInterests">The expected interests.</param>
+        /// <returns>
+        /// An interval with the possible value of the company.
+        /// </returns>
+        /// <exception cref="BizVal.ValuationException">Number of expected benefits intervals is different than number of expected interest intervals</exception>
         public Interval MixedAnalysis(decimal substantialValue, IList<Interval> expectedBenefits, IList<Interval> expectedInterests)
         {
             Contract.NotNull(expectedBenefits, "expectedBenefits;");
@@ -72,8 +95,6 @@ namespace BizVal.Services.Valuation
 
             return result;
         }
-
-
 
         private Interval GetCashflowDivisor(IList<Interval> expectedWaccs, int i)
         {

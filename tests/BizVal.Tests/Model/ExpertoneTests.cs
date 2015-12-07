@@ -17,7 +17,7 @@ namespace BizVal.Tests.Model
         public void ConstructorGeneratesExpertone()
         {
             var expertone = new Expertone<string>(this.GetTestExpertise());
-            var lowerItemslist = expertone.LowerItems;
+            var lowerItemslist = expertone.LowerValues;
 
             Assert.NotNull(lowerItemslist);
             Assert.AreEqual(11, lowerItemslist.Count);
@@ -33,7 +33,7 @@ namespace BizVal.Tests.Model
             Assert.AreEqual(0.3m, lowerItemslist[9]);
             Assert.AreEqual(0m, lowerItemslist[10]);
 
-            var upperItemslist = expertone.UpperItems;
+            var upperItemslist = expertone.UpperValues;
 
             Assert.NotNull(upperItemslist);
             Assert.AreEqual(11, upperItemslist.Count);

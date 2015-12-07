@@ -5,40 +5,78 @@ using BizVal.Framework;
 
 namespace BizVal.Model
 {
+    /// <summary>
+    /// Encapsulates an Expertone.
+    /// </summary>
+    /// <typeparam name="T">Type of the items in which we're applying the expertone.</typeparam>
     public class Expertone<T> where T : IComparable<T>
     {
         private readonly SortedList<T, ExpertoneItem> items;
 
+        /// <summary>
+        /// Gets or sets the interval where the expertone is applied.
+        /// </summary>
+        /// <value>
+        /// The interval.
+        /// </value>
         public Interval Interval { get; set; }
 
-        public List<decimal> LowerItems
+        /// <summary>
+        /// Gets the list of the values of the expertone for the lower bound.
+        /// </summary>
+        /// <value>
+        /// The values of the expertone for the lower bound.
+        /// </value>
+        public List<decimal> LowerValues
         {
-            get { return this.items.Values.Select(item => item.LowerItem).ToList(); }
+            get { return this.items.Values.Select(item => item.LowerBoundValue).ToList(); }
         }
 
-        public List<decimal> UpperItems
+        /// <summary>
+        /// Gets the list of the values of the expertone for the upper bound.
+        /// </summary>
+        /// <value>
+        /// The values of the expertone for the upper bound.
+        /// </value>
+        public List<decimal> UpperValues
         {
-            get { return this.items.Values.Select(item => item.UpperItem).ToList(); }
+            get { return this.items.Values.Select(item => item.UpperBoundValue).ToList(); }
         }
 
-        public List<decimal> LowerRItems
+        /// <summary>
+        /// Gets the list of the values of the R-expertone for the lower bound.
+        /// </summary>
+        /// <value>
+        /// The values of the R-expertone for the lower bound.
+        /// </value>
+        public List<decimal> LowerRValues
         {
             get
             {
-                var returnValue = this.items.Values.Select(item => this.Interval.LowerBound + (this.Interval.Width * item.LowerItem)).ToList();
+                var returnValue = this.items.Values.Select(item => this.Interval.LowerBound + (this.Interval.Width * item.LowerBoundValue)).ToList();
                 return returnValue;
             }
         }
 
-        public List<decimal> UpperRItems
+        /// <summary>
+        /// Gets the list of the values of the R-expertone for the upper bound.
+        /// </summary>
+        /// <value>
+        /// The values of the R-expertone for the upper bound.
+        /// </value>
+        public List<decimal> UpperRValues
         {
             get
             {
-                var returnValue = this.items.Values.Select(item => this.Interval.LowerBound + (this.Interval.Width * item.UpperItem)).ToList();
+                var returnValue = this.items.Values.Select(item => this.Interval.LowerBound + (this.Interval.Width * item.UpperBoundValue)).ToList();
                 return returnValue;
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Expertone{T}"/> class.
+        /// </summary>
+        /// <param name="expertise">The expertise used to create the expertone.</param>
         public Expertone(Expertise<T> expertise)
         {
             Contract.NotNull(expertise, "expertise");
@@ -53,23 +91,27 @@ namespace BizVal.Model
             foreach (var item in expertise.Cardinalities)
             {
                 decimal lowerBoundProbability = decimal.Divide(item.Value.Lower, totalCardinality);
-                var lastLowerAccumulated = this.items.Values.LastOrDefault() == null ? 1 : this.items.Values.Last().LowerItem;
+                var lastLowerAccumulated = this.items.Values.LastOrDefault() == null ? 1 : this.items.Values.Last().LowerBoundValue;
                 decimal lowerAccumulatedProbability = lastLowerAccumulated - lowerBoundProbability;
 
                 decimal upperBoundProbability = decimal.Divide(item.Value.Upper, totalCardinality);
-                var lastUpperAccumulated = this.items.Values.LastOrDefault() == null ? 1 : this.items.Values.Last().UpperItem;
+                var lastUpperAccumulated = this.items.Values.LastOrDefault() == null ? 1 : this.items.Values.Last().UpperBoundValue;
                 decimal upperAccumulatedProbability = lastUpperAccumulated - upperBoundProbability;
 
                 this.items.Add(item.Key, new ExpertoneItem(lowerAccumulatedProbability, upperAccumulatedProbability));
             }
         }
 
+        /// <summary>
+        /// Gets the expected value for the expertone.
+        /// </summary>
+        /// <returns>An interval containing the expected value of the expertone.</returns>
         public Interval GetExpectedValue()
         {
             var result = new Interval()
             {
-                LowerBound = this.GetExpectedValue(this.LowerRItems),
-                UpperBound = this.GetExpectedValue(this.UpperRItems)
+                LowerBound = this.GetExpectedValue(this.LowerRValues),
+                UpperBound = this.GetExpectedValue(this.UpperRValues)
             };
             return result;
         }
