@@ -1,4 +1,4 @@
-﻿namespace BizVal.App
+﻿namespace BizVal.App.Interfaces
 {
     public interface IShell
     {

@@ -40,24 +40,9 @@
     <Reference Include="Caliburn.Micro.Platform">
       <HintPath>..\packages\Caliburn.Micro.2.0.2\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -71,9 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="IShell.cs" />
+    <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Model\TermSet.cs" />
     <Compile Include="Model\Hierarchy.cs" />
+    <Compile Include="Module\AppModule.cs" />
     <Compile Include="ViewModels\HierarchyDefinitionViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="App.xaml.cs">
@@ -91,6 +77,10 @@
     <Compile Include="Views\ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Theme\Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HierarchyDefinitionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,7 +116,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -138,6 +130,53 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BizVal.Framework\BizVal.Framework.csproj">
+      <Project>{0659840a-e7fd-462b-b866-7dbf64841bc3}</Project>
+      <Name>BizVal.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AddMini.png" />
+    <Resource Include="Images\bombetaElement.png" />
+    <Resource Include="Images\Busca_mini.png" />
+    <Resource Include="Images\Element.png" />
+    <Resource Include="Images\Element_afegeix.png" />
+    <Resource Include="Images\Element_busca.png" />
+    <Resource Include="Images\Element_edita.png" />
+    <Resource Include="Images\Element_elimina.png" />
+    <Resource Include="Images\engranatgeTecnic.png" />
+    <Resource Include="Images\Fondo Tecnico trabajando.png" />
+    <Resource Include="Images\IconaAplicacio.png" />
+    <Resource Include="Images\Incidencia.png" />
+    <Resource Include="Images\Incidencia_afegeix.png" />
+    <Resource Include="Images\Incidencia_busca.png" />
+    <Resource Include="Images\Incidencia_edita.png" />
+    <Resource Include="Images\Incidencia_elimina.png" />
+    <Resource Include="Images\Incidencia_Titol.png" />
+    <Resource Include="Images\Login.png" />
+    <Resource Include="Images\LupaBusca.png" />
+    <Resource Include="Images\Ordre.png" />
+    <Resource Include="Images\Ordre_afegeix.png" />
+    <Resource Include="Images\Ordre_busca.png" />
+    <Resource Include="Images\Ordre_edita.png" />
+    <Resource Include="Images\Ordre_elimina.png" />
+    <Resource Include="Images\Ordre_Titol.png" />
+    <Resource Include="Images\RemoveMini.png" />
+    <Resource Include="Images\ShutDown.png" />
+    <Resource Include="Images\Supervisor.png" />
+    <Resource Include="Images\Supervisor_afegeix.png" />
+    <Resource Include="Images\Supervisor_edita.png" />
+    <Resource Include="Images\Supervisor_elimina.png" />
+    <Resource Include="Images\Tecnic.png" />
+    <Resource Include="Images\Tecnic_afegeix.png" />
+    <Resource Include="Images\Tecnic_busca.png" />
+    <Resource Include="Images\Tecnic_edita.png" />
+    <Resource Include="Images\Tecnic_elimina.png" />
+    <Resource Include="Images\UllSupervisor.png" />
+    <Resource Include="Images\Update_mini.png" />
+    <Resource Include="Images\Usuari.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

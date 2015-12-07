@@ -1,0 +1,804 @@
+﻿<ResourceDictionary    
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Colors & Brushes -->
+    <Color x:Key="BlueLightColor">#D7EFF8</Color>
+    <Color x:Key="BlueNormalColor">#B0D2E1</Color>
+    <Color x:Key="BlueMediumColor">#FF046FA1</Color>
+    <Color x:Key="BlueDarkColor">#044769</Color>
+    <Color x:Key="RedDarkColor">#880508</Color>
+    <Color x:Key="GrayLightColor">#CFCFCF</Color>
+
+    <SolidColorBrush x:Key="BlueLightBrush" Color="{StaticResource BlueLightColor}" />
+    <SolidColorBrush x:Key="BlueNormalBrush" Color="{StaticResource BlueNormalColor}" />
+    <SolidColorBrush x:Key="BlueMediumBrush" Color="{StaticResource BlueMediumColor}" />
+    <SolidColorBrush x:Key="BlueDarkBrush" Color="{StaticResource BlueDarkColor}" />
+    <SolidColorBrush x:Key="RedDarkBrush" Color="{StaticResource RedDarkColor}" />
+    <SolidColorBrush x:Key="GrayLightBrush" Color="{StaticResource GrayLightColor}" />
+
+    <LinearGradientBrush x:Key="LightBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource BlueLightColor}" />
+        <GradientStop Color="{StaticResource BlueNormalColor}" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="MediumBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource BlueNormalColor}" />
+        <GradientStop Color="{StaticResource BlueMediumColor}" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DarkBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource BlueMediumColor}" />
+        <GradientStop Color="{StaticResource BlueDarkColor}" Offset="1" />
+    </LinearGradientBrush>
+
+    <!-- TextBox, Label, TextBlock, ComboBox Styles -->
+    <Style TargetType="TextBox">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueMediumBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="25" />
+    </Style>
+
+    <Style TargetType="PasswordBox">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueMediumBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="MaxLength" Value="8" />
+    </Style>
+
+    <Style TargetType="Label" >
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Height" Value="30" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelBorderTitle">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="Foreground" Value="{StaticResource BlueDarkBrush}"/>
+        <Setter Property="Height" Value="30" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelInsideTitle">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="Foreground" Value="{StaticResource BlueMediumBrush}"/>
+        <Setter Property="Height" Value="30" />
+    </Style>
+
+    <Style TargetType="ComboBox" >
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueMediumBrush}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <Style TargetType="{x:Type Calendar}">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueMediumBrush}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Height" Value="25" />
+    </Style>
+
+    <Style x:Key="AreaControlTitle" TargetType="TextBlock" >
+        <Setter Property="FontWeight" Value="ExtraBlack" />
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="Foreground" Value="{StaticResource BlueMediumBrush}"/>
+        <Setter Property="Opacity" Value="0.7"/>
+        <Setter Property="Margin" Value="20,0,0,0"/>
+    </Style>
+
+    <Style x:Key="AreaControlTitleLight" TargetType="TextBlock" >
+        <Setter Property="FontWeight" Value="ExtraBlack" />
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="Foreground" Value="{StaticResource BlueLightBrush}"/>
+        <Setter Property="Opacity" Value="0.7"/>
+        <Setter Property="Margin" Value="20,0,0,0"/>
+    </Style>
+
+    <Style x:Key="UserTitle" TargetType="TextBlock" >
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="Foreground" Value="{StaticResource BlueNormalBrush}"/>
+        <Setter Property="Opacity" Value="0.7"/>
+        <Setter Property="Margin" Value="20,0,0,0"/>
+    </Style>
+
+    <Style x:Key="AreaTextBox" TargetType="TextBox" >
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueMediumBrush}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+    </Style>
+
+    <Style x:Key="ErrorsMessage" TargetType="Label" >
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Content" Value="{Binding Path=LastError, Mode=OneWay}" />
+    </Style>
+
+    <!-- Borders -->
+    <Style x:Key="AreaGlobalDarkBorder" TargetType="Border" >
+        <Setter Property="Background" Value="{StaticResource DarkBackground}"/>
+    </Style>
+
+    <Style x:Key="AreaControlBorder" TargetType="Border" >
+        <Setter Property="Background" Value="{StaticResource LightBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueMediumBrush}"/>
+        <Setter Property="BorderThickness" Value="5"/>
+        <Setter Property="Margin" Value="3"/>
+    </Style>
+
+    <Style x:Key="AreaControlDarkBorder" TargetType="Border" >
+        <Setter Property="Background" Value="{StaticResource DarkBackground}"/>
+    </Style>
+
+    <Style x:Key="AreaActionMigBorder" TargetType="Border" >
+        <Setter Property="Background" Value="{StaticResource MediumBackground}"/>
+    </Style>
+
+    <Style x:Key="AreaWorkBorder" TargetType="Border" >
+        <Setter Property="Background" Value="{StaticResource LightBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueDarkBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Margin" Value="25"/>
+        <Setter Property="CornerRadius" Value="2"/>
+    </Style>
+
+    <Style x:Key="AreaWorkCornerBorder" TargetType="Border" >
+        <Setter Property="Background" Value="{StaticResource LightBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueMediumBrush}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="CornerRadius" Value="15"/>
+    </Style>
+
+    <Style x:Key="ErrorsBorder" TargetType="Border" >
+        <Setter Property="Background" Value="{StaticResource RedDarkBrush}"/>
+        <Setter Property="Margin" Value="40,0,0,0"/>
+        <Setter Property="Width" Value="400"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="CornerRadius" Value="5"/>
+    </Style>
+
+    <Style x:Key="SplitWorkAreaBorder" TargetType="Border" >
+        <Setter Property="Background" Value="{StaticResource BlueMediumBrush}"/>
+        <Setter Property="Opacity" Value="0.6"/>
+        <Setter Property="Height" Value="3"/>
+        <Setter Property="Margin" Value="100,0,100,0"/>
+    </Style>
+
+    <Style x:Key="SplitGlobalAreaBorder" TargetType="Border" >
+        <Setter Property="Background" Value="{StaticResource BlueNormalBrush}"/>
+        <Setter Property="Opacity" Value="0.7"/>
+        <Setter Property="Margin" Value="0,5,0,5"/>
+    </Style>
+
+    <!-- BUTTONS -->
+
+    <!--GENERAL buttons-->
+    <Style x:Key="BlueButton" TargetType="Button" >
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="Background" Value="{StaticResource BlueMediumBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <ControlTemplate x:Key="LogginButton">
+        <Grid>
+            <Image Source="../Images/Login.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ShutDownButton">
+        <Grid>
+            <Image Source="../Images/ShutDown.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="UpdateMiniButton">
+        <Grid>
+            <Image Source="../Images/Update_mini.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SearchMiniButton">
+        <Grid>
+            <Image Source="../Images/Busca_mini.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="AddMiniButton">
+        <Grid>
+            <Image Source="../Images/AddMini.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RemoveMiniButton">
+        <Grid>
+            <Image Source="../Images/RemoveMini.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--SUPERVISOR buttons-->
+    <ControlTemplate x:Key="SupervisorButton">
+        <Grid>
+            <Image Source="../Images/Supervisor.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="SupervisorAddButton">
+        <Grid>
+            <Image Source="../Images/Supervisor_afegeix.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SupervisorRemoveButton">
+        <Grid>
+            <Image Source="../Images/Supervisor_elimina.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--TECNIC buttons-->
+    <ControlTemplate x:Key="TecnicButton" >
+        <Grid>
+            <Image Source="../Images/Tecnic.png" Cursor="Hand" Opacity="1" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="TecnicAddButton" >
+        <Grid>
+            <Image Source="../Images/Tecnic_afegeix.png" Cursor="Hand" Opacity="1" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TecnicRemoveButton">
+        <Grid>
+            <Image Source="../Images/Tecnic_elimina.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TecnicEditButton">
+        <Grid>
+            <Image Source="../Images/Tecnic_edita.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TecnicSearchButton">
+        <Grid>
+            <Image Source="../Images/Tecnic_busca.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--ELEMENT buttons-->
+    <ControlTemplate x:Key="ElementButton">
+        <Grid>
+            <Image Source="../Images/Element.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ElementAddButton" >
+        <Grid>
+            <Image Source="../Images/Element_afegeix.png" Cursor="Hand" Opacity="1" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ElementRemoveButton">
+        <Grid>
+            <Image Source="../Images/Element_elimina.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ElementEditButton">
+        <Grid>
+            <Image Source="../Images/Element_edita.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ElementSearchButton">
+        <Grid>
+            <Image Source="../Images/Element_busca.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--INCIDENCIA buttons-->
+    <ControlTemplate x:Key="IncidenciaButton">
+        <Grid>
+            <Image Source="../Images/Incidencia.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="IncidenciaAddButton" >
+        <Grid>
+            <Image Source="../Images/Incidencia_afegeix.png" Cursor="Hand" Opacity="1" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="IncidenciaRemoveButton">
+        <Grid>
+            <Image Source="../Images/Incidencia_elimina.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="IncidenciaEditButton">
+        <Grid>
+            <Image Source="../Images/Element_edita.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="IncidenciaSearchButton">
+        <Grid>
+            <Image Source="../Images/Incidencia_busca.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--ORDRE buttons-->
+    <ControlTemplate x:Key="OrdreButton">
+        <Grid>
+            <Image Source="../Images/Ordre.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="OrdreAddButton" >
+        <Grid>
+            <Image Source="../Images/Ordre_afegeix.png" Cursor="Hand" Opacity="1" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="OrdreRemoveButton">
+        <Grid>
+            <Image Source="../Images/Ordre_elimina.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="OrdreEditButton">
+        <Grid>
+            <Image Source="../Images/Ordre_edita.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="OrdreSearchButton">
+        <Grid>
+            <Image Source="../Images/Ordre_busca.png" Cursor="Hand" Opacity="1"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+</ResourceDictionary>

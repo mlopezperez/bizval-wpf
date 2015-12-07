@@ -39,6 +39,7 @@
     <Compile Include="IExpertiseStandardizer.cs" />
     <Compile Include="ILamaCalculator.cs" />
     <Compile Include="CwAggregation\LamaCalculator.cs" />
+    <Compile Include="Module\BizValModule.cs" />
     <Compile Include="Valuation\CompanyValuator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,14 +1,15 @@
+using System;
+using System.Collections.Generic;
+using BizVal.App.Interfaces;
+using BizVal.App.Module;
+using BizVal.Framework.DependencyInjection;
+using Caliburn.Micro;
+
 namespace BizVal.App
 {
-    using BizVal.App.ViewModels;
-    using Caliburn.Micro;
-    using Microsoft.Practices.Unity;
-    using System;
-    using System.Collections.Generic;
-
     public class AppBootstrapper : BootstrapperBase, IDisposable
     {
-        private IUnityContainer container;
+        private IContainer container;
 
         public AppBootstrapper()
         {
@@ -17,16 +18,15 @@ namespace BizVal.App
 
         protected override void Configure()
         {
-            this.container = new UnityContainer();
+            this.container = new Container(new LifeTimeManagerFactory());
 
-            this.container.RegisterType<IWindowManager, WindowManager>(new ContainerControlledLifetimeManager());
-            this.container.RegisterType<IEventAggregator, EventAggregator>(new ContainerControlledLifetimeManager());
-            this.container.RegisterType<IShell, ShellViewModel>(new PerResolveLifetimeManager());
+            var appModule = new AppModule();
+            appModule.Configure(this.container);
         }
 
         protected override object GetInstance(Type service, string key)
         {
-            var instance = this.container.Resolve(service, key);
+            var instance = this.container.Resolve(service);
             if (instance != null)
             {
                 return instance;
@@ -40,10 +40,6 @@ namespace BizVal.App
             return this.container.ResolveAll(service);
         }
 
-        protected override void BuildUp(object instance)
-        {
-            this.container.BuildUp(instance);
-        }
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {

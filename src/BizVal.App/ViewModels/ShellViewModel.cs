@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Windows.Documents;
-
+using BizVal.App.Interfaces;
 using BizVal.App.Model;
 
 namespace BizVal.App.ViewModels
