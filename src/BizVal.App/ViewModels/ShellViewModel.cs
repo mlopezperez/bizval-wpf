@@ -1,17 +1,28 @@
 using BizVal.App.Interfaces;
-using System.Collections.ObjectModel;
+using BizVal.Framework;
+using BizVal.Model;
+using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
 {
-    public class ShellViewModel : Caliburn.Micro.PropertyChangedBase, IShell
+    public class ShellViewModel : IShell
     {
-        private readonly ObservableCollection<SliderViewModel> sliders = new ObservableCollection<SliderViewModel>();
+        public CashflowViewModel Cashflow { get; set; }
 
-        public ShellViewModel(HierarchyDefinitionViewModel hierarchyDefinition)
+        public MixedAnalysisViewModel MixedAnalysis { get; set; }  
+
+        private readonly Hierarchy hierarchy;
+
+        public ShellViewModel(
+            IHierarchyManager hierarchyManager, 
+            CashflowViewModel casflowViewModel,
+            MixedAnalysisViewModel mixedAnalysisViewModel)
         {
-            this.HierarchyDefinition = hierarchyDefinition;
+            Contract.NotNull(hierarchyManager, "hierarchyManager");
+            this.hierarchy = hierarchyManager.GetDefaultHierarchy();
+
+            this.Cashflow = Contract.NotNull(casflowViewModel, "casflowViewModel");
+            this.MixedAnalysis = Contract.NotNull(mixedAnalysisViewModel, "mixedAnalysisViewModel");
         }
-       
-        public HierarchyDefinitionViewModel HierarchyDefinition { get; set; }
     }
 }

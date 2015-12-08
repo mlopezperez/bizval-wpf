@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace BizVal.App.Views
 {
     /// <summary>
-    /// Interaction logic for HierarchyDefinitionView.xaml
+    /// Interaction logic for MixedAnalysisView.xaml
     /// </summary>
-    public partial class HierarchyDefinitionView : Window
+    public partial class MixedAnalysisView : UserControl
     {
-        public HierarchyDefinitionView()
+        public MixedAnalysisView()
         {
             InitializeComponent();
         }

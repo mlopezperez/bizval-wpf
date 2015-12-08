@@ -15,6 +15,7 @@ namespace BizVal.App.Module
             container.RegisterType<IListViewModel, ListViewModel>(LifeTimeManagerType.TransientLifetime);
             container.RegisterType<IHierarchyDefinitionViewModel, HierarchyDefinitionViewModel>(LifeTimeManagerType.TransientLifetime);
             container.RegisterType<IIntervalListViewModel, IntervalListViewModel>(LifeTimeManagerType.TransientLifetime);
+            container.RegisterType<IIntervalViewModel, IntervalViewModel>(LifeTimeManagerType.TransientLifetime);
         }
     }
 }

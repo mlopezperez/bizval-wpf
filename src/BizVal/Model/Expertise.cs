@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BizVal.Model
 {
@@ -12,6 +13,17 @@ namespace BizVal.Model
         /// The interval.
         /// </value>
         public Interval Interval { get; set; }
+
+        /// <summary>
+        /// Gets the current number of opinions.
+        /// </summary>
+        /// <value>
+        /// The number of opinions.
+        /// </value>
+        public int NumberOfOpinions
+        {
+            get { return this.Cardinalities.Sum(i => i.Value.Lower); }
+        }
 
         /// <summary>
         /// Gets or sets the cardinalities of each opinion.

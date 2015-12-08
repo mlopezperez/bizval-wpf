@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace BizVal.App.Views
 {
     /// <summary>
-    /// Interaction logic for HierarchyDefinitionView.xaml
+    /// Interaction logic for CashflowView.xaml
     /// </summary>
-    public partial class HierarchyDefinitionView : UserControl
+    public partial class CashflowView : UserControl
     {
-        public HierarchyDefinitionView()
+        public CashflowView()
         {
             InitializeComponent();
         }

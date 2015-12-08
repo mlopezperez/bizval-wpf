@@ -12,6 +12,14 @@ namespace BizVal.Model
     public class LabelSet : ICollection<Label>
     {
         private readonly SortedDictionary<int, Label> labels;
+        private string name;
+
+        public string Name
+        {
+            get { return string.IsNullOrEmpty(this.name) ? "Unknown" : this.name; }
+            set { this.name = value; }
+        }
+
 
         /// <summary>
         /// Gets the <see cref="Label"/> with the specified key.
@@ -63,6 +71,12 @@ namespace BizVal.Model
         public LabelSet()
         {
             this.labels = new SortedDictionary<int, Label>();
+        }
+
+        public LabelSet(string name)
+            : this()
+        {
+            this.Name = name;
         }
 
         /// <summary>

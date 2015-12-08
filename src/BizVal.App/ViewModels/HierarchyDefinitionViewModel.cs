@@ -1,11 +1,15 @@
-﻿using BizVal.App.Interfaces;
+﻿using System.Linq;
+using BizVal.App.Interfaces;
 using BizVal.Framework;
+using BizVal.Model;
 using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
 {
-    public class HierarchyDefinitionViewModel : PropertyChangedBase, IHierarchyDefinitionViewModel
+    public class HierarchyDefinitionViewModel : Screen, IHierarchyDefinitionViewModel
     {
+        public Hierarchy Hierarchy { get; set; }
+
         public ListViewModel TermSet { get; set; }
 
         public ListViewModel Levels { get; set; }
@@ -17,6 +21,8 @@ namespace BizVal.App.ViewModels
 
             this.Levels.InputName = "Levels:";
             this.TermSet.InputName = "Terms:";
+
+            this.Levels.Items = new BindableCollection<string>(this.Hierarchy.Select(i => i.Name));
         }
     }
 }

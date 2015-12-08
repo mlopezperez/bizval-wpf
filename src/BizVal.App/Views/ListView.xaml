@@ -4,23 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    
-    <StackPanel Orientation="Horizontal">
-            <StackPanel>
-                <Label x:Name="InputName"></Label>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Margin="10,0,10,0" Width="150" HorizontalAlignment="Left" x:Name="NewItem"></TextBox>
-                <Button x:Name="Add" Width="40">Add</Button>
-                </StackPanel>
-                <ListBox Margin="10" x:Name="Items" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  SelectedIndex="{Binding SelectedItemIndex, Mode=TwoWay}" />
+             d:DesignHeight="400" d:DesignWidth="400">
 
-            </StackPanel>
-
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                <Button Content="Up" Height="25" Width="50" Margin="10" x:Name="Up"/>
-                <Button Content="Down" Height="25" Width="50" Margin="10" x:Name="Down"/>
-                <Button Content="Delete" Height="25" Width="50" Margin="10" x:Name="Delete"/>
-            </StackPanel>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label x:Name="InputName" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"></Label>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="0, 0, 0, 5">
+            <TextBox VerticalAlignment="Center" Width="175" HorizontalAlignment="Left" x:Name="NewItem"></TextBox>
+            <Button x:Name="Add" Width="50" VerticalAlignment="Center" Margin="5,0,0,0">Add</Button>
         </StackPanel>
+        <ListBox Grid.Row="2" Grid.Column="0" x:Name="Items" SelectedIndex="{Binding SelectedItemIndex, Mode=TwoWay}" Height="300" />
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
+            <Button Content="Up" Height="25" Width="50" Margin="5" x:Name="Up"/>
+            <Button Content="Down" Height="25" Width="50" Margin="5" x:Name="Down"/>
+            <Button Content="Delete" Height="25" Width="50" Margin="5" x:Name="Delete"/>
+        </StackPanel>
+    </Grid>
 </UserControl>

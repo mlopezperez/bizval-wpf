@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BizVal.App.Interfaces;
 using BizVal.App.Module;
 using BizVal.Framework.DependencyInjection;
+using BizVal.Services.Module;
 using Caliburn.Micro;
 
 namespace BizVal.App
@@ -22,6 +23,9 @@ namespace BizVal.App
 
             var appModule = new AppModule();
             appModule.Configure(this.container);
+
+            var servicesModule = new BizValModule();
+            servicesModule.Configure(this.container);
         }
 
         protected override object GetInstance(Type service, string key)

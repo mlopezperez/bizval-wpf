@@ -22,6 +22,7 @@ namespace BizVal.Services.Module
             container.RegisterType<IAggregator, CwAggregator>(LifeTimeManagerType.ContainerControlled);
             container.RegisterType<ILamaCalculator, LamaCalculator>(LifeTimeManagerType.ContainerControlled);
             container.RegisterType<ICwCompanyValuator, CwCompanyValuator>(LifeTimeManagerType.ContainerControlled);
+            container.RegisterType<IHierarchyManager, HierarchyManager>(LifeTimeManagerType.ContainerControlled);
         }
     }
 }

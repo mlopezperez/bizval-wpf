@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>12.0.60617.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -72,25 +73,38 @@
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Interfaces\IShell.cs" />
-    <Compile Include="Model\TermSet.cs" />
-    <Compile Include="Model\Hierarchy.cs" />
     <Compile Include="Module\AppModule.cs" />
+    <Compile Include="ViewModels\CashflowViewModel.cs" />
+    <Compile Include="ViewModels\ExpertiseViewModel.cs" />
     <Compile Include="ViewModels\HierarchyDefinitionViewModel.cs" />
     <Compile Include="Interfaces\IHierarchyDefinitionViewModel.cs" />
     <Compile Include="Interfaces\IListViewModel.cs" />
     <Compile Include="Interfaces\IIntervalListViewModel.cs" />
+    <Compile Include="Interfaces\IIntervalViewModel.cs" />
+    <Compile Include="Interfaces\ICashflowViewModel.cs" />
     <Compile Include="ViewModels\IntervalListViewModel.cs" />
+    <Compile Include="ViewModels\IntervalViewModel.cs" />
+    <Compile Include="ViewModels\MixedAnalysisViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\ListViewModel.cs" />
+    <Compile Include="Views\CashflowView.xaml.cs">
+      <DependentUpon>CashflowView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HierarchyDefinitionView.xaml.cs">
       <DependentUpon>HierarchyDefinitionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\IntervalListView.xaml.cs">
       <DependentUpon>IntervalListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IntervalView.xaml.cs">
+      <DependentUpon>IntervalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MixedAnalysisView.xaml.cs">
+      <DependentUpon>MixedAnalysisView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SliderView.xaml.cs">
       <DependentUpon>SliderView.xaml</DependentUpon>
@@ -123,11 +137,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CashflowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HierarchyDefinitionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\IntervalListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IntervalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MixedAnalysisView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,6 +208,14 @@
       <Project>{0659840a-e7fd-462b-b866-7dbf64841bc3}</Project>
       <Name>BizVal.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BizVal.Services\BizVal.Services.csproj">
+      <Project>{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}</Project>
+      <Name>BizVal.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BizVal\BizVal.csproj">
+      <Project>{795da232-6083-48b6-9e49-17ed6a67e6aa}</Project>
+      <Name>BizVal</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\AddMini.png" />
@@ -226,6 +260,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\IG\HowToApplyTheme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\stocks2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

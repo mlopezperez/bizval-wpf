@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="CwAggregation\CwAggregator.cs" />
     <Compile Include="CwAggregation\ExpertiseStandardizer.cs" />
+    <Compile Include="CwAggregation\HierarchyManager.cs" />
     <Compile Include="CwCompanyValuator.cs" />
     <Compile Include="IExpertiseStandardizer.cs" />
     <Compile Include="ILamaCalculator.cs" />
