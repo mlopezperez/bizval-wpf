@@ -7,18 +7,18 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ContentControl x:Name="ExpectedBenefits" Grid.Row="1" Grid.Column="0" />
-        <ContentControl x:Name="ExpectedInterests" Grid.Row="1" Grid.Column="1" />
-        <Label Content="SubstantialValue:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" />
-        <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="100" FontFamily="{Binding SubstantialValue, Mode=TwoWay}"/>
+        <ContentControl x:Name="ExpectedBenefits" Grid.Row="0" Grid.Column="0" />
+        <ContentControl x:Name="ExpectedInterests" Grid.Row="0" Grid.Column="1" />
+        <Label Content="Substantial Value:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" />
+        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="100" FontFamily="{Binding SubstantialValue, Mode=TwoWay}"/>
         <Label Content="Some text" Grid.Row="2" Grid.ColumnSpan="2"></Label>
     </Grid>
 </UserControl>

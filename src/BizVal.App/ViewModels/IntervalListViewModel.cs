@@ -1,41 +1,73 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BizVal.App.Interfaces;
+﻿using BizVal.App.Interfaces;
+using BizVal.App.Model;
 using BizVal.Framework;
-using BizVal.Model;
 using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
 {
-    public class IntervalListViewModel : IIntervalListViewModel
+    public class IntervalListViewModel : PropertyChangedBase, IIntervalListViewModel
     {
         private readonly IWindowManager windowManager;
+        private IntervalWithOpinions selectedItem;
 
         public string InputName { get; set; }
+
+        public IObservableCollection<IntervalWithOpinions> Values { get; set; }
+
+        public IntervalWithOpinions SelectedItem
+        {
+            get
+            {
+                return this.selectedItem;
+            }
+            set
+            {
+                this.selectedItem = value;
+                this.NotifyOfPropertyChange(() => this.SelectedItem);
+                this.NotifyOfPropertyChange(() => this.CanEdit);
+                this.NotifyOfPropertyChange(() => this.CanDelete);
+            }
+        }
+
+        public bool CanEdit
+        {
+            get { return this.SelectedItem != null; }
+        }
+
+        public bool CanDelete
+        {
+            get { return this.SelectedItem != null; }
+        }
 
         public IntervalListViewModel(IWindowManager windowManager)
         {
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
-            this.Expertises = new List<LinguisticExpertise>();
-            var expertise = new LinguisticExpertise(new Interval(0.1m, 0.2m));
-            expertise.AddOpinion(new TwoTuple(new Label(1, "cosa"), 0m), new TwoTuple(new Label(2, "cosa2"), -0.33m));
-
-            var expertise2 = new LinguisticExpertise(new Interval(0.15m, 0.30m));
-            expertise2.AddOpinion(new TwoTuple(new Label(1, "cosa"), 0m), new TwoTuple(new Label(2, "cosa2"), -0.33m));
-            expertise2.AddOpinion(new TwoTuple(new Label(1, "cosa"), 0m), new TwoTuple(new Label(1, "cosa1"), -0.33m));
-
-            this.Expertises.Add(expertise);
-            this.Expertises.Add(expertise2);
+            this.Values = new BindableCollection<IntervalWithOpinions>();
         }
-
-        public IList<LinguisticExpertise> Expertises { get; set; }
 
         public void Add()
         {
-            //var vm = new IntervalViewModel(this.Expertises.First());
-            //this.windowManager.ShowDialog(vm);
-
+            var data = new IntervalWithOpinions(new Interval());
+            var vm = new IntervalViewModel(this.windowManager, data);
+            var result = this.windowManager.ShowDialog(vm);
+            if (result.HasValue && result.Value)
+            {
+                this.Values.Add(data);
+            }
+            this.NotifyOfPropertyChange(() => this.Values);
         }
 
+        public void Edit()
+        {
+            var vm = new IntervalViewModel(this.windowManager, this.SelectedItem);
+            this.windowManager.ShowDialog(vm);
+            this.NotifyOfPropertyChange(() => this.Values);
+        }
+
+        public void Delete()
+        {
+            this.Values.Remove(this.SelectedItem);
+            this.NotifyOfPropertyChange(() => this.Values);
+        }
     }
 }

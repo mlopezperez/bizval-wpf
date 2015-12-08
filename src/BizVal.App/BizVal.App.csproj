@@ -73,6 +73,9 @@
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Interfaces\IShell.cs" />
+    <Compile Include="Model\Interval.cs" />
+    <Compile Include="Model\IntervalWithOpinions.cs" />
+    <Compile Include="Model\Opinion.cs" />
     <Compile Include="Module\AppModule.cs" />
     <Compile Include="ViewModels\CashflowViewModel.cs" />
     <Compile Include="ViewModels\ExpertiseViewModel.cs" />

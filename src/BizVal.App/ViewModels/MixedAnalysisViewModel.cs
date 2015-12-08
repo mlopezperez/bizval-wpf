@@ -5,8 +5,8 @@ namespace BizVal.App.ViewModels
 {
     public class MixedAnalysisViewModel : PropertyChangedBase
     {
-        private const string ExpectedInterestInputName = "Expected interests:";
-        private const string ExpectedBenefitsInputName = "Expected interests:";
+        private const string ExpectedInterestInputName = "Expected Interests:";
+        private const string ExpectedBenefitsInputName = "Expected Benefits:";
 
         public IntervalListViewModel ExpectedBenefits { get; set; }
         public IntervalListViewModel ExpectedInterests { get; set; }
