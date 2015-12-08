@@ -1,9 +1,9 @@
-﻿namespace BizVal.App.ViewModels
-{
-    using Caliburn.Micro;
-    using System.Collections.Generic;
+﻿using BizVal.App.Interfaces;
+using Caliburn.Micro;
 
-    public class ListViewModel : PropertyChangedBase
+namespace BizVal.App.ViewModels
+{
+    public class ListViewModel : PropertyChangedBase, IListViewModel
     {
         private int selectedItemIndex;
 
@@ -53,14 +53,7 @@
             }
         }
 
-        public string InputName { get; private set; }
-        
-
-        public ListViewModel(string inputName, IEnumerable<string> items)
-        {
-            this.Items = new BindableCollection<string>(items);
-            this.InputName = inputName;
-        }
+        public string InputName { get; set; }
 
         public bool CanAdd
         {

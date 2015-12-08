@@ -1,39 +1,17 @@
-using System.Collections.Generic;
-using System.Windows.Documents;
 using BizVal.App.Interfaces;
-using BizVal.App.Model;
+using System.Collections.ObjectModel;
 
 namespace BizVal.App.ViewModels
 {
-    using System.Collections.ObjectModel;
-
     public class ShellViewModel : Caliburn.Micro.PropertyChangedBase, IShell
     {
         private readonly ObservableCollection<SliderViewModel> sliders = new ObservableCollection<SliderViewModel>();
 
-        public ShellViewModel()
+        public ShellViewModel(HierarchyDefinitionViewModel hierarchyDefinition)
         {
-            this.sliders.Add(new SliderViewModel());
-            this.sliders.Add(new SliderViewModel());
-            this.sliders.Add(new SliderViewModel());
+            this.HierarchyDefinition = hierarchyDefinition;
         }
-
-        public ObservableCollection<SliderViewModel> Sliders
-        {
-            get
-            {
-                return this.sliders;
-            }
-        }
-
-        public HierarchyDefinitionViewModel Hierarchy
-        {
-            get
-            {
-                return new HierarchyDefinitionViewModel(new Hierarchy());
-            }
-        }
-
-      
+       
+        public HierarchyDefinitionViewModel HierarchyDefinition { get; set; }
     }
 }

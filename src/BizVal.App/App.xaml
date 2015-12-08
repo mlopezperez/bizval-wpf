@@ -7,10 +7,12 @@
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary>
                         <app:AppBootstrapper x:Key="bootstrapper" />
+                        
                     </ResourceDictionary>
-                </ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/IG/IG.MSControls.Core.Implicit.xaml" />
+                <ResourceDictionary Source="Themes/IG/IG.MSControls.Toolkit.Implicit.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
-
 
     </Application.Resources>
 </Application>

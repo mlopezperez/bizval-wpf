@@ -1,38 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using BizVal.App.Model;
-
+﻿using BizVal.App.Interfaces;
+using BizVal.Framework;
 using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
 {
-    public class HierarchyDefinitionViewModel : PropertyChangedBase
+    public class HierarchyDefinitionViewModel : PropertyChangedBase, IHierarchyDefinitionViewModel
     {
-        private readonly Hierarchy hierarchy;
+        public ListViewModel TermSet { get; set; }
 
-        public HierarchyDefinitionViewModel(Hierarchy hierarchy)
-        {
-            this.hierarchy = hierarchy;
-        }
+        public ListViewModel Levels { get; set; }
 
-        public ListViewModel TermSet
+        public HierarchyDefinitionViewModel(ListViewModel levels, ListViewModel termSet)
         {
-            get
-            {
-                return new ListViewModel("New term:", new List<string>());
-            }
-        }
+            this.Levels = Contract.NotNull(levels, "levels");
+            this.TermSet = Contract.NotNull(termSet, "termSet");
 
-        public ListViewModel Hierarchy
-        {
-            get
-            {
-                return new ListViewModel("New Set Name:", new List<string>());
-            }
+            this.Levels.InputName = "Levels:";
+            this.TermSet.InputName = "Terms:";
         }
     }
 }

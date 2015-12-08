@@ -7,7 +7,7 @@
     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <TabControl>
             <TabItem Header="Term definition">
-                <ContentControl x:Name="Hierarchy"></ContentControl>
+                <ContentControl x:Name="HierarchyDefinition"></ContentControl>
             </TabItem>
             <TabItem Header="Expertise">
                 <ItemsControl x:Name="Sliders"/>

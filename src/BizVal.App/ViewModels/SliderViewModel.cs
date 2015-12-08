@@ -1,8 +1,9 @@
-﻿namespace BizVal.App.ViewModels
+﻿using System.Collections.Generic;
+using BizVal.App.Model;
+using Caliburn.Micro;
+
+namespace BizVal.App.ViewModels
 {
-    using BizVal.App.Model;
-    using Caliburn.Micro;
-    using System.Collections.Generic;
 
     public class SliderViewModel : PropertyChangedBase
     {
@@ -85,30 +86,30 @@
             }
         }
 
-        public SliderViewModel()
-        {
-            var scale1 = new TermSet();
-            scale1.Name = "s1";
-            scale1.Terms = new List<string>();
-            scale1.Terms.Add("termino11");
-            scale1.Terms.Add("termino12");
-            scale1.Terms.Add("termino13");
+        //public SliderViewModel()
+        //{
+        //    var scale1 = new TermSet();
+        //    scale1.Name = "s1";
+        //    scale1.Terms = new List<string>();
+        //    scale1.Terms.Add("termino11");
+        //    scale1.Terms.Add("termino12");
+        //    scale1.Terms.Add("termino13");
 
-            var scale2 = new TermSet();
-            scale2.Name = "S2";
-            scale2.Terms = new List<string>();
-            scale2.Terms.Add("termino21");
-            scale2.Terms.Add("termino22");
-            scale2.Terms.Add("termino23");
-            scale2.Terms.Add("termino24");
-            scale2.Terms.Add("termino25");
+        //    var scale2 = new TermSet();
+        //    scale2.Name = "S2";
+        //    scale2.Terms = new List<string>();
+        //    scale2.Terms.Add("termino21");
+        //    scale2.Terms.Add("termino22");
+        //    scale2.Terms.Add("termino23");
+        //    scale2.Terms.Add("termino24");
+        //    scale2.Terms.Add("termino25");
 
-            this.modelScales = new Hierarchy();
-            this.modelScales.TermSets = new List<TermSet>();
-            this.modelScales.TermSets.Add(scale1);
-            this.modelScales.TermSets.Add(scale2);
+        //    this.modelScales = new Hierarchy();
+        //    this.modelScales.TermSets = new List<TermSet>();
+        //    this.modelScales.TermSets.Add(scale1);
+        //    this.modelScales.TermSets.Add(scale2);
 
-            this.SelectedScale = 0;
-        }
+        //    this.SelectedScale = 0;
+        //}
     }
 }
