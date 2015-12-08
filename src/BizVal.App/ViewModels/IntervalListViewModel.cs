@@ -8,13 +8,13 @@ namespace BizVal.App.ViewModels
     public class IntervalListViewModel : PropertyChangedBase, IIntervalListViewModel
     {
         private readonly IWindowManager windowManager;
-        private IntervalWithOpinions selectedItem;
+        private BindableExpertise selectedItem;
 
         public string InputName { get; set; }
 
-        public IObservableCollection<IntervalWithOpinions> Values { get; set; }
+        public IObservableCollection<BindableExpertise> Values { get; set; }
 
-        public IntervalWithOpinions SelectedItem
+        public BindableExpertise SelectedItem
         {
             get
             {
@@ -42,12 +42,12 @@ namespace BizVal.App.ViewModels
         public IntervalListViewModel(IWindowManager windowManager)
         {
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
-            this.Values = new BindableCollection<IntervalWithOpinions>();
+            this.Values = new BindableCollection<BindableExpertise>();
         }
 
         public void Add()
         {
-            var data = new IntervalWithOpinions(new Interval());
+            var data = new BindableExpertise(new BindableInterval());
             var vm = new IntervalViewModel(this.windowManager, data);
             var result = this.windowManager.ShowDialog(vm);
             if (result.HasValue && result.Value)

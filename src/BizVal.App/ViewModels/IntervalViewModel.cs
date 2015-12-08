@@ -9,13 +9,13 @@ namespace BizVal.App.ViewModels
     internal sealed class IntervalViewModel : Screen, IIntervalViewModel
     {
         private readonly IWindowManager windowManager;
-        private readonly IntervalWithOpinions intervalWithOpinions;
+        private readonly BindableExpertise intervalWithOpinions;
 
         public decimal LowerBound { get; set; }
 
         public decimal UpperBound { get; set; }
 
-        public IntervalViewModel(IWindowManager windowManager, IntervalWithOpinions intervalWithOpinions)
+        public IntervalViewModel(IWindowManager windowManager, BindableExpertise intervalWithOpinions)
         {
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
             this.intervalWithOpinions = Contract.NotNull(intervalWithOpinions, "intervalWithOpinions");

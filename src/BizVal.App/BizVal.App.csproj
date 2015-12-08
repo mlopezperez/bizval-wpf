@@ -73,8 +73,11 @@
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Interfaces\IShell.cs" />
-    <Compile Include="Model\Interval.cs" />
-    <Compile Include="Model\IntervalWithOpinions.cs" />
+    <Compile Include="Model\BindableHierarchy.cs" />
+    <Compile Include="Model\BindableInterval.cs" />
+    <Compile Include="Model\BindableExpertise.cs" />
+    <Compile Include="Model\BindableLabel.cs" />
+    <Compile Include="Model\BindableLabelSet.cs" />
     <Compile Include="Model\Opinion.cs" />
     <Compile Include="Module\AppModule.cs" />
     <Compile Include="ViewModels\CashflowViewModel.cs" />

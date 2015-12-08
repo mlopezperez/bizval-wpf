@@ -1,28 +1,55 @@
 ﻿using System.Linq;
 using BizVal.App.Interfaces;
+using BizVal.App.Model;
 using BizVal.Framework;
-using BizVal.Model;
 using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
 {
     public class HierarchyDefinitionViewModel : Screen, IHierarchyDefinitionViewModel
     {
-        public Hierarchy Hierarchy { get; set; }
+        private BindableLabelSet selectedSet;
+        private IObservableCollection<BindableLabelSet> levels;
 
-        public ListViewModel TermSet { get; set; }
-
-        public ListViewModel Levels { get; set; }
-
-        public HierarchyDefinitionViewModel(ListViewModel levels, ListViewModel termSet)
+        public IObservableCollection<BindableLabelSet> Levels
         {
-            this.Levels = Contract.NotNull(levels, "levels");
-            this.TermSet = Contract.NotNull(termSet, "termSet");
+            get
+            {
+                return this.levels;
+            }
+            set
+            {
+                this.levels = value;
+                this.NotifyOfPropertyChange(() => this.Levels);
+            }
+        }
 
-            this.Levels.InputName = "Levels:";
-            this.TermSet.InputName = "Terms:";
+        public BindableLabelSet SelectedSet
+        {
+            get
+            {
+                return this.selectedSet;
+            }
+            set
+            {
+                this.selectedSet = value;
+                this.NotifyOfPropertyChange(() => this.SelectedSet);
+            }
+        }
 
-            this.Levels.Items = new BindableCollection<string>(this.Hierarchy.Select(i => i.Name));
+        public HierarchyDefinitionViewModel(BindableHierarchy bindableHierarchy)
+        {
+            this.Levels = bindableHierarchy.Levels;
+        }
+
+        public void AddSet()
+        {
+            int i = 0;
+        }
+
+        public void Cancel()
+        {
+            this.TryClose(false);
         }
     }
 }

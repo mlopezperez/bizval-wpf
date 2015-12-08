@@ -2,15 +2,16 @@
 
 namespace BizVal.App.Model
 {
-    public class IntervalWithOpinions
+    public class BindableExpertise
     {
-        public Interval Interval { get; set; }
+        public BindableInterval Interval { get; set; }
         public BindableCollection<Opinion> Opinions { get; set; }
 
-        public IntervalWithOpinions(Interval interval)
+        public BindableExpertise(BindableInterval interval)
         {
             this.Interval = interval;
             this.Opinions = new BindableCollection<Opinion>();
         }
     }
 }
+    

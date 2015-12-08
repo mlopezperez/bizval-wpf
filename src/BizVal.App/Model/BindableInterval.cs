@@ -7,7 +7,7 @@ using Caliburn.Micro;
 
 namespace BizVal.App.Model
 {
-    public class Interval : PropertyChangedBase
+    public class BindableInterval : PropertyChangedBase
     {
         private decimal lowerBound;
         private decimal upperBound;

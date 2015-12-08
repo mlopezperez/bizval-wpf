@@ -10,13 +10,12 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BizVal.App.Views
 {
     /// <summary>
-    /// Interaction logic for HierarchyDefinitionView.xaml
+    /// Interaction logic for HierarchyDefinitionVieww.xaml
     /// </summary>
     public partial class HierarchyDefinitionView : Window
     {

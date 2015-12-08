@@ -1,10 +1,8 @@
-﻿using BizVal.Model;
-
-namespace BizVal.App.Model
+﻿namespace BizVal.App.Model
 {
     public class Opinion
     {
-        public Label LowerBoundLabel { get; set; }
-        public Label UpperBoundLabel { get; set; }
+        public BindableLabel LowerBoundLabel { get; set; }
+        public BindableLabel UpperBoundLabel { get; set; }
     }
 }

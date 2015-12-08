@@ -4,7 +4,6 @@
 
 //namespace BizVal.App.ViewModels
 //{
-
 //    public class SliderViewModel : PropertyChangedBase
 //    {
 //        private readonly Hierarchy modelScales;
