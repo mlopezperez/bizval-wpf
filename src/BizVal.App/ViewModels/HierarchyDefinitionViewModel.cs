@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using BizVal.App.Interfaces;
+﻿using BizVal.App.Interfaces;
 using BizVal.App.Model;
-using BizVal.Framework;
 using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
@@ -9,20 +7,21 @@ namespace BizVal.App.ViewModels
     public class HierarchyDefinitionViewModel : Screen, IHierarchyDefinitionViewModel
     {
         private BindableLabelSet selectedSet;
-        private IObservableCollection<BindableLabelSet> levels;
+        private BindableHierarchy bindableHierarchy;
 
-        public IObservableCollection<BindableLabelSet> Levels
+        public BindableHierarchy Hierarchy
         {
             get
             {
-                return this.levels;
+                return this.bindableHierarchy;
             }
             set
             {
-                this.levels = value;
-                this.NotifyOfPropertyChange(() => this.Levels);
+                this.bindableHierarchy = value;
+                this.NotifyOfPropertyChange(() => this.Hierarchy);
             }
         }
+
 
         public BindableLabelSet SelectedSet
         {
@@ -37,9 +36,10 @@ namespace BizVal.App.ViewModels
             }
         }
 
-        public HierarchyDefinitionViewModel(BindableHierarchy bindableHierarchy)
+        public HierarchyDefinitionViewModel(IHierarchyManager hierarchyManager)
         {
-            this.Levels = bindableHierarchy.Levels;
+            var hierarchy = hierarchyManager.GetCurrentHierarchy();
+            this.Hierarchy = new BindableHierarchy(hierarchy);
         }
 
         public void AddSet()

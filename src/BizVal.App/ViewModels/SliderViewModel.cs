@@ -32,7 +32,7 @@ namespace BizVal.App.ViewModels
         {
             get
             {
-                return this.CurrentSet.Terms[this.UpperBoundValue].Name;
+                return this.CurrentSet.Labels[this.UpperBoundValue].Name;
             }
         }
 
@@ -40,7 +40,7 @@ namespace BizVal.App.ViewModels
         {
             get
             {
-                return this.CurrentSet.Terms[this.LowerBoundValue].Name;
+                return this.CurrentSet.Labels[this.LowerBoundValue].Name;
             }
         }
 
@@ -84,7 +84,7 @@ namespace BizVal.App.ViewModels
 
         public int MaxValue
         {
-            get { return this.CurrentSet.Terms.Count - 1; }
+            get { return this.CurrentSet.Labels.Count - 1; }
         }
 
         public SliderViewModel(BindableHierarchy bindableHierarchy, string expertName)

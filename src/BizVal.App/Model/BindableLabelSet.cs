@@ -21,7 +21,7 @@ namespace BizVal.App.Model
             }
         }
 
-        public IObservableCollection<BindableLabel> Terms
+        public IObservableCollection<BindableLabel> Labels
         {
             get
             {
@@ -34,5 +34,10 @@ namespace BizVal.App.Model
         {
             this.labelSet = labelSet;
         }
+
+        //public override string ToString()
+        //{
+        //    return string.Format("{0}", this.SetName);
+        //}
     }
 }

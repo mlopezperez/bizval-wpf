@@ -8,6 +8,7 @@ namespace BizVal.App.ViewModels
 {
     public class ShellViewModel : IShell
     {
+        private readonly HierarchyDefinitionViewModel hierarchyDefinitionViewModel;
         private readonly IWindowManager windowManager;
 
         public CashflowViewModel Cashflow { get; set; }
@@ -20,25 +21,20 @@ namespace BizVal.App.ViewModels
 
         public ShellViewModel(
             IWindowManager windowManager,
-            //IHierarchyManager hierarchyManager,
+            HierarchyDefinitionViewModel hierarchyDefinitionViewModel,
             CashflowViewModel casflowViewModel,
             MixedAnalysisViewModel mixedAnalysisViewModel)
         {
+            this.hierarchyDefinitionViewModel = hierarchyDefinitionViewModel;
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
-            //Contract.NotNull(hierarchyManager, "hierarchyManager");
-
-            //this.hierarchy = hierarchyManager.GetDefaultHierarchy();
 
             this.Cashflow = Contract.NotNull(casflowViewModel, "casflowViewModel");
             this.MixedAnalysis = Contract.NotNull(mixedAnalysisViewModel, "mixedAnalysisViewModel");
-            //this.Expertise = new ExpertiseViewModel(new BindableHierarchy(this.hierarchy));
         }
 
         public void DefineHierarchy()
         {
-            //var bindableHierarchy = new BindableHierarchy(this.hierarchy);
-            //var vm = new HierarchyDefinitionViewModel(bindableHierarchy);
-            //this.windowManager.ShowDialog(vm);
+            this.windowManager.ShowDialog(this.hierarchyDefinitionViewModel);
         }
     }
 }
