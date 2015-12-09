@@ -4,6 +4,6 @@ namespace BizVal
 {
     public interface IHierarchyManager
     {
-        Hierarchy GetDefaultHierarchy();
+        Hierarchy GetCurrentHierarchy();
     }
 }

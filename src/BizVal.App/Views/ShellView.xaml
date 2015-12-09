@@ -4,14 +4,14 @@
         Title="Business Valuation with Words"
         xmlns:local="clr-namespace:BizVal.App.Views" x:Class="BizVal.App.Views.ShellView" Icon="/BizVal.App;component/Images/stocks2.png" Background="LightGray">
 
-    
-        <DockPanel Width="Auto">
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Hierarchies">
-                    <MenuItem Header="Define Hierarchy" x:Name="DefineHierarchy"/>
-                </MenuItem>
-            </Menu>
-        
+
+    <DockPanel Width="Auto">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Hierarchies">
+                <MenuItem Header="Define Hierarchy" x:Name="DefineHierarchy"/>
+            </MenuItem>
+        </Menu>
+
         <Grid Margin="0,5,0,0" DockPanel.Dock="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -20,9 +20,9 @@
                 <ColumnDefinition Width="700"/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
-            
+
             <Label x:Name="Result" Grid.Column="1" VerticalAlignment="Center" Content="SomeContent" />
-           
+
             <TabControl Grid.Column="0">
                 <TabItem Header="Cashflow">
                     <ContentControl x:Name="Cashflow"></ContentControl>
@@ -30,11 +30,14 @@
                 <TabItem Header="MixedAnalysis">
                     <ContentControl x:Name="MixedAnalysis"/>
                 </TabItem>
+                <TabItem Header="Expertise">
+                    <ContentControl x:Name="Expertise"/>
+                </TabItem>
             </TabControl>
         </Grid>
 
     </DockPanel>
 
-   
+
 
 </Window>

@@ -4,17 +4,23 @@ namespace BizVal.Services.CwAggregation
 {
     internal class HierarchyManager : IHierarchyManager
     {
-        public Hierarchy GetDefaultHierarchy()
+        private Hierarchy currentHierarchy;
+
+        public Hierarchy GetCurrentHierarchy()
         {
-            var hierarchy = new Hierarchy();
-            hierarchy.Add(this.GetLabelSet3());
-            hierarchy.Add(this.GetLabelSet5());
-            return hierarchy;
+            if (this.currentHierarchy == null)
+            {
+                this.currentHierarchy = new Hierarchy();
+                this.currentHierarchy.Add(this.GetLabelSet3());
+                this.currentHierarchy.Add(this.GetLabelSet5());
+            }
+
+            return this.currentHierarchy;
         }
 
         private LabelSet GetLabelSet3()
         {
-            var result = new LabelSet();
+            var result = new LabelSet("3-Labels");
             result.Add(new Label(0, "Poco"));
             result.Add(new Label(1, "Medio"));
             result.Add(new Label(2, "Mucho"));
@@ -23,11 +29,11 @@ namespace BizVal.Services.CwAggregation
 
         private LabelSet GetLabelSet5()
         {
-            var result = new LabelSet();
+            var result = new LabelSet("5-Labels");
             result.Add(new Label(0, "Nada"));
             result.Add(new Label(1, "Poco"));
-            result.Add(new Label(2, "Mucho"));
-            result.Add(new Label(3, "Algo"));
+            result.Add(new Label(2, "Medio"));
+            result.Add(new Label(3, "Bastante"));
             result.Add(new Label(4, "Mucho"));
             return result;
         }

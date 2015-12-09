@@ -1,114 +1,97 @@
-﻿//using System.Collections.Generic;
-//using BizVal.App.Model;
-//using Caliburn.Micro;
+﻿using System.Linq;
+using BizVal.App.Model;
+using Caliburn.Micro;
 
-//namespace BizVal.App.ViewModels
-//{
-//    public class SliderViewModel : PropertyChangedBase
-//    {
-//        private readonly Hierarchy modelScales;
+namespace BizVal.App.ViewModels
+{
+    public class SliderViewModel : PropertyChangedBase
+    {
+        private int lowerValue;
+        private int upperValue;
+        private BindableLabelSet currentSet;
+        private string expertName;
+        public IObservableCollection<BindableLabelSet> Sets { get; private set; }
 
-//        private TermSet selectedScale;
+        public BindableLabelSet CurrentSet
+        {
+            get
+            {
+                return this.currentSet;
+            }
+            set
+            {
+                this.currentSet = value;
+                this.NotifyOfPropertyChange(() => this.CurrentSet);
+                this.NotifyOfPropertyChange(() => this.MaxValue);
+                this.NotifyOfPropertyChange(() => this.LowerLabel);
+                this.NotifyOfPropertyChange(() => this.UpperLabel);
+            }
+        }
 
-//        private int selectedValue;
+        public string UpperLabel
+        {
+            get
+            {
+                return this.CurrentSet.Terms[this.UpperBoundValue].Name;
+            }
+        }
 
-//        private int selectedScaleIndex;
+        public string LowerLabel
+        {
+            get
+            {
+                return this.CurrentSet.Terms[this.LowerBoundValue].Name;
+            }
+        }
 
-//        public int MinValue
-//        {
-//            get
-//            {
-//                return 0;
-//            }
-//        }
+        public int LowerBoundValue
+        {
+            get
+            {
+                return this.lowerValue;
+            }
+            set
+            {
+                this.lowerValue = value;
+                this.NotifyOfPropertyChange(() => this.LowerBoundValue);
+                this.NotifyOfPropertyChange(() => this.LowerLabel);
+            }
+        }
 
-//        public int MaxValue
-//        {
-//            get
-//            {
-//                return this.selectedScale.Terms.Count - 1;
-//            }
-//        }
+        public int UpperBoundValue
+        {
+            get
+            {
+                return this.upperValue;
+            }
+            set
+            {
+                this.upperValue = value;
+                this.NotifyOfPropertyChange(() => this.UpperBoundValue);
+                this.NotifyOfPropertyChange(() => this.UpperLabel);
+            }
+        }
 
-//        public int SelectedValue
-//        {
-//            get
-//            {
-//                return this.selectedValue;
-//            }
+        public string ExpertName
+        {
+            get { return this.expertName; }
+            set
+            {
+                this.expertName = value;
+                this.NotifyOfPropertyChange(() => this.ExpertName);
+            }
+        }
 
-//            set
-//            {
-//                this.selectedValue = value;
-//                this.NotifyOfPropertyChange(() => this.SelectedValueText);
-//            }
-//        }
+        public int MaxValue
+        {
+            get { return this.CurrentSet.Terms.Count - 1; }
+        }
 
-//        public string SelectedValueText
-//        {
-//            get
-//            {
-//                return this.selectedScale.Terms[this.selectedValue];
-//            }
-//        }
-
-//        public IEnumerable<TermSet> Scales
-//        {
-//            get
-//            {
-//                return this.modelScales.TermSets;
-//            }
-//        }
-
-//        public int SelectedScale
-//        {
-//            get
-//            {
-//                return this.selectedScaleIndex;
-//            }
-
-//            set
-//            {
-//                this.selectedScaleIndex = value;
-//                this.selectedScale = this.modelScales.TermSets[this.selectedScaleIndex];
-//                this.NotifyOfPropertyChange(() => this.SelectedScale);
-//                this.NotifyOfPropertyChange(() => this.SelectedValueText);
-//                this.NotifyOfPropertyChange(() => this.MaxValue);
-//            }
-//        }
-
-//        public string SelectedScaleName
-//        {
-//            get
-//            {
-//                return this.selectedScale.Name;
-//            }
-//        }
-
-//        //public SliderViewModel()
-//        //{
-//        //    var scale1 = new TermSet();
-//        //    scale1.Name = "s1";
-//        //    scale1.Terms = new List<string>();
-//        //    scale1.Terms.Add("termino11");
-//        //    scale1.Terms.Add("termino12");
-//        //    scale1.Terms.Add("termino13");
-
-//        //    var scale2 = new TermSet();
-//        //    scale2.Name = "S2";
-//        //    scale2.Terms = new List<string>();
-//        //    scale2.Terms.Add("termino21");
-//        //    scale2.Terms.Add("termino22");
-//        //    scale2.Terms.Add("termino23");
-//        //    scale2.Terms.Add("termino24");
-//        //    scale2.Terms.Add("termino25");
-
-//        //    this.modelScales = new Hierarchy();
-//        //    this.modelScales.TermSets = new List<TermSet>();
-//        //    this.modelScales.TermSets.Add(scale1);
-//        //    this.modelScales.TermSets.Add(scale2);
-
-//        //    this.SelectedScale = 0;
-//        //}
-//    }
-//}
+        public SliderViewModel(BindableHierarchy bindableHierarchy, string expertName)
+        {
+            this.Sets = bindableHierarchy.Levels;
+            this.CurrentSet = this.Sets.First();
+            this.ExpertName = expertName;
+        }
+    }
+}
