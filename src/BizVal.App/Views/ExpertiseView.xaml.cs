@@ -17,7 +17,7 @@ namespace BizVal.App.Views
     /// <summary>
     /// Interaction logic for ExpertiseView.xaml
     /// </summary>
-    public partial class ExpertiseView : UserControl
+    public partial class ExpertiseView : Window
     {
         public ExpertiseView()
         {

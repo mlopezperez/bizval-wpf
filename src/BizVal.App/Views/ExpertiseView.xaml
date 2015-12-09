@@ -1,16 +1,29 @@
-﻿<UserControl x:Class="BizVal.App.Views.ExpertiseView"
+﻿<Window x:Class="BizVal.App.Views.ExpertiseView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-        <!--Title="Add Expertise" Height="450" Width="600" WindowStyle="ToolWindow"-->
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Expertise" Height="480" Width="730" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" Background="LightGray">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <ItemsControl Grid.Row="1" x:Name="Sliders">
-        </ItemsControl>
-        <Button x:Name="Add" Grid.Row="2" Width="100">Add</Button>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="Interval" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="Bold" ></Label>
+        <ScrollViewer Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="5" >
+            <ItemsControl  x:Name="Sliders" BorderBrush="DarkGray" BorderThickness="1.5">
+            </ItemsControl>
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" >
+            <Button x:Name="Add"  Width="100" Height="20" Margin="5">Add</Button>
+            <Button x:Name="Delete"  Width="100" Height="20" Margin="5">Remove</Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button  HorizontalAlignment="Right" x:Name="Save"  Width="100" Height="20" Margin="5">Save</Button>
+            <Button  HorizontalAlignment="Right" x:Name="Cancel"  Width="100" Height="20" Margin="5">Cancel</Button>
+        </StackPanel>
     </Grid>
-</UserControl>
+</Window>

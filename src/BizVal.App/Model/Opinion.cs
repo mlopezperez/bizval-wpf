@@ -4,5 +4,6 @@
     {
         public BindableLabel LowerBoundLabel { get; set; }
         public BindableLabel UpperBoundLabel { get; set; }
+        public int LabelSet { get; set; }
     }
 }

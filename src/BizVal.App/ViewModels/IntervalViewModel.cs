@@ -8,18 +8,41 @@ namespace BizVal.App.ViewModels
 {
     internal sealed class IntervalViewModel : Screen, IIntervalViewModel
     {
+        private readonly IHierarchyManager hierarchyManager;
         private readonly IWindowManager windowManager;
-        private readonly BindableExpertise intervalWithOpinions;
+        private readonly BindableExpertise expertise;
 
-        public decimal LowerBound { get; set; }
-
-        public decimal UpperBound { get; set; }
-
-        public IntervalViewModel(IWindowManager windowManager, BindableExpertise intervalWithOpinions)
+        public decimal LowerBound
         {
-            this.windowManager = Contract.NotNull(windowManager, "windowManager");
-            this.intervalWithOpinions = Contract.NotNull(intervalWithOpinions, "intervalWithOpinions");
+            get
+            {
+                return this.expertise.Interval.LowerBound;
+            }
+            set
+            {
+                this.expertise.Interval.LowerBound = value;
+                this.NotifyOfPropertyChange(() => this.LowerBound);
+            }
+        }
 
+        public decimal UpperBound
+        {
+            get
+            {
+                return this.expertise.Interval.UpperBound;
+            }
+            set
+            {
+                this.expertise.Interval.UpperBound = value;
+                this.NotifyOfPropertyChange(() => this.UpperBound);
+            }
+        }
+
+        public IntervalViewModel(IWindowManager windowManager, BindableExpertise intervalWithOpinions, IHierarchyManager hierarchyManager)
+        {
+            this.hierarchyManager = hierarchyManager;
+            this.windowManager = Contract.NotNull(windowManager, "windowManager");
+            this.expertise = Contract.NotNull(intervalWithOpinions, "intervalWithOpinions");
 
             this.LowerBound = intervalWithOpinions.Interval.LowerBound;
             this.UpperBound = intervalWithOpinions.Interval.UpperBound;
@@ -28,8 +51,8 @@ namespace BizVal.App.ViewModels
 
         public void Save()
         {
-            this.intervalWithOpinions.Interval.LowerBound = this.LowerBound;
-            this.intervalWithOpinions.Interval.UpperBound = this.UpperBound;
+            this.expertise.Interval.LowerBound = this.LowerBound;
+            this.expertise.Interval.UpperBound = this.UpperBound;
             this.TryClose(true);
         }
 
@@ -40,8 +63,8 @@ namespace BizVal.App.ViewModels
 
         public void Expertise()
         {
-            //var vm = new ExpertiseViewModel(this.expertise.);
-            //this.windowManager.ShowDialog(vm);
+            var vm = new ExpertiseViewModel(this.hierarchyManager, this.expertise);
+            this.windowManager.ShowDialog(vm);
         }
     }
 }

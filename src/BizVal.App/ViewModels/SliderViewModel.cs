@@ -10,7 +10,21 @@ namespace BizVal.App.ViewModels
         private int upperValue;
         private BindableLabelSet currentSet;
         private string expertName;
+        private bool selected;
         public IObservableCollection<BindableLabelSet> Sets { get; private set; }
+
+        public bool Selected
+        {
+            get
+            {
+                return this.selected;
+            }
+            set
+            {
+                this.selected = value;
+                this.NotifyOfPropertyChange(() => this.Selected);
+            }
+        }
 
         public BindableLabelSet CurrentSet
         {

@@ -7,6 +7,7 @@ namespace BizVal.App.ViewModels
 {
     public class IntervalListViewModel : PropertyChangedBase, IIntervalListViewModel
     {
+        private readonly IHierarchyManager hierarchyManager;
         private readonly IWindowManager windowManager;
         private BindableExpertise selectedItem;
 
@@ -39,8 +40,9 @@ namespace BizVal.App.ViewModels
             get { return this.SelectedItem != null; }
         }
 
-        public IntervalListViewModel(IWindowManager windowManager)
+        public IntervalListViewModel(IWindowManager windowManager, IHierarchyManager hierarchyManager)
         {
+            this.hierarchyManager = hierarchyManager;
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
             this.Values = new BindableCollection<BindableExpertise>();
         }
@@ -48,7 +50,7 @@ namespace BizVal.App.ViewModels
         public void Add()
         {
             var data = new BindableExpertise(new BindableInterval());
-            var vm = new IntervalViewModel(this.windowManager, data);
+            var vm = new IntervalViewModel(this.windowManager, data, this.hierarchyManager);
             var result = this.windowManager.ShowDialog(vm);
             if (result.HasValue && result.Value)
             {
@@ -59,7 +61,7 @@ namespace BizVal.App.ViewModels
 
         public void Edit()
         {
-            var vm = new IntervalViewModel(this.windowManager, this.SelectedItem);
+            var vm = new IntervalViewModel(this.windowManager, this.SelectedItem, this.hierarchyManager);
             this.windowManager.ShowDialog(vm);
             this.NotifyOfPropertyChange(() => this.Values);
         }
