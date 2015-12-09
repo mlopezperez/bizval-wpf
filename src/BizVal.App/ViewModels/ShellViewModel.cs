@@ -6,7 +6,7 @@ using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
 {
-    public class ShellViewModel : IShell
+    public class ShellViewModel : Conductor<object>, IShell
     {
         private readonly IHierarchyManager hierarchyManager;
         private readonly IWindowManager windowManager;
@@ -36,6 +36,16 @@ namespace BizVal.App.ViewModels
         {
             var hierarchyDefinitionViewModel = new HierarchyDefinitionViewModel(this.hierarchyManager);
             this.windowManager.ShowDialog(hierarchyDefinitionViewModel);
+        }
+
+        public void ShowCashflow()
+        {
+            this.ActivateItem(this.Cashflow);
+        }
+
+        public void ShowMixedAnalysis()
+        {
+            this.ActivateItem(this.MixedAnalysis);
         }
     }
 }

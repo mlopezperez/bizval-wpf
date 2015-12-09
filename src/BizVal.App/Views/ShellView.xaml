@@ -11,29 +11,15 @@
                 <MenuItem Header="Define Hierarchy" x:Name="DefineHierarchy"/>
             </MenuItem>
         </Menu>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Button x:Name="ShowCashflow">Cashflow</Button>
+            <Button x:Name="ShowMixedAnalysis">Mixed</Button>
+            <Button x:Name="ShowResults">Results</Button>
+        </StackPanel>
 
-        <Grid Margin="0,5,0,0" DockPanel.Dock="Left">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="700"/>
-                <ColumnDefinition Width="300"/>
-            </Grid.ColumnDefinitions>
-
-            <Label x:Name="Result" Grid.Column="1" VerticalAlignment="Center" Content="SomeContent" />
-
-            <TabControl Grid.Column="0">
-                <TabItem Header="Cashflow">
-                    <ContentControl x:Name="Cashflow"></ContentControl>
-                </TabItem>
-                <TabItem Header="MixedAnalysis">
-                    <ContentControl x:Name="MixedAnalysis"/>
-                </TabItem>
-                <TabItem Header="Expertise">
-                    <ContentControl x:Name="Expertise"/>
-                </TabItem>
-            </TabControl>
+        <Grid DockPanel.Dock="Left">
+           
+            <ContentControl x:Name="ActiveItem"></ContentControl>
         </Grid>
 
     </DockPanel>
