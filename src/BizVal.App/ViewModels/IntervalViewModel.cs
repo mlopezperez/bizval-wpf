@@ -1,7 +1,6 @@
 ﻿using BizVal.App.Interfaces;
 using BizVal.App.Model;
 using BizVal.Framework;
-using BizVal.Model;
 using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
@@ -22,6 +21,7 @@ namespace BizVal.App.ViewModels
             {
                 this.expertise.Interval.LowerBound = value;
                 this.NotifyOfPropertyChange(() => this.LowerBound);
+                this.NotifyOfPropertyChange(() => this.CanSave);
             }
         }
 
@@ -35,7 +35,13 @@ namespace BizVal.App.ViewModels
             {
                 this.expertise.Interval.UpperBound = value;
                 this.NotifyOfPropertyChange(() => this.UpperBound);
+                this.NotifyOfPropertyChange(() => this.CanSave);
             }
+        }
+
+        public bool CanSave
+        {
+            get { return this.UpperBound >= this.LowerBound; }
         }
 
         public IntervalViewModel(IWindowManager windowManager, BindableExpertise intervalWithOpinions, IHierarchyManager hierarchyManager)

@@ -19,6 +19,6 @@
         <ContentControl x:Name="CashflowData" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" />
         <ContentControl x:Name="WaccData" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch">
         </ContentControl>
-        <Label x:Name="ErrorMessage" Grid.Row="1" Grid.ColumnSpan="2" Content="Hola!" VerticalAlignment="Bottom" />
+        <Label x:Name="ErrorMessage" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Foreground="DarkOrange" />
     </Grid>
 </UserControl>

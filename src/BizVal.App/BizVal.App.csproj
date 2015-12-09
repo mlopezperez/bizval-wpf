@@ -69,6 +69,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Events\CashflowCalculationErrorEvent.cs" />
+    <Compile Include="Events\CashflowCalculationEvent.cs" />
+    <Compile Include="Events\DataChangedEvent.cs" />
     <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Model\BindableHierarchy.cs" />
     <Compile Include="Model\BindableInterval.cs" />
@@ -218,9 +221,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BizVal.Framework\BizVal.Framework.csproj">
       <Project>{0659840a-e7fd-462b-b866-7dbf64841bc3}</Project>

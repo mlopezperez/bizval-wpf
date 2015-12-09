@@ -1,34 +1,92 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using BizVal.App.Events;
+using BizVal.App.Model;
+using BizVal.Model;
 using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
 {
-    public class ResultsViewModel : Screen
+    public class ResultsViewModel : Screen, IHandle<CashflowCalculationEvent>
     {
-        public IList<Point> Points { get; set; }
+        private const string IntervalPattern = "[{0:0.00}, {1:0.00}]";
+        private readonly ICompanyValuator companyValuator;
+        private readonly ICwCompanyValuator cwCompanyValuator;
+        private readonly IEventAggregator eventAggregator;
+        private BindableInterval cashflowResult;
 
-        public ResultsViewModel()
+        public string CashflowResult
         {
-            this.Points = new List<Point>();
-            var point1 = new Point(2f, 2f, 4f);
-            var point2 = new Point(2f, 2f, 1f);
-            this.Points.Add(point1);
-            this.Points.Add(point2);
+            get
+            {
+                if (this.CashflowInterval != null)
+                {
+                    return string.Format(IntervalPattern, this.CashflowInterval.LowerBound,
+                        this.CashflowInterval.UpperBound);
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public BindableInterval CashflowInterval
+        {
+            get { return this.cashflowResult; }
+            set
+            {
+                this.cashflowResult = value;
+                this.NotifyOfPropertyChange(() => this.CashflowInterval);
+                this.NotifyOfPropertyChange(() => this.CashflowResult);
+            }
+        }
+
+        public ResultsViewModel(ICompanyValuator companyValuator, ICwCompanyValuator cwCompanyValuator, IEventAggregator eventAggregator)
+        {
+            this.companyValuator = companyValuator;
+            this.cwCompanyValuator = cwCompanyValuator;
+            this.eventAggregator = eventAggregator;
+
+            this.eventAggregator.Subscribe(this);
+        }
+
+        public void Handle(CashflowCalculationEvent message)
+        {
+            try
+            {
+                this.CalculateCashflow(message);
+                // this.CalculateAdjustedCashflow(message);
+            }
+            catch (ValuationException ex)
+            {
+                this.eventAggregator.PublishOnUIThread(new CashflowCalculationErrorEvent(ex.Message));
+            }
+            catch (AggregateException ex)
+            {
+                this.eventAggregator.PublishOnUIThread(new CashflowCalculationErrorEvent(ex.Message));
+            }
+        }
+
+        private void CalculateAdjustedCashflow(CashflowCalculationEvent message)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CalculateCashflow(CashflowCalculationEvent message)
+        {
+            var cashflowIntervals =
+                message.Cashflows.Select(i => new Interval(i.Interval.LowerBound, i.Interval.UpperBound)).ToList();
+            var waccIntervals =
+                message.Waccs.Select(i => new Interval(i.Interval.LowerBound, i.Interval.UpperBound)).ToList();
+            var result = this.companyValuator.Cashflow(cashflowIntervals, waccIntervals);
+            this.CashflowInterval = new BindableInterval()
+            {
+                LowerBound = result.LowerBound,
+                UpperBound = result.UpperBound
+            };
         }
     }
 
-    public class Point
-    {
-        public float X { get; set; }
-        public float Y { get; set; }
 
-        public float Size { get; set; }
-
-        public Point(float x, float y, float size)
-        {
-            this.X = x;
-            this.Y = y;
-            this.Size = size;
-        }
-    }
 }
