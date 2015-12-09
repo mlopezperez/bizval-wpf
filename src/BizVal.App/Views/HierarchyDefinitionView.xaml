@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BizVal.App.Views.HierarchyDefinitionView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Define Hierarchy" WindowStyle="ToolWindow" Width="700" Height="500" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+        Title="Define Hierarchy" Background="LightGray" WindowStyle="ToolWindow" Width="700" Height="500" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -22,21 +22,18 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">Sets:</Label>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="0, 0, 0, 5">
-                <TextBox VerticalAlignment="Center" Width="175" HorizontalAlignment="Left" x:Name="NewItem"></TextBox>
-                <Button x:Name="AddSet" Width="50" VerticalAlignment="Center" Margin="5,0,0,0">Add</Button>
-            </StackPanel>
-            <ListBox SelectionMode="Single" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=Hierarchy.Levels, Mode=TwoWay}" SelectedItem="{Binding SelectedSet, Mode=TwoWay}" VerticalAlignment="Stretch" >
+            <TextBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" x:Name="SetName"></TextBox>
+            <Button  Grid.Row="1" Grid.Column="1" x:Name="AddSet" Width="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0" Content="{Binding AddSetButtonText}"></Button>
+            <ListBox SelectionMode="Single" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=Hierarchy.Levels}" SelectedItem="{Binding SelectedSet, Mode=TwoWay}" VerticalAlignment="Stretch" Margin="0,5,0,0" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding SetName}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
-                <Button Content="Up" Height="25" Width="50" Margin="5" x:Name="UpSet"/>
-                <Button Content="Down" Height="25" Width="50" Margin="5" x:Name="DownSet"/>
-                <Button Content="Delete" Height="25" Width="50" Margin="5" x:Name="DeleteSet"/>
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
+                <Button Content="Edit" Height="25" Width="50" Margin="5,5,0,0" x:Name="EditSet"/>
+                <Button Content="Delete" Height="25" Width="50" Margin="5,5,0,0" x:Name="DeleteSet"/>
             </StackPanel>
         </Grid>
 
@@ -50,25 +47,24 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label  Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">Labels</Label>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="0,0,0,5">
-                <TextBox VerticalAlignment="Center" Width="175" HorizontalAlignment="Stretch" x:Name="NewLabel"></TextBox>
-                <Button x:Name="AddLabel" Width="50" VerticalAlignment="Center" Margin="5,0,0,0">Add</Button>
-            </StackPanel>
-            <ListBox SelectionMode="Single" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=SelectedSet.Labels}" VerticalAlignment="Stretch">
+            <Label  Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">Labels:</Label>
+                <TextBox Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Stretch" x:Name="LabelName"></TextBox>
+                <Button Grid.Row ="1" Grid.Column="1" x:Name="AddLabel" Width="50" Height="25" VerticalAlignment="Center" Content="{Binding AddLabelButtonText}"></Button>
+            <ListBox SelectionMode="Single" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=SelectedSet.Labels}" SelectedItem="{Binding SelectedLabel, Mode=TwoWay}" VerticalAlignment="Stretch" Margin="0,5,0,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
+                <Button Content="Edit" Height="25" Width="50" Margin="5" x:Name="EditLabel"/>
+                <Button Content="Delete" Height="25" Width="50" Margin="5" x:Name="DeleteLabel"/>
                 <Button Content="Up" Height="25" Width="50" Margin="5" x:Name="UpLabel"/>
                 <Button Content="Down" Height="25" Width="50" Margin="5" x:Name="DownLabel"/>
-                <Button Content="Delete" Height="25" Width="50" Margin="5" x:Name="DeleteLabel"/>
             </StackPanel>
         </Grid>
-        
+
         <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Width="100" Margin="5" x:Name="Accept">Accept</Button>
         <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="100" Margin="5" x:Name="Cancel">Cancel</Button>
 

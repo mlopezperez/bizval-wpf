@@ -6,38 +6,37 @@ namespace BizVal.App.Model
 {
     public class BindableLabelSet : PropertyChangedBase
     {
-        private readonly LabelSet labelSet;
+        private string setName;
+        private IObservableCollection<BindableLabel> labels;
 
         public string SetName
         {
             get
             {
-                return this.labelSet.Name;
+                return this.setName;
             }
             set
             {
-                this.labelSet.Name = value;
+                this.setName = value;
                 this.NotifyOfPropertyChange(() => this.SetName);
             }
         }
 
         public IObservableCollection<BindableLabel> Labels
         {
-            get
+            get { return this.labels; }
+            set
             {
-                var labels = this.labelSet.Select(i => new BindableLabel(i));
-                return new BindableCollection<BindableLabel>(labels);
+                this.labels = value;
+                this.NotifyOfPropertyChange(() => this.Labels);
             }
         }
 
         public BindableLabelSet(LabelSet labelSet)
         {
-            this.labelSet = labelSet;
+            var set = labelSet.Select(i => new BindableLabel(i));
+            this.SetName = labelSet.Name;
+            this.Labels = new BindableCollection<BindableLabel>(set);
         }
-
-        //public override string ToString()
-        //{
-        //    return string.Format("{0}", this.SetName);
-        //}
     }
 }

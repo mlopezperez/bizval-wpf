@@ -1,41 +1,38 @@
-﻿using BizVal.Model;
+﻿using System.Runtime.CompilerServices;
+using BizVal.Model;
 using Caliburn.Micro;
 
 namespace BizVal.App.Model
 {
     public class BindableLabel : PropertyChangedBase
     {
-        private readonly Label label;
+        private int index;
+        private string name;
 
         public int Index
         {
-            get
-            {
-                return this.label.Index;
-            }
+            get { return this.index; }
             set
             {
-                this.label.Index = value;
+                this.index = value;
                 this.NotifyOfPropertyChange(() => this.Index);
             }
         }
 
         public string Name
         {
-            get
-            {
-                return this.label.Name;
-            }
+            get { return this.name; }
             set
             {
-                this.label.Name = value;
+                this.name = value;
                 this.NotifyOfPropertyChange(() => this.Name);
             }
         }
 
         public BindableLabel(Label label)
         {
-            this.label = label;
+            this.Name = label.Name;
+            this.Index = label.Index;
         }
     }
 }

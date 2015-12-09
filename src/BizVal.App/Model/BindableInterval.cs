@@ -21,7 +21,7 @@ namespace BizVal.App.Model
             set
             {
                 this.lowerBound = value;
-                this.NotifyOfPropertyChange(() => this.LowerBound);
+                this.NotifyOfPropertyChange(() => this.LowerBound); 
             }
         }
 

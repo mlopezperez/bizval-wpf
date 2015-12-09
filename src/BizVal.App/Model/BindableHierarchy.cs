@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Runtime.CompilerServices;
 using BizVal.Model;
 using Caliburn.Micro;
 
@@ -24,8 +23,8 @@ namespace BizVal.App.Model
 
         public BindableHierarchy(Hierarchy hierarchy)
         {
-            var hLevels = hierarchy.Select(i => new BindableLabelSet(i));
-            this.Levels = new BindableCollection<BindableLabelSet>(hLevels);
+            var sets = hierarchy.Select(i => new BindableLabelSet(i));
+            this.Levels = new BindableCollection<BindableLabelSet>(sets);
         }
     }
 }
