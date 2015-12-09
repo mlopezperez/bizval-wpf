@@ -5,6 +5,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -66,9 +67,11 @@
                 <Button Content="Down" Height="25" Width="50" Margin="5,5,0,0" x:Name="DownLabel"/>
             </StackPanel>
         </Grid>
+        
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="ErrorMessage" Foreground="Orange"></Label>
 
-        <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Width="100" Margin="5" x:Name="Accept">Accept</Button>
-        <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="100" Margin="5" x:Name="Cancel">Cancel</Button>
+        <Button Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Width="100" Margin="5" x:Name="Accept">Accept</Button>
+        <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Width="100" Margin="5" x:Name="Cancel">Cancel</Button>
 
 
     </Grid>

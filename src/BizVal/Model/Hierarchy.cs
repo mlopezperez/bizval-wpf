@@ -94,7 +94,19 @@ namespace BizVal.Model
         /// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
         public void Add(LabelSet item)
         {
-            this.levels.Add(item.Count, item);
+            try
+            {
+                this.levels.Add(item.Count, item);
+            }
+            catch (ArgumentException ex)
+            {
+                var message =
+                    string.Format(
+                        "A level with cardinality {0} already exists in hierarchy. Check hierarchy level \"{1}\" for missing items.",
+                        item.Count,
+                        item.Name);
+                throw new HierarchyException(message, ex);
+            }
         }
 
         /// <summary>

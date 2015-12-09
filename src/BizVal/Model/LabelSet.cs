@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace BizVal.Model
 {
@@ -143,8 +144,16 @@ namespace BizVal.Model
         /// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
         public void Add(Label item)
         {
-            this.labels.Add(item.Index, item);
-            item.LabelSet = this;
+            try
+            {
+                this.labels.Add(item.Index, item);
+                item.LabelSet = this;
+            }
+            catch (ArgumentException ex)
+            {
+                var message = string.Format("Label with index {0} already exists in the set \"{1}\". Check the index of the label \"{2}\".", item.Index, this.Name, item.Name);
+                throw new HierarchyException(message, ex);
+            }
         }
 
         /// <summary>

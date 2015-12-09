@@ -34,6 +34,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HierarchyException.cs" />
     <Compile Include="ICwCompanyValuator.cs" />
     <Compile Include="IHierarchyManager.cs" />
     <Compile Include="Model\Cardinality.cs" />

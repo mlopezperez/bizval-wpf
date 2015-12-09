@@ -1,6 +1,6 @@
-﻿using System.Diagnostics.Eventing.Reader;
-using BizVal.App.Interfaces;
+﻿using BizVal.App.Interfaces;
 using BizVal.App.Model;
+using BizVal.Framework;
 using BizVal.Model;
 using Caliburn.Micro;
 
@@ -8,8 +8,9 @@ namespace BizVal.App.ViewModels
 {
     public class HierarchyDefinitionViewModel : Screen, IHierarchyDefinitionViewModel
     {
-        private const string Add = "Add";
-        private const string Save = "Save";
+        private readonly IHierarchyManager hierarchyManager;
+        private const string AddText = "Add";
+        private const string SaveText = "Save";
 
         private BindableLabelSet selectedSet;
         private BindableHierarchy bindableHierarchy;
@@ -20,6 +21,13 @@ namespace BizVal.App.ViewModels
         private string addLabelButtonTest;
         private string labelName;
         private bool editingLabel;
+        private string errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return this.errorMessage; }
+            set { this.errorMessage = value; this.NotifyOfPropertyChange(() => this.ErrorMessage); }
+        }
 
         public string AddSetButtonText
         {
@@ -106,16 +114,6 @@ namespace BizVal.App.ViewModels
                 this.NotifyOfPropertyChange(() => this.LabelName);
                 this.NotifyOfPropertyChange(() => this.CanAddLabel);
             }
-        }
-
-
-
-        public HierarchyDefinitionViewModel(IHierarchyManager hierarchyManager)
-        {
-            var hierarchy = hierarchyManager.GetCurrentHierarchy();
-            this.Hierarchy = new BindableHierarchy(hierarchy);
-            this.AddSetButtonText = Add;
-            this.AddLabelButtonText = Add;
         }
 
         public string AddLabelButtonText
@@ -221,6 +219,18 @@ namespace BizVal.App.ViewModels
             this.SelectedSet.DownLabel(this.SelectedLabel);
         }
 
+
+        public HierarchyDefinitionViewModel(IHierarchyManager hierarchyManager)
+        {
+            this.hierarchyManager = Contract.NotNull(hierarchyManager, "hierarchyManager");
+
+            var hierarchy = hierarchyManager.GetCurrentHierarchy();
+            this.Hierarchy = new BindableHierarchy(hierarchy);
+
+            this.AddSetButtonText = AddText;
+            this.AddLabelButtonText = AddText;
+        }
+
         public void AddSet()
         {
             if (this.SelectedSet != null)
@@ -236,14 +246,14 @@ namespace BizVal.App.ViewModels
                 this.SelectedSet = null;
             }
             this.SetName = string.Empty;
-            this.AddSetButtonText = Add;
+            this.AddSetButtonText = AddText;
         }
 
         public void EditSet()
         {
             this.editingSet = true;
             this.SetName = this.SelectedSet.SetName;
-            this.AddSetButtonText = Save;
+            this.AddSetButtonText = SaveText;
             this.NotifyOfPropertyChange(() => this.CanDeleteSet);
         }
 
@@ -267,7 +277,7 @@ namespace BizVal.App.ViewModels
                 this.SelectedLabel = null;
             }
             this.LabelName = string.Empty;
-            this.AddLabelButtonText = Add;
+            this.AddLabelButtonText = AddText;
 
         }
 
@@ -275,7 +285,7 @@ namespace BizVal.App.ViewModels
         {
             this.editingLabel = true;
             this.LabelName = this.SelectedLabel.Name;
-            this.AddLabelButtonText = Save;
+            this.AddLabelButtonText = SaveText;
             this.NotifyOfPropertyChange(() => this.CanDeleteLabel);
         }
 
@@ -284,6 +294,19 @@ namespace BizVal.App.ViewModels
             this.SelectedSet.Labels.Remove(this.SelectedLabel);
         }
 
+        public void Accept()
+        {
+            try
+            {
+                Hierarchy modifiedHierarchy = this.Hierarchy.ToHierarchy();
+                this.hierarchyManager.SaveHierarchy(modifiedHierarchy);
+                this.TryClose(true);
+            }
+            catch (HierarchyException ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
 
         public void Cancel()
         {

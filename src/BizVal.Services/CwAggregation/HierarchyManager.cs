@@ -6,7 +6,7 @@ namespace BizVal.Services.CwAggregation
     {
         private Hierarchy currentHierarchy;
 
-        public Hierarchy GetCurrentHierarchy()
+        Hierarchy IHierarchyManager.GetCurrentHierarchy()
         {
             if (this.currentHierarchy == null)
             {
@@ -16,6 +16,11 @@ namespace BizVal.Services.CwAggregation
             }
 
             return this.currentHierarchy;
+        }
+
+        void IHierarchyManager.SaveHierarchy(Hierarchy modifiedHierarchy)
+        {
+            this.currentHierarchy = modifiedHierarchy;
         }
 
         private LabelSet GetLabelSet3()

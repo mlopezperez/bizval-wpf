@@ -49,5 +49,22 @@ namespace BizVal.App.Model
                 this.Levels[currentIndex + 1] = set;
             }
         }
+
+        public Hierarchy ToHierarchy()
+        {
+            var hierarchy = new Hierarchy();
+            foreach (var level in this.Levels)
+            {
+                var labelSet = new LabelSet(level.SetName);
+                foreach (var bindableLabel in level.Labels)
+                {
+                    var label = new Label(bindableLabel.Index, bindableLabel.Name);
+                    labelSet.Add(label);
+                }
+
+                hierarchy.Add(labelSet);
+            }
+            return hierarchy;
+        }
     }
 }
