@@ -9,27 +9,29 @@ namespace BizVal.App.ViewModels
     public class ShellViewModel : Conductor<object>, IShell
     {
         private readonly IHierarchyManager hierarchyManager;
+        private readonly ResultsViewModel resultsViewModel;
         private readonly IWindowManager windowManager;
 
         public CashflowViewModel Cashflow { get; set; }
 
         public MixedAnalysisViewModel MixedAnalysis { get; set; }
 
-        //public ExpertiseViewModel Expertise { get; set; }
-
-        //private readonly Hierarchy hierarchy;
+        public ResultsViewModel Results { get; set; }
 
         public ShellViewModel(
             IWindowManager windowManager,
             IHierarchyManager hierarchyManager,
             CashflowViewModel casflowViewModel,
-            MixedAnalysisViewModel mixedAnalysisViewModel)
+            MixedAnalysisViewModel mixedAnalysisViewModel,
+            ResultsViewModel resultsViewModel)
         {
-            this.hierarchyManager = hierarchyManager;
+            this.hierarchyManager = Contract.NotNull(hierarchyManager, "hierarchyManager");
+            this.resultsViewModel = Contract.NotNull(resultsViewModel, "resultsViewModel");
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
 
             this.Cashflow = Contract.NotNull(casflowViewModel, "casflowViewModel");
             this.MixedAnalysis = Contract.NotNull(mixedAnalysisViewModel, "mixedAnalysisViewModel");
+            this.Results = Contract.NotNull(resultsViewModel, "resultsViewModel");
         }
 
         public void DefineHierarchy()
@@ -46,6 +48,11 @@ namespace BizVal.App.ViewModels
         public void ShowMixedAnalysis()
         {
             this.ActivateItem(this.MixedAnalysis);
+        }
+
+        public void ShowResults()
+        {
+            this.ActivateItem(this.Results);
         }
     }
 }
