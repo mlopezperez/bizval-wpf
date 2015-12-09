@@ -58,6 +58,8 @@ namespace BizVal.App.ViewModels
                 this.NotifyOfPropertyChange(() => this.SelectedSet);
                 this.NotifyOfPropertyChange(() => this.CanEditSet);
                 this.NotifyOfPropertyChange(() => this.CanDeleteSet);
+                this.NotifyOfPropertyChange(() => this.CanUpSet);
+                this.NotifyOfPropertyChange(() => this.CanDownSet);
             }
         }
 
@@ -71,6 +73,8 @@ namespace BizVal.App.ViewModels
                 this.NotifyOfPropertyChange(() => this.SelectedLabel);
                 this.NotifyOfPropertyChange(() => this.CanEditLabel);
                 this.NotifyOfPropertyChange(() => this.CanDeleteLabel);
+                this.NotifyOfPropertyChange(() => this.CanUpLabel);
+                this.NotifyOfPropertyChange(() => this.CanDownLabel);
             }
         }
 
@@ -136,7 +140,29 @@ namespace BizVal.App.ViewModels
 
         public bool CanDeleteLabel
         {
-            get { return this.SelectedSet != null && this.SelectedLabel != null; }
+            get { return this.SelectedSet != null && this.SelectedLabel != null && !this.editingLabel; }
+        }
+
+        public bool CanUpLabel
+        {
+            get
+            {
+                return
+                    this.SelectedSet != null &&
+                    this.SelectedLabel != null &&
+                    (this.SelectedSet.Labels.IndexOf(this.SelectedLabel) > 0);
+            }
+        }
+
+        public bool CanDownLabel
+        {
+            get
+            {
+                return
+                    this.SelectedSet != null &&
+                    this.SelectedLabel != null &&
+                    (this.SelectedSet.Labels.IndexOf(this.SelectedLabel) < this.SelectedSet.Labels.Count - 1);
+            }
         }
 
         public bool CanAddSet
@@ -151,7 +177,48 @@ namespace BizVal.App.ViewModels
 
         public bool CanDeleteSet
         {
-            get { return this.SelectedSet != null; }
+            get { return this.SelectedSet != null && !this.editingSet; }
+        }
+
+        public bool CanUpSet
+        {
+            get
+            {
+                return this.SelectedSet != null &&
+                    (this.Hierarchy.Levels.IndexOf(this.SelectedSet) > 0);
+            }
+        }
+
+        public bool CanDownSet
+        {
+            get
+            {
+
+                return this.SelectedSet != null &&
+                      (this.Hierarchy.Levels.IndexOf(this.SelectedSet) < this.Hierarchy.Levels.Count - 1);
+            }
+        }
+
+
+
+        public void UpSet()
+        {
+            this.Hierarchy.UpLevel(this.SelectedSet);
+        }
+
+        public void DownSet()
+        {
+            this.Hierarchy.DownLevel(this.SelectedSet);
+        }
+
+        public void UpLabel()
+        {
+            this.SelectedSet.UpLabel(this.SelectedLabel);
+        }
+
+        public void DownLabel()
+        {
+            this.SelectedSet.DownLabel(this.SelectedLabel);
         }
 
         public void AddSet()
@@ -177,6 +244,7 @@ namespace BizVal.App.ViewModels
             this.editingSet = true;
             this.SetName = this.SelectedSet.SetName;
             this.AddSetButtonText = Save;
+            this.NotifyOfPropertyChange(() => this.CanDeleteSet);
         }
 
         public void DeleteSet()
@@ -208,6 +276,7 @@ namespace BizVal.App.ViewModels
             this.editingLabel = true;
             this.LabelName = this.SelectedLabel.Name;
             this.AddLabelButtonText = Save;
+            this.NotifyOfPropertyChange(() => this.CanDeleteLabel);
         }
 
         public void DeleteLabel()

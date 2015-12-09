@@ -34,6 +34,8 @@
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
                 <Button Content="Edit" Height="25" Width="50" Margin="5,5,0,0" x:Name="EditSet"/>
                 <Button Content="Delete" Height="25" Width="50" Margin="5,5,0,0" x:Name="DeleteSet"/>
+                <Button Content="Up" Height="25" Width="50" Margin="5,5,0,0" x:Name="UpSet"/>
+                <Button Content="Down" Height="25" Width="50" Margin="5,5,0,0" x:Name="DownSet"/>
             </StackPanel>
         </Grid>
 
@@ -48,8 +50,8 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Label  Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">Labels:</Label>
-                <TextBox Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Stretch" x:Name="LabelName"></TextBox>
-                <Button Grid.Row ="1" Grid.Column="1" x:Name="AddLabel" Width="50" Height="25" VerticalAlignment="Center" Content="{Binding AddLabelButtonText}"></Button>
+            <TextBox Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Stretch" x:Name="LabelName"></TextBox>
+            <Button Grid.Row ="1" Grid.Column="1" x:Name="AddLabel" Width="50" Height="25" VerticalAlignment="Center" Margin="5,0,0,0" Content="{Binding AddLabelButtonText}"></Button>
             <ListBox SelectionMode="Single" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=SelectedSet.Labels}" SelectedItem="{Binding SelectedLabel, Mode=TwoWay}" VerticalAlignment="Stretch" Margin="0,5,0,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -58,10 +60,10 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
-                <Button Content="Edit" Height="25" Width="50" Margin="5" x:Name="EditLabel"/>
-                <Button Content="Delete" Height="25" Width="50" Margin="5" x:Name="DeleteLabel"/>
-                <Button Content="Up" Height="25" Width="50" Margin="5" x:Name="UpLabel"/>
-                <Button Content="Down" Height="25" Width="50" Margin="5" x:Name="DownLabel"/>
+                <Button Content="Edit" Height="25" Width="50" Margin="5,5,0,0" x:Name="EditLabel"/>
+                <Button Content="Delete" Height="25" Width="50" Margin="5,5,0,0" x:Name="DeleteLabel"/>
+                <Button Content="Up" Height="25" Width="50" Margin="5,5,0,0" x:Name="UpLabel"/>
+                <Button Content="Down" Height="25" Width="50" Margin="5,5,0,0" x:Name="DownLabel"/>
             </StackPanel>
         </Grid>
 

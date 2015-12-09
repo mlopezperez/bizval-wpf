@@ -38,5 +38,30 @@ namespace BizVal.App.Model
             this.SetName = labelSet.Name;
             this.Labels = new BindableCollection<BindableLabel>(set);
         }
+
+        public void UpLabel(BindableLabel label)
+        {
+            var currentIndex = this.Labels.IndexOf(label);
+            if (currentIndex > 0)
+            {
+                var previousLevel = this.Labels[currentIndex - 1];
+                this.Labels[currentIndex] = previousLevel;
+                this.Labels[currentIndex - 1] = label;
+                this.NotifyOfPropertyChange(() => this.Labels);
+                label.Index = currentIndex - 1;
+            }
+        }
+
+        public void DownLabel(BindableLabel label)
+        {
+            var currentIndex = this.Labels.IndexOf(label);
+            if (currentIndex < this.Labels.Count - 1)
+            {
+                var nextLevel = this.Labels[currentIndex + 1];
+                this.Labels[currentIndex] = nextLevel;
+                this.Labels[currentIndex + 1] = label;
+                label.Index = currentIndex + 1;
+            }
+        }
     }
 }

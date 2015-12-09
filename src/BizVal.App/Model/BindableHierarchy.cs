@@ -26,5 +26,28 @@ namespace BizVal.App.Model
             var sets = hierarchy.Select(i => new BindableLabelSet(i));
             this.Levels = new BindableCollection<BindableLabelSet>(sets);
         }
+
+        public void UpLevel(BindableLabelSet set)
+        {
+            var currentIndex = this.Levels.IndexOf(set);
+            if (currentIndex > 0)
+            {
+                var previousLevel = this.Levels[currentIndex - 1];
+                this.Levels[currentIndex] = previousLevel;
+                this.Levels[currentIndex - 1] = set;
+                this.NotifyOfPropertyChange(() => this.Levels);
+            }
+        }
+
+        public void DownLevel(BindableLabelSet set)
+        {
+            var currentIndex = this.Levels.IndexOf(set);
+            if (currentIndex < this.Levels.Count - 1)
+            {
+                var nextLevel = this.Levels[currentIndex + 1];
+                this.Levels[currentIndex] = nextLevel;
+                this.Levels[currentIndex + 1] = set;
+            }
+        }
     }
 }
