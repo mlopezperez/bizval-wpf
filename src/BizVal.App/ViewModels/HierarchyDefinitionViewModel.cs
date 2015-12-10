@@ -1,5 +1,4 @@
-﻿using System.Windows.Media.Animation;
-using BizVal.App.Events;
+﻿using BizVal.App.Events;
 using BizVal.App.Interfaces;
 using BizVal.App.Model;
 using BizVal.Framework;

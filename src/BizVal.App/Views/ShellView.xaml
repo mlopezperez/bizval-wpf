@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Business Valuation with Words"
-        xmlns:local="clr-namespace:BizVal.App.Views" x:Class="BizVal.App.Views.ShellView" Icon="/BizVal.App;component/Images/stocks2.png" Background="LightGray" WindowState="Maximized">
+        xmlns:local="clr-namespace:BizVal.App.Views" x:Class="BizVal.App.Views.ShellView" Icon="/BizVal.App;component/Images/Money.ico" Background="LightGray" WindowState="Maximized">
 
 
     <DockPanel Width="Auto">
