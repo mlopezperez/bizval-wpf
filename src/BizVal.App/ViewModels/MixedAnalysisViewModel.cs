@@ -9,14 +9,14 @@ namespace BizVal.App.ViewModels
     {
         private readonly IEventAggregator eventAggregator;
         private string errorMessage;
-        private float substantialValue;
+        private decimal substantialValue;
         private const string ExpectedInterestInputName = "Expected Interests:";
         private const string ExpectedBenefitsInputName = "Expected Benefits:";
 
         public IntervalListViewModel ExpectedBenefits { get; set; }
         public IntervalListViewModel ExpectedInterests { get; set; }
 
-        public float SubstantialValue
+        public decimal SubstantialValue
         {
             get { return this.substantialValue; }
             set

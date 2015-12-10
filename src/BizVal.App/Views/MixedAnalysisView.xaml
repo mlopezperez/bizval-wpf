@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Substantial Value:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" />
-        <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="100" Text="{Binding SubstantialValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="100" Text="{Binding SubstantialValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N4}"/>
 
         <ContentControl x:Name="ExpectedBenefits" Grid.Row="1" Grid.Column="0" />
         <ContentControl x:Name="ExpectedInterests" Grid.Row="1" Grid.Column="1" />
