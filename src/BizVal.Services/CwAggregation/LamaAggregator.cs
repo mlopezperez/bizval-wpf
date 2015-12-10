@@ -6,45 +6,23 @@ using BizVal.Model;
 namespace BizVal.Services.CwAggregation
 {
     /// <summary>
-    /// Impementation of IAggregator.
+    /// Impementation of ILamaAggregator.
     /// </summary>
-    /// <seealso cref="BizVal.IAggregator" />
-    internal sealed class CwAggregator : IAggregator
+    /// <seealso cref="BizVal.ILamaAggregator" />
+    internal sealed class LamaAggregator : ILamaAggregator
     {
         private readonly ILamaCalculator lamaCalculator;
         private readonly IExpertiseStandardizer standardizer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CwAggregator"/> class.
+        /// Initializes a new instance of the <see cref="LamaAggregator"/> class.
         /// </summary>
         /// <param name="standardizer">The standardizer.</param>
         /// <param name="lamaCalculator">The lama calculator.</param>
-        public CwAggregator(IExpertiseStandardizer standardizer, ILamaCalculator lamaCalculator)
+        public LamaAggregator(IExpertiseStandardizer standardizer, ILamaCalculator lamaCalculator)
         {
             this.lamaCalculator = Contract.NotNull(lamaCalculator, "lamaCalculator");
             this.standardizer = Contract.NotNull(standardizer, "standardizer");
-        }
-
-        /// <summary>
-        /// Aggregates the linguistic information privided in the expertise using the expertone method.
-        /// </summary>
-        /// <param name="expertise">The expertise.</param>
-        /// <param name="hierarchy">The hierarchy for the labels in the expertise.</param>
-        /// <param name="referenceLevel">The reference level where we shall standarize the expertise.</param>
-        /// <returns>
-        /// An adjusted interval aggregating the linguistic information provided in the expertise.
-        /// </returns>
-        Interval IAggregator.AggregateByExpertone(Expertise expertise, Hierarchy hierarchy, int referenceLevel)
-        {
-            Contract.NotNull(expertise, "expertise");
-            Contract.NotNull(hierarchy, "hierarchy");
-
-            var standardExpertise = this.standardizer.Standardize(expertise, hierarchy, referenceLevel);
-            TwoTupleCardinalities cardinalities = new TwoTupleCardinalities(standardExpertise);
-
-            var expertone = new Expertone<TwoTuple>(cardinalities);
-            var expectedInterval = expertone.GetExpectedValue();
-            return expectedInterval;
         }
 
         /// <summary>
@@ -56,7 +34,7 @@ namespace BizVal.Services.CwAggregation
         /// <returns>
         /// An adjusted interval aggregating the linguistic information provided in the expertise.
         /// </returns>
-        Interval IAggregator.AggregateByLama(Expertise expertise, Hierarchy hierarchy, int referenceLevel)
+        Interval ILamaAggregator.AggregateByLama(Expertise expertise, Hierarchy hierarchy, int referenceLevel)
         {
             Contract.NotNull(expertise, "expertise");
             Contract.NotNull(hierarchy, "hierarchy");

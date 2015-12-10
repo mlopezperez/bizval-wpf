@@ -19,7 +19,10 @@ namespace BizVal.Services.Module
             container.RegisterType<ICompanyValuator, CompanyValuator>(LifeTimeManagerType.ContainerControlled);
 
             container.RegisterType<IExpertiseStandardizer, ExpertiseStandardizer>(LifeTimeManagerType.ContainerControlled);
-            container.RegisterType<IAggregator, CwAggregator>(LifeTimeManagerType.ContainerControlled);
+            container.RegisterType<ILamaAggregator, LamaAggregator>(LifeTimeManagerType.ContainerControlled);
+            container.RegisterType<IExpertoneAggregator, ExpertoneAggregator>(LifeTimeManagerType.ContainerControlled);
+            container.RegisterType<IExpertoneExpertiseAdjuster, ExpertoneExpertiseAdjuster>(LifeTimeManagerType.ContainerControlled);
+            container.RegisterType<ILamaExpertiseAdjuster, LamaExpertiseAdjuster>(LifeTimeManagerType.ContainerControlled);
             container.RegisterType<ILamaCalculator, LamaCalculator>(LifeTimeManagerType.ContainerControlled);
             container.RegisterType<ICwCompanyValuator, CwCompanyValuator>(LifeTimeManagerType.ContainerControlled);
             container.RegisterType<IHierarchyManager, HierarchyManager>(LifeTimeManagerType.ContainerControlled);

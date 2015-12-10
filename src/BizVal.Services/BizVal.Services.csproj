@@ -34,13 +34,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CwAggregation\CwAggregator.cs" />
+    <Compile Include="CwAggregation\ExpertoneAggregator.cs" />
+    <Compile Include="CwAggregation\LamaAggregator.cs" />
     <Compile Include="CwAggregation\ExpertiseStandardizer.cs" />
     <Compile Include="CwAggregation\HierarchyManager.cs" />
     <Compile Include="CwCompanyValuator.cs" />
+    <Compile Include="CwAggregation\ExpertoneExpertiseAdjuster.cs" />
     <Compile Include="IExpertiseStandardizer.cs" />
+    <Compile Include="IExpertoneExpertiseAdjuster.cs" />
     <Compile Include="ILamaCalculator.cs" />
     <Compile Include="CwAggregation\LamaCalculator.cs" />
+    <Compile Include="ILamaExpertiseAdjuster.cs" />
+    <Compile Include="CwAggregation\LamaExpertiseAdjuster.cs" />
     <Compile Include="Module\BizValModule.cs" />
     <Compile Include="Valuation\CompanyValuator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

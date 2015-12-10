@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="HierarchyException.cs" />
     <Compile Include="ICwCompanyValuator.cs" />
+    <Compile Include="IExpertoneAggregator.cs" />
     <Compile Include="IHierarchyManager.cs" />
     <Compile Include="Model\Cardinality.cs" />
     <Compile Include="Model\CardinalityList.cs" />

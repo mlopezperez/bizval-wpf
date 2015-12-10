@@ -7,23 +7,26 @@ using BizVal.Model;
 namespace BizVal.Services
 {
     /// <summary>
-    /// 
+    /// Implementation of ICwCompanyValuator.
     /// </summary>
     /// <seealso cref="BizVal.ICwCompanyValuator" />
     internal sealed class CwCompanyValuator : ICwCompanyValuator
     {
+        private readonly IExpertoneExpertiseAdjuster expertoneExpertiseAdjuster;
+        private readonly ILamaExpertiseAdjuster lamaExpertiseAdjuster;
         private readonly ICompanyValuator companyValuator;
-        private readonly IAggregator aggregator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CwCompanyValuator"/> class.
         /// </summary>
         /// <param name="companyValuator">The company valuator.</param>
-        /// <param name="aggregator">The aggregator.</param>
-        public CwCompanyValuator(ICompanyValuator companyValuator, IAggregator aggregator)
+        /// <param name="lamaExpertiseAdjuster"></param>
+        /// <param name="expertoneExpertiseAdjuster"></param>
+        public CwCompanyValuator(ICompanyValuator companyValuator, ILamaExpertiseAdjuster lamaExpertiseAdjuster, IExpertoneExpertiseAdjuster expertoneExpertiseAdjuster)
         {
+            this.expertoneExpertiseAdjuster = Contract.NotNull(expertoneExpertiseAdjuster, "expertoneExpertiseAdjuster");
+            this.lamaExpertiseAdjuster = Contract.NotNull(lamaExpertiseAdjuster, "lamaExpertiseAdjuster");
             this.companyValuator = Contract.NotNull(companyValuator, "companyValuator");
-            this.aggregator = Contract.NotNull(aggregator, "aggregator");
         }
 
         /// <summary>
@@ -42,8 +45,8 @@ namespace BizVal.Services
             Contract.NotNull(waccs, "waccs");
             Contract.NotNull(linguisticHierarchy, "linguisticHierarchy");
 
-            IList<Interval> adjustedCashflows = this.AdjustByExpertones(cashflows, linguisticHierarchy);
-            IList<Interval> adjustedWaccs = this.AdjustByExpertones(waccs, linguisticHierarchy);
+            IList<Interval> adjustedCashflows = this.expertoneExpertiseAdjuster.AdjustByExpertones(cashflows, linguisticHierarchy);
+            IList<Interval> adjustedWaccs = this.expertoneExpertiseAdjuster.AdjustByExpertones(waccs, linguisticHierarchy);
             var result = this.companyValuator.Cashflow(adjustedCashflows, adjustedWaccs);
             return result;
         }
@@ -64,8 +67,8 @@ namespace BizVal.Services
             Contract.NotNull(waccs, "waccs");
             Contract.NotNull(linguisticHierarchy, "linguisticHierarchy");
 
-            IList<Interval> adjustedCashflows = this.AdjustByLama(cashflows, linguisticHierarchy);
-            IList<Interval> adjustedWaccs = this.AdjustByLama(waccs, linguisticHierarchy);
+            IList<Interval> adjustedCashflows = this.lamaExpertiseAdjuster.AdjustByLama(cashflows, linguisticHierarchy) ;
+            IList<Interval> adjustedWaccs = this.lamaExpertiseAdjuster.AdjustByLama(waccs, linguisticHierarchy);
             var result = this.companyValuator.Cashflow(adjustedCashflows, adjustedWaccs);
             return result;
         }
@@ -88,8 +91,8 @@ namespace BizVal.Services
             Contract.NotNull(interests, "interests");
             Contract.NotNull(linguisticHierarchy, "linguisticHierarchy");
 
-            IList<Interval> adjustedBenefits = this.AdjustByExpertones(benefits, linguisticHierarchy);
-            IList<Interval> adjustedInterests = this.AdjustByExpertones(interests, linguisticHierarchy);
+            IList<Interval> adjustedBenefits = this.expertoneExpertiseAdjuster.AdjustByExpertones(benefits, linguisticHierarchy);
+            IList<Interval> adjustedInterests = this.expertoneExpertiseAdjuster.AdjustByExpertones(interests, linguisticHierarchy);
             var result = this.companyValuator.MixedAnalysis(substantialValue, adjustedBenefits, adjustedInterests);
             return result;
         }
@@ -111,42 +114,10 @@ namespace BizVal.Services
             Contract.NotNull(interests, "interests");
             Contract.NotNull(linguisticHierarchy, "linguisticHierarchy");
 
-            IList<Interval> adjustedBenefits = this.AdjustByLama(benefits, linguisticHierarchy);
-            IList<Interval> adjustedInterests = this.AdjustByLama(interests, linguisticHierarchy);
+            IList<Interval> adjustedBenefits = this.lamaExpertiseAdjuster.AdjustByLama(benefits, linguisticHierarchy);
+            IList<Interval> adjustedInterests = this.lamaExpertiseAdjuster.AdjustByLama(interests, linguisticHierarchy);
             var result = this.companyValuator.MixedAnalysis(substantialValue, adjustedBenefits, adjustedInterests);
             return result;
-        }
-
-        private IList<Interval> AdjustByExpertones(IList<Expertise> data, Hierarchy hierarchy)
-        {
-            var referenceLevel = hierarchy.LastOrDefault();
-            if (referenceLevel == null)
-            {
-                throw new AggregateException("Hierarchy does not contains linguistic levels");
-            }
-            var adjustedData = new List<Interval>();
-            foreach (var item in data)
-            {
-                var adjustedInterval = this.aggregator.AggregateByExpertone(item, hierarchy, referenceLevel.Count);
-                adjustedData.Add(adjustedInterval);
-            }
-            return adjustedData;
-        }
-
-        private IList<Interval> AdjustByLama(IList<Expertise> data, Hierarchy hierarchy)
-        {
-            var referenceLevel = hierarchy.LastOrDefault();
-            if (referenceLevel == null)
-            {
-                throw new AggregateException("Hierarchy does not contains linguistic levels");
-            }
-            var adjustedData = new List<Interval>();
-            foreach (var item in data)
-            {
-                var adjustedInterval = this.aggregator.AggregateByLama(item, hierarchy, referenceLevel.Count);
-                adjustedData.Add(adjustedInterval);
-            }
-            return adjustedData;
         }
     }
 }
