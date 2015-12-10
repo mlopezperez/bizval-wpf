@@ -1,0 +1,32 @@
+﻿<Window x:Class="BizVal.App.Views.LabelDefinitionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LabelDefinitionView" Height="Auto" Width="Auto" Background="LightGray" WindowStyle="ToolWindow" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Margin="5" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Label:</Label>
+        <Label Margin="5" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" x:Name="LabelName" FontWeight="Bold"></Label>
+
+
+        <Label Margin="5" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Lower Bound:</Label>
+        <Label Margin="5" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Medium Value:</Label>
+        <Label Margin="5" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Upper Bound:</Label>
+
+        <TextBox Text="{Binding Lower, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=N4}" Margin="5" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="75"></TextBox>
+        <TextBox Text="{Binding Medium, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=N4}" Margin="5" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Width="75"></TextBox>
+        <TextBox Text="{Binding Upper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=N4}" Margin="5" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Width="75"></TextBox>
+
+        <Button x:Name="Save" Grid.Column="0" Grid.Row="4" Width="50" HorizontalAlignment="Right" Margin="5">Save</Button>
+        <Button x:Name="Cancel" Grid.Column="1" Grid.Row="4" Width="50" HorizontalAlignment="Left" Margin="5">Cancel</Button>
+    </Grid>
+</Window>

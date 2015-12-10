@@ -88,6 +88,7 @@ namespace BizVal.App.ViewModels
                 this.NotifyOfPropertyChange(() => this.CanDeleteLabel);
                 this.NotifyOfPropertyChange(() => this.CanUpLabel);
                 this.NotifyOfPropertyChange(() => this.CanDownLabel);
+                this.NotifyOfPropertyChange(() => this.CanEditLabelValues);
             }
         }
 
@@ -226,6 +227,21 @@ namespace BizVal.App.ViewModels
         {
             this.SelectedSet.DownLabel(this.SelectedLabel);
             this.changes = true;
+        }
+
+        public bool CanEditLabelValues
+        {
+            get { return this.SelectedSet != null && this.SelectedLabel != null; }
+        }
+
+        public void EditLabelValues()
+        {
+            var vm = new LabelDefinitionViewModel(this.SelectedLabel);
+            var result = this.windowManager.ShowDialog(vm);
+            if (result.HasValue && result.Value)
+            {
+                this.changes = true;
+            }
         }
 
 

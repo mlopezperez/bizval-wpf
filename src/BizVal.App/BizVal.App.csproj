@@ -96,6 +96,7 @@
     <Compile Include="Interfaces\ICashflowViewModel.cs" />
     <Compile Include="ViewModels\IntervalListViewModel.cs" />
     <Compile Include="ViewModels\IntervalViewModel.cs" />
+    <Compile Include="ViewModels\LabelDefinitionViewModel.cs" />
     <Compile Include="ViewModels\MixedAnalysisViewModel.cs" />
     <Compile Include="Events\MixedCalculationEvent.cs" />
     <Compile Include="Events\MixedCalculationErrorEvent.cs" />
@@ -123,6 +124,9 @@
     </Compile>
     <Compile Include="Views\IntervalView.xaml.cs">
       <DependentUpon>IntervalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LabelDefinitionView.xaml.cs">
+      <DependentUpon>LabelDefinitionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MixedAnalysisView.xaml.cs">
       <DependentUpon>MixedAnalysisView.xaml</DependentUpon>
@@ -182,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\IntervalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LabelDefinitionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

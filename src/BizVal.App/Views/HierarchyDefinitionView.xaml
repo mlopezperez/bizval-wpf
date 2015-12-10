@@ -65,9 +65,10 @@
                 <Button Content="Delete" Height="25" Width="50" Margin="5,5,0,0" x:Name="DeleteLabel"/>
                 <Button Content="Up" Height="25" Width="50" Margin="5,5,0,0" x:Name="UpLabel"/>
                 <Button Content="Down" Height="25" Width="50" Margin="5,5,0,0" x:Name="DownLabel"/>
+                <Button Content="Values" Height="25" Width="50" Margin="5,5,0,0" x:Name="EditLabelValues"/>
             </StackPanel>
         </Grid>
-        
+
         <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="ErrorMessage" Foreground="Orange"></Label>
 
         <Button Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Width="100" Margin="5" x:Name="Accept">Accept</Button>
