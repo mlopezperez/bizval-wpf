@@ -53,6 +53,7 @@
       <HintPath>..\..\packages\Infragistics.Themes.IG.Wpf.1.0.0\lib\net40\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -72,6 +73,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Behaviors\TextBoxInputBehavior.cs" />
+    <Compile Include="Converters\StringToDecimalConverter.cs" />
     <Compile Include="Events\CashflowCalculationErrorEvent.cs" />
     <Compile Include="Events\CashflowCalculationEvent.cs" />
     <Compile Include="Events\DataChangedEvent.cs" />
