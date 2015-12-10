@@ -1,4 +1,5 @@
-﻿using BizVal.App.Interfaces;
+﻿using BizVal.App.Events;
+using BizVal.App.Interfaces;
 using BizVal.App.Model;
 using BizVal.Framework;
 using BizVal.Model;
@@ -8,6 +9,8 @@ namespace BizVal.App.ViewModels
 {
     public class HierarchyDefinitionViewModel : Screen, IHierarchyDefinitionViewModel
     {
+        private readonly IEventAggregator eventAggregator;
+        private readonly IWindowManager windowManager;
         private readonly IHierarchyManager hierarchyManager;
         private const string AddText = "Add";
         private const string SaveText = "Save";
@@ -220,8 +223,10 @@ namespace BizVal.App.ViewModels
         }
 
 
-        public HierarchyDefinitionViewModel(IHierarchyManager hierarchyManager)
+        public HierarchyDefinitionViewModel(IHierarchyManager hierarchyManager, IWindowManager windowManager, IEventAggregator eventAggregator)
         {
+            this.eventAggregator = Contract.NotNull(eventAggregator, "eventAggregator");
+            this.windowManager = Contract.NotNull(windowManager, "windowManager");
             this.hierarchyManager = Contract.NotNull(hierarchyManager, "hierarchyManager");
 
             var hierarchy = hierarchyManager.GetCurrentHierarchy();
@@ -298,9 +303,15 @@ namespace BizVal.App.ViewModels
         {
             try
             {
-                Hierarchy modifiedHierarchy = this.Hierarchy.ToHierarchy();
-                this.hierarchyManager.SaveHierarchy(modifiedHierarchy);
-                this.TryClose(true);
+                var changeHierarchy = new HierarchyChangedViewModel();
+                var result = this.windowManager.ShowDialog(changeHierarchy);
+                if (result.HasValue && result.Value)
+                {
+                    Hierarchy modifiedHierarchy = this.Hierarchy.ToHierarchy();
+                    this.hierarchyManager.SaveHierarchy(modifiedHierarchy);
+                    this.TryClose(true);
+                    this.eventAggregator.PublishOnUIThread(new HierarchyChangedEvent());
+                }
             }
             catch (HierarchyException ex)
             {

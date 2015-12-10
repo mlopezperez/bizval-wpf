@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows.Data;
 using BizVal.App.Interfaces;
 using BizVal.App.Module;
 using BizVal.Framework.DependencyInjection;

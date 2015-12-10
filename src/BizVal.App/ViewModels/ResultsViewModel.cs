@@ -9,7 +9,10 @@ using Opinion = BizVal.Model.Opinion;
 
 namespace BizVal.App.ViewModels
 {
-    public class ResultsViewModel : Screen, IHandle<CashflowCalculationEvent>, IHandle<MixedCalculationEvent>
+    public class ResultsViewModel : Screen, 
+        IHandle<CashflowCalculationEvent>, 
+        IHandle<MixedCalculationEvent>,
+        IHandle<HierarchyChangedEvent>
     {
         private const string IntervalPattern = "[{0:0.00}, {1:0.00}]";
         private readonly ICompanyValuator companyValuator;
@@ -238,6 +241,14 @@ namespace BizVal.App.ViewModels
             this.CashflowLamaInterval = new BindableInterval(result);
         }
 
+        private void CalculateAdjustedCashflowByExpertones(CashflowCalculationEvent message)
+        {
+            var cashflowExpertises = this.GetExpertises(message.Cashflows);
+            var waccExpertises = this.GetExpertises(message.Waccs);
+            var result = this.cwCompanyValuator.CashflowWithExpertones(cashflowExpertises, waccExpertises, this.hierarchyManager.GetCurrentHierarchy());
+            this.CashflowExpInterval = new BindableInterval(result);
+        }
+
         private void CalculateMixed(MixedCalculationEvent message)
         {
             var benefitsIntervals =
@@ -264,14 +275,6 @@ namespace BizVal.App.ViewModels
             this.MixedLamaInterval = new BindableInterval(result);
         }
 
-        private void CalculateAdjustedCashflowByExpertones(CashflowCalculationEvent message)
-        {
-            var cashflowExpertises = this.GetExpertises(message.Cashflows);
-            var waccExpertises = this.GetExpertises(message.Waccs);
-            var result = this.cwCompanyValuator.CashflowWithExpertones(cashflowExpertises, waccExpertises, this.hierarchyManager.GetCurrentHierarchy());
-            this.CashflowExpInterval = new BindableInterval(result);
-        }
-
 
         private IList<Expertise> GetExpertises(IList<BindableExpertise> cashflows)
         {
@@ -294,7 +297,15 @@ namespace BizVal.App.ViewModels
         }
 
 
+        public void Handle(HierarchyChangedEvent message)
+        {
+            this.CashflowExpInterval = null;
+            this.CashflowLamaInterval = null;
+            this.CashflowInterval = null;
 
-
+            this.MixedExpInterval = null;
+            this.MixedLamaInterval = null;
+            this.MixedInterval = null;
+        }
     }
 }

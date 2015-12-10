@@ -9,12 +9,23 @@ namespace BizVal.App.ViewModels
     {
         private readonly IEventAggregator eventAggregator;
         private string errorMessage;
+        private float substantialValue;
         private const string ExpectedInterestInputName = "Expected Interests:";
         private const string ExpectedBenefitsInputName = "Expected Benefits:";
 
         public IntervalListViewModel ExpectedBenefits { get; set; }
         public IntervalListViewModel ExpectedInterests { get; set; }
-        public float SubstantialValue { get; set; }
+
+        public float SubstantialValue
+        {
+            get { return this.substantialValue; }
+            set
+            {
+                this.substantialValue = value; 
+                this.NotifyOfPropertyChange(() => this.SubstantialValue);
+                this.FireCalculationEvent();
+            }
+        }
 
         public string ErrorMessage
         {
@@ -40,6 +51,11 @@ namespace BizVal.App.ViewModels
 
         public void Handle(DataChangedEvent message)
         {
+            this.FireCalculationEvent();
+        }
+
+        private void FireCalculationEvent()
+        {
             var mixedEvent = new MixedCalculationEvent()
             {
                 Benefits = this.ExpectedBenefits.Values,
@@ -58,7 +74,9 @@ namespace BizVal.App.ViewModels
 
         public void Handle(HierarchyChangedEvent message)
         {
-
+            this.SubstantialValue = 0;
+            this.ExpectedInterests.Values.Clear();
+            this.ExpectedBenefits.Values.Clear();
         }
     }
 }

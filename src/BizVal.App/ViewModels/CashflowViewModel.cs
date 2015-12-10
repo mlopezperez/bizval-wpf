@@ -4,7 +4,7 @@ using Caliburn.Micro;
 
 namespace BizVal.App.ViewModels
 {
-    public class CashflowViewModel : Screen, IHandle<DataChangedEvent>, IHandle<CashflowCalculationErrorEvent>
+    public class CashflowViewModel : Screen, IHandle<DataChangedEvent>, IHandle<CashflowCalculationErrorEvent>, IHandle<HierarchyChangedEvent>
     {
         private readonly IEventAggregator eventAggregator;
         private string errorMessage;
@@ -28,6 +28,8 @@ namespace BizVal.App.ViewModels
 
             this.CashflowData.InputName = CashflowDataName;
             this.WaccData.InputName = WaccDataName;
+
+            this.eventAggregator.Subscribe(this);
         }
 
         public void Handle(DataChangedEvent message)
@@ -41,22 +43,16 @@ namespace BizVal.App.ViewModels
             this.ErrorMessage = string.Empty;
             this.eventAggregator.PublishOnUIThread(cashflowEvent);
         }
-
-        protected override void OnActivate()
-        {
-            this.eventAggregator.Subscribe(this);
-            base.OnActivate();
-        }
-
-        protected override void OnDeactivate(bool close)
-        {
-            this.eventAggregator.Unsubscribe(this);
-            base.OnDeactivate(close);
-        }
-
+       
         public void Handle(CashflowCalculationErrorEvent message)
         {
             this.ErrorMessage = message.Error;
+        }
+
+        public void Handle(HierarchyChangedEvent message)
+        {
+            this.CashflowData.Values.Clear();
+            this.WaccData.Values.Clear();
         }
     }
 }

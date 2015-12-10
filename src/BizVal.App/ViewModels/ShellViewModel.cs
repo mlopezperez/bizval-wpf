@@ -6,6 +6,7 @@ namespace BizVal.App.ViewModels
 {
     public class ShellViewModel : Screen, IShell
     {
+        private readonly IEventAggregator eventAggregator;
         private readonly IHierarchyManager hierarchyManager;
         private readonly IWindowManager windowManager;
 
@@ -18,10 +19,12 @@ namespace BizVal.App.ViewModels
         public ShellViewModel(
             IWindowManager windowManager,
             IHierarchyManager hierarchyManager,
+            IEventAggregator eventAggregator,
             CashflowViewModel casflowViewModel,
             MixedAnalysisViewModel mixedAnalysisViewModel,
             ResultsViewModel resultsViewModel)
         {
+            this.eventAggregator = Contract.NotNull(eventAggregator, "eventAggregator");
             this.hierarchyManager = Contract.NotNull(hierarchyManager, "hierarchyManager");
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
 
@@ -32,7 +35,7 @@ namespace BizVal.App.ViewModels
 
         public void DefineHierarchy()
         {
-            var hierarchyDefinitionViewModel = new HierarchyDefinitionViewModel(this.hierarchyManager);
+            var hierarchyDefinitionViewModel = new HierarchyDefinitionViewModel(this.hierarchyManager, this.windowManager, this.eventAggregator);
             this.windowManager.ShowDialog(hierarchyDefinitionViewModel);
         }
     }
