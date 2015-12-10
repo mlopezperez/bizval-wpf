@@ -1,4 +1,5 @@
-﻿using BizVal.App.Events;
+﻿using System.Windows.Media.Animation;
+using BizVal.App.Events;
 using BizVal.App.Interfaces;
 using BizVal.App.Model;
 using BizVal.Framework;
@@ -25,6 +26,7 @@ namespace BizVal.App.ViewModels
         private string labelName;
         private bool editingLabel;
         private string errorMessage;
+        private bool changes;
 
         public string ErrorMessage
         {
@@ -205,21 +207,25 @@ namespace BizVal.App.ViewModels
         public void UpSet()
         {
             this.Hierarchy.UpLevel(this.SelectedSet);
+            this.changes = true;
         }
 
         public void DownSet()
         {
             this.Hierarchy.DownLevel(this.SelectedSet);
+            this.changes = true;
         }
 
         public void UpLabel()
         {
             this.SelectedSet.UpLabel(this.SelectedLabel);
+            this.changes = true;
         }
 
         public void DownLabel()
         {
             this.SelectedSet.DownLabel(this.SelectedLabel);
+            this.changes = true;
         }
 
 
@@ -252,6 +258,7 @@ namespace BizVal.App.ViewModels
             }
             this.SetName = string.Empty;
             this.AddSetButtonText = AddText;
+            this.changes = true;
         }
 
         public void EditSet()
@@ -277,12 +284,13 @@ namespace BizVal.App.ViewModels
             }
             else
             {
-                var label = new Label(this.SelectedSet.Labels.Count, this.LabelName);
+                var label = new Label(this.SelectedSet.Labels.Count, this.LabelName, 0, 0, 0);
                 this.SelectedSet.Labels.Add(new BindableLabel(label));
                 this.SelectedLabel = null;
             }
             this.LabelName = string.Empty;
             this.AddLabelButtonText = AddText;
+            this.changes = true;
 
         }
 
@@ -303,14 +311,22 @@ namespace BizVal.App.ViewModels
         {
             try
             {
-                var changeHierarchy = new HierarchyChangedViewModel();
-                var result = this.windowManager.ShowDialog(changeHierarchy);
-                if (result.HasValue && result.Value)
+                if (this.changes)
                 {
-                    Hierarchy modifiedHierarchy = this.Hierarchy.ToHierarchy();
-                    this.hierarchyManager.SaveHierarchy(modifiedHierarchy);
+                    var changeHierarchy = new HierarchyChangedViewModel();
+                    var result = this.windowManager.ShowDialog(changeHierarchy);
+                    if (result.HasValue && result.Value)
+                    {
+                        Hierarchy modifiedHierarchy = this.Hierarchy.ToHierarchy();
+                        this.hierarchyManager.SaveHierarchy(modifiedHierarchy);
+                        this.TryClose(true);
+                        this.changes = false;
+                        this.eventAggregator.PublishOnUIThread(new HierarchyChangedEvent());
+                    }
+                }
+                else
+                {
                     this.TryClose(true);
-                    this.eventAggregator.PublishOnUIThread(new HierarchyChangedEvent());
                 }
             }
             catch (HierarchyException ex)
@@ -322,6 +338,7 @@ namespace BizVal.App.ViewModels
         public void Cancel()
         {
             this.TryClose(false);
+            this.changes = false;
         }
     }
 }

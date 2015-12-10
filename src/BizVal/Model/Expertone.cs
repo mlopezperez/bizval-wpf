@@ -123,7 +123,10 @@ namespace BizVal.Model
             {
                 result = result + expertoneItems[i];
             }
-            result = decimal.Divide(result, expertoneItems.Count - 1);
+            if (expertoneItems.Count > 1)
+            {
+                result = decimal.Divide(result, expertoneItems.Count - 1);
+            }
             return result;
         }
     }

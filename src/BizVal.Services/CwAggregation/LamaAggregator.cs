@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BizVal.Framework;
 using BizVal.Model;
@@ -53,9 +54,32 @@ namespace BizVal.Services.CwAggregation
 
         private Interval AdjustInterval(Interval interval, TwoTuple aggregatedLowerTuple, TwoTuple aggregatedUpperTuple)
         {
-            var adjustedInterval = new Interval(1, 1);
+            var lowerTupleFactor = this.GetFactor(aggregatedLowerTuple);
+            var upperTupleFactor = this.GetFactor(aggregatedUpperTuple);
+
+            Interval adjustedInterval = lowerTupleFactor < upperTupleFactor ?
+                new Interval(lowerTupleFactor, upperTupleFactor) :
+                new Interval(upperTupleFactor, lowerTupleFactor);
+
             var result = interval.LowerBound + (interval.Width * adjustedInterval);
             return result;
+        }
+
+        private decimal GetFactor(TwoTuple tuple)
+        {
+            var set = tuple.Label.LabelSet;
+            var beta = set.DeltaInv(tuple);
+            decimal k = 1m;
+            if (beta < set.G)
+            {
+                int h = (int)Math.Truncate(beta);
+                var sigma = beta - h;
+                var membershipTuple1 = new TwoTuple(set[h], 1 - sigma);
+                var membershipTuple2 = new TwoTuple(set[h + 1], sigma);
+                k = (membershipTuple1.Label.M * membershipTuple1.Alpha) +
+                        (membershipTuple2.Label.M * membershipTuple2.Alpha);
+            }
+            return k;
         }
     }
 }

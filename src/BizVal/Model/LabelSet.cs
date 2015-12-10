@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace BizVal.Model
 {
@@ -12,6 +11,9 @@ namespace BizVal.Model
     /// <seealso cref="System.Collections.Generic.ICollection{BizVal.Model.Label}" />
     public class LabelSet : ICollection<Label>
     {
+        private const decimal LowerBound = 0m;
+        private const decimal UpperBound = 1m;
+
         private readonly SortedDictionary<int, Label> labels;
         private string name;
 

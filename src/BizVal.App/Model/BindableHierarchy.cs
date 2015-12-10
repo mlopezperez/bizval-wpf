@@ -58,7 +58,7 @@ namespace BizVal.App.Model
                 var labelSet = new LabelSet(level.SetName);
                 foreach (var bindableLabel in level.Labels)
                 {
-                    var label = new Label(bindableLabel.Index, bindableLabel.Name);
+                    var label = new Label(bindableLabel.Index, bindableLabel.Name, bindableLabel.Lower, bindableLabel.Medium, bindableLabel.Upper);
                     labelSet.Add(label);
                 }
 

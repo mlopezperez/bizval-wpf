@@ -73,8 +73,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Behaviors\TextBoxInputBehavior.cs" />
-    <Compile Include="Converters\StringToDecimalConverter.cs" />
     <Compile Include="Events\CashflowCalculationErrorEvent.cs" />
     <Compile Include="Events\CashflowCalculationEvent.cs" />
     <Compile Include="Events\DataChangedEvent.cs" />

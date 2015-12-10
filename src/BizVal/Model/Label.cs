@@ -23,6 +23,12 @@ namespace BizVal.Model
         /// </value>
         public string Name { get; set; }
 
+        public decimal A { get; set; }
+
+        public decimal B { get; set; }
+
+        public decimal M { get; set; }
+
         /// <summary>
         /// Gets or sets the label set in which the label is contained.
         /// </summary>
@@ -30,6 +36,23 @@ namespace BizVal.Model
         /// The label set.
         /// </value>
         public LabelSet LabelSet { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Label" /> class.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="lower">The lower.</param>
+        /// <param name="medium">The medium.</param>
+        /// <param name="max">The maximum.</param>
+        public Label(int index, string name, decimal lower, decimal medium, decimal max)
+        {
+            this.Index = index;
+            this.Name = name;
+            this.A = lower;
+            this.M = medium;
+            this.B = max;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Label"/> class.
@@ -40,7 +63,6 @@ namespace BizVal.Model
         {
             this.Index = index;
             this.Name = name;
-
         }
 
         /// <summary>
