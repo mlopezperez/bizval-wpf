@@ -11,15 +11,27 @@
                 <MenuItem Header="Define Hierarchy" x:Name="DefineHierarchy"/>
             </MenuItem>
         </Menu>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+        <!--<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <Button x:Name="ShowCashflow">Cashflow</Button>
             <Button x:Name="ShowMixedAnalysis">Mixed</Button>
             <Button x:Name="ShowResults">Results</Button>
-        </StackPanel>
+        </StackPanel>-->
 
         <Grid DockPanel.Dock="Left">
-           
-            <ContentControl x:Name="ActiveItem"></ContentControl>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TabControl>
+                <TabItem Header="Cashflow">
+                    <ContentControl x:Name="Cashflow"></ContentControl>
+                </TabItem>
+                <TabItem Header="MixedAnalisis">
+                    <ContentControl x:Name="MixedAnalysis"></ContentControl>
+                </TabItem>
+            </TabControl>
+            <ContentControl Grid.Column="1" x:Name="Results"></ContentControl>
+
         </Grid>
 
     </DockPanel>

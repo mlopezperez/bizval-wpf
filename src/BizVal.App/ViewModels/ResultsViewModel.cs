@@ -9,7 +9,7 @@ using Opinion = BizVal.Model.Opinion;
 
 namespace BizVal.App.ViewModels
 {
-    public class ResultsViewModel : Screen, IHandle<CashflowCalculationEvent>
+    public class ResultsViewModel : Screen, IHandle<CashflowCalculationEvent>, IHandle<MixedCalculationEvent>
     {
         private const string IntervalPattern = "[{0:0.00}, {1:0.00}]";
         private readonly ICompanyValuator companyValuator;
@@ -19,6 +19,9 @@ namespace BizVal.App.ViewModels
         private BindableInterval cashflowResult;
         private BindableInterval cashflowLamaResult;
         private BindableInterval cashflowExpResult;
+        private BindableInterval mixedExpResult;
+        private BindableInterval mixedResult;
+        private BindableInterval mixedLamaResult;
 
         public string CashflowResult
         {
@@ -95,6 +98,82 @@ namespace BizVal.App.ViewModels
             }
         }
 
+        public string MixedResult
+        {
+            get
+            {
+                if (this.MixedInterval != null)
+                {
+                    return string.Format(IntervalPattern, this.MixedInterval.LowerBound,
+                        this.MixedInterval.UpperBound);
+                }
+                return string.Empty;
+            }
+        }
+
+        public string MixedLamaResult
+        {
+            get
+            {
+                if (this.MixedLamaInterval != null)
+                {
+                    return string.Format(IntervalPattern, this.MixedLamaInterval.LowerBound,
+                        this.MixedLamaInterval.UpperBound);
+                }
+                return string.Empty;
+
+            }
+        }
+
+        public string MixedExpResult
+        {
+            get
+            {
+                if (this.MixedExpInterval != null)
+                {
+                    return string.Format(IntervalPattern, this.MixedExpInterval.LowerBound,
+                        this.MixedExpInterval.UpperBound);
+                }
+                return string.Empty;
+
+            }
+        }
+
+        public BindableInterval MixedExpInterval
+        {
+            get { return this.mixedExpResult; }
+            set
+            {
+                this.mixedExpResult = value;
+                this.NotifyOfPropertyChange(() => this.MixedExpInterval);
+                this.NotifyOfPropertyChange(() => this.MixedExpResult);
+            }
+        }
+
+        public BindableInterval MixedInterval
+        {
+            get { return this.mixedResult; }
+            set
+            {
+                this.mixedResult = value;
+                this.NotifyOfPropertyChange(() => this.MixedInterval);
+                this.NotifyOfPropertyChange(() => this.MixedResult);
+            }
+        }
+
+
+        public BindableInterval MixedLamaInterval
+        {
+            get { return this.mixedLamaResult; }
+            set
+            {
+                this.mixedLamaResult = value;
+                this.NotifyOfPropertyChange(() => this.MixedLamaInterval);
+                this.NotifyOfPropertyChange(() => this.MixedLamaResult);
+            }
+        }
+
+
         public ResultsViewModel(ICompanyValuator companyValuator, ICwCompanyValuator cwCompanyValuator, IEventAggregator eventAggregator, IHierarchyManager hierarchyManager)
         {
             this.companyValuator = companyValuator;
@@ -103,6 +182,24 @@ namespace BizVal.App.ViewModels
             this.hierarchyManager = hierarchyManager;
 
             this.eventAggregator.Subscribe(this);
+        }
+
+        public void Handle(MixedCalculationEvent message)
+        {
+            try
+            {
+                this.CalculateMixed(message);
+                this.CalculateAdjustedMixedByLama(message);
+                this.CalculateAdjustedMixedByExpertones(message);
+            }
+            catch (ValuationException ex)
+            {
+                this.eventAggregator.PublishOnUIThread(new MixedCalculationErrorEvent(ex.Message));
+            }
+            catch (AggregateException ex)
+            {
+                this.eventAggregator.PublishOnUIThread(new MixedCalculationErrorEvent(ex.Message));
+            }
         }
 
         public void Handle(CashflowCalculationEvent message)
@@ -123,12 +220,48 @@ namespace BizVal.App.ViewModels
             }
         }
 
+        private void CalculateCashflow(CashflowCalculationEvent message)
+        {
+            var cashflowIntervals =
+                message.Cashflows.Select(i => new Interval(i.Interval.LowerBound, i.Interval.UpperBound)).ToList();
+            var waccIntervals =
+                message.Waccs.Select(i => new Interval(i.Interval.LowerBound, i.Interval.UpperBound)).ToList();
+            var result = this.companyValuator.Cashflow(cashflowIntervals, waccIntervals);
+            this.CashflowInterval = new BindableInterval(result);
+        }
+
         private void CalculateAdjustedCashflowByLama(CashflowCalculationEvent message)
         {
             var cashflowExpertises = this.GetExpertises(message.Cashflows);
             var waccExpertises = this.GetExpertises(message.Waccs);
             var result = this.cwCompanyValuator.CashflowWithLama(cashflowExpertises, waccExpertises, this.hierarchyManager.GetCurrentHierarchy());
             this.CashflowLamaInterval = new BindableInterval(result);
+        }
+
+        private void CalculateMixed(MixedCalculationEvent message)
+        {
+            var benefitsIntervals =
+                message.Benefits.Select(i => new Interval(i.Interval.LowerBound, i.Interval.UpperBound)).ToList();
+            var interestsIntervals =
+                message.Interests.Select(i => new Interval(i.Interval.LowerBound, i.Interval.UpperBound)).ToList();
+            var result = this.companyValuator.MixedAnalysis(message.SubstantialValue, benefitsIntervals, interestsIntervals);
+            this.MixedInterval = new BindableInterval(result);
+        }
+
+        private void CalculateAdjustedMixedByExpertones(MixedCalculationEvent message)
+        {
+            var benefits = this.GetExpertises(message.Benefits);
+            var interests = this.GetExpertises(message.Interests);
+            var result = this.cwCompanyValuator.MixedWithWithExpertones(message.SubstantialValue, benefits, interests, this.hierarchyManager.GetCurrentHierarchy());
+            this.MixedExpInterval = new BindableInterval(result);
+        }
+
+        private void CalculateAdjustedMixedByLama(MixedCalculationEvent message)
+        {
+            var benefits = this.GetExpertises(message.Benefits);
+            var interests = this.GetExpertises(message.Interests);
+            var result = this.cwCompanyValuator.MixedWithWithLama(message.SubstantialValue, benefits, interests, this.hierarchyManager.GetCurrentHierarchy());
+            this.MixedLamaInterval = new BindableInterval(result);
         }
 
         private void CalculateAdjustedCashflowByExpertones(CashflowCalculationEvent message)
@@ -138,6 +271,7 @@ namespace BizVal.App.ViewModels
             var result = this.cwCompanyValuator.CashflowWithExpertones(cashflowExpertises, waccExpertises, this.hierarchyManager.GetCurrentHierarchy());
             this.CashflowExpInterval = new BindableInterval(result);
         }
+
 
         private IList<Expertise> GetExpertises(IList<BindableExpertise> cashflows)
         {
@@ -159,16 +293,8 @@ namespace BizVal.App.ViewModels
             return result;
         }
 
-        private void CalculateCashflow(CashflowCalculationEvent message)
-        {
-            var cashflowIntervals =
-                message.Cashflows.Select(i => new Interval(i.Interval.LowerBound, i.Interval.UpperBound)).ToList();
-            var waccIntervals =
-                message.Waccs.Select(i => new Interval(i.Interval.LowerBound, i.Interval.UpperBound)).ToList();
-            var result = this.companyValuator.Cashflow(cashflowIntervals, waccIntervals);
-            this.CashflowInterval = new BindableInterval(result);
-        }
+
+
+
     }
-
-
 }

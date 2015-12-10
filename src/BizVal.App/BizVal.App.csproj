@@ -82,6 +82,7 @@
     <Compile Include="Module\AppModule.cs" />
     <Compile Include="ViewModels\CashflowViewModel.cs" />
     <Compile Include="ViewModels\ExpertiseViewModel.cs" />
+    <Compile Include="Events\HierarchyChangedEvent.cs" />
     <Compile Include="ViewModels\HierarchyDefinitionViewModel.cs" />
     <Compile Include="Interfaces\IHierarchyDefinitionViewModel.cs" />
     <Compile Include="Interfaces\IListViewModel.cs" />
@@ -91,6 +92,8 @@
     <Compile Include="ViewModels\IntervalListViewModel.cs" />
     <Compile Include="ViewModels\IntervalViewModel.cs" />
     <Compile Include="ViewModels\MixedAnalysisViewModel.cs" />
+    <Compile Include="Events\MixedCalculationEvent.cs" />
+    <Compile Include="Events\MixedCalculationErrorEvent.cs" />
     <Compile Include="ViewModels\ResultsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="App.xaml.cs">
