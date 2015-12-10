@@ -10,6 +10,7 @@ namespace BizVal.App.ViewModels
 {
     public class HierarchyDefinitionViewModel : Screen, IHierarchyDefinitionViewModel
     {
+        private const string Title = "Linguistic hierarchy definition";
         private readonly IEventAggregator eventAggregator;
         private readonly IWindowManager windowManager;
         private readonly IHierarchyManager hierarchyManager;
@@ -247,6 +248,7 @@ namespace BizVal.App.ViewModels
 
         public HierarchyDefinitionViewModel(IHierarchyManager hierarchyManager, IWindowManager windowManager, IEventAggregator eventAggregator)
         {
+            this.DisplayName = Title;
             this.eventAggregator = Contract.NotNull(eventAggregator, "eventAggregator");
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
             this.hierarchyManager = Contract.NotNull(hierarchyManager, "hierarchyManager");

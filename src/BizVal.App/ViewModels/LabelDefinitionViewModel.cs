@@ -67,6 +67,7 @@ namespace BizVal.App.ViewModels
             this.Upper = label.Upper;
             this.Medium = label.Medium;
             this.LabelName = label.Name;
+            this.DisplayName = "Define Label";
         }
 
         public bool CanSave

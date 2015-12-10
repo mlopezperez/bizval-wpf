@@ -30,8 +30,11 @@ namespace BizVal.App.ViewModels
 
         public ExpertiseViewModel(IHierarchyManager hierarchyManager, BindableExpertise expertise)
         {
-            this.expertise = expertise;
+            this.expertise = Contract.NotNull(expertise, "expertise");
             Contract.NotNull(hierarchyManager, "hierarchyManager");
+
+            this.DisplayName = "Define Expertise";
+
             this.Sliders = new BindableCollection<SliderViewModel>();
 
             this.hierarchy = new BindableHierarchy(hierarchyManager.GetCurrentHierarchy());

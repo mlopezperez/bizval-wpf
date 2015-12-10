@@ -46,12 +46,14 @@ namespace BizVal.App.ViewModels
 
         public IntervalViewModel(IWindowManager windowManager, BindableExpertise intervalWithOpinions, IHierarchyManager hierarchyManager)
         {
-            this.hierarchyManager = hierarchyManager;
+            this.hierarchyManager = Contract.NotNull(hierarchyManager, "hierarchyManager");
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
             this.expertise = Contract.NotNull(intervalWithOpinions, "intervalWithOpinions");
 
             this.LowerBound = intervalWithOpinions.Interval.LowerBound;
             this.UpperBound = intervalWithOpinions.Interval.UpperBound;
+
+            this.DisplayName = "Define Interval";
 
         }
 

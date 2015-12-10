@@ -24,6 +24,7 @@ namespace BizVal.App.ViewModels
             MixedAnalysisViewModel mixedAnalysisViewModel,
             ResultsViewModel resultsViewModel)
         {
+            this.DisplayName = "Business valuation using CW";
             this.eventAggregator = Contract.NotNull(eventAggregator, "eventAggregator");
             this.hierarchyManager = Contract.NotNull(hierarchyManager, "hierarchyManager");
             this.windowManager = Contract.NotNull(windowManager, "windowManager");
