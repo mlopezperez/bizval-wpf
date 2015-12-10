@@ -23,8 +23,8 @@
                   GridLinesVisibility="None" AlternatingRowBackground="LightGray"
                   SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Interval.LowerBound, StringFormat={}{0:0.00}}" Header="Lower" Width="100" />
-                <DataGridTextColumn Binding="{Binding Path=Interval.UpperBound, StringFormat={}{0:0.00}}" Header="Upper" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Path=Interval.LowerBound, StringFormat={}{0:N4}}" Header="Lower" Width="100" />
+                <DataGridTextColumn Binding="{Binding Path=Interval.UpperBound, StringFormat={}{0:N4}}" Header="Upper" Width="100"/>
                 <DataGridTextColumn Binding="{Binding Path=Opinions.Count, StringFormat= {}{0} Opinions}" Header="Opinions" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
