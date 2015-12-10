@@ -32,6 +32,8 @@ namespace BizVal.App.ViewModels
             this.Cashflow = Contract.NotNull(casflowViewModel, "casflowViewModel");
             this.MixedAnalysis = Contract.NotNull(mixedAnalysisViewModel, "mixedAnalysisViewModel");
             this.Results = Contract.NotNull(resultsViewModel, "resultsViewModel");
+
+            this.ActivateItem(this.Cashflow);
         }
 
         public void DefineHierarchy()

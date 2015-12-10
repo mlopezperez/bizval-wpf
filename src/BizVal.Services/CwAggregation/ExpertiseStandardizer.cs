@@ -16,16 +16,17 @@ namespace BizVal.Services.CwAggregation
         /// <param name="hierarchy"></param>
         /// <param name="level"></param>
         /// <returns>A standarized expertise.</returns>
-        LinguisticExpertise IExpertiseStandardizer.Standardize(LinguisticExpertise expertise, Hierarchy hierarchy, int level)
+        Expertise IExpertiseStandardizer.Standardize(Expertise expertise, Hierarchy hierarchy, int level)
         {
             Contract.NotNull(expertise, "expertise");
             Contract.NotNull(hierarchy, "hierarchy");
 
-            var result = new LinguisticExpertise(expertise.Interval);
-            foreach (var item in expertise.Cardinalities)
+            var result = new Expertise(expertise.Interval);
+            foreach (var item in expertise.Opinions)
             {
-                var standarTuple = hierarchy.Translate(item.Key, level);
-                result.Cardinalities.Add(standarTuple, item.Value);
+                var lowerTuple = hierarchy.Translate(item.LowerOpinion, level);
+                var upperTuple = hierarchy.Translate(item.UpperOpinion, level);
+                result.Opinions.Add(new Opinion(lowerTuple, upperTuple));
             }
             return result;
         }

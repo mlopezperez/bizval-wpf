@@ -1,20 +1,24 @@
-﻿using System.Runtime.CompilerServices;
-
+﻿
 namespace BizVal.Model
 {
     /// <summary>
     /// Encapsulates an expertise of linguistic information with TwoTuples.
     /// </summary>
     /// <seealso cref="BizVal.Model.Expertise{BizVal.Model.TwoTuple}" />
-    public class LinguisticExpertise : Expertise<TwoTuple>
+    public class TwoTupleCardinalities : CardinalityList<TwoTuple>
     {
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinguisticExpertise"/> class.
+        /// Initializes a new instance of the <see cref="TwoTupleCardinalities"/> class.
         /// </summary>
-        /// <param name="interval">The interval.</param>
-        public LinguisticExpertise(Interval interval)
-            : base(interval)
+        /// <param name="expertise">The expertise.</param>
+        public TwoTupleCardinalities(Expertise expertise)
+            : base(expertise.Interval)
         {
+            foreach (var item in expertise.Opinions)
+            {
+                this.AddOpinion(item.LowerOpinion, item.UpperOpinion);
+            }
         }
 
         /// <summary>

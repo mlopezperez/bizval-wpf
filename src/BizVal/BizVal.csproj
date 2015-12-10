@@ -38,8 +38,10 @@
     <Compile Include="ICwCompanyValuator.cs" />
     <Compile Include="IHierarchyManager.cs" />
     <Compile Include="Model\Cardinality.cs" />
+    <Compile Include="Model\CardinalityList.cs" />
     <Compile Include="Model\Expertise.cs" />
-    <Compile Include="Model\LinguisticExpertise.cs" />
+    <Compile Include="Model\Opinion.cs" />
+    <Compile Include="Model\TwoTupleCardinalities.cs" />
     <Compile Include="ICompanyValuator.cs" />
     <Compile Include="IAggregator.cs" />
     <Compile Include="Model\Expertone.cs" />

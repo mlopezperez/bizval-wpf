@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BizVal.App.Events;
 using BizVal.App.Model;
 using BizVal.Model;
 using Caliburn.Micro;
+using Opinion = BizVal.Model.Opinion;
 
 namespace BizVal.App.ViewModels
 {
@@ -13,7 +15,10 @@ namespace BizVal.App.ViewModels
         private readonly ICompanyValuator companyValuator;
         private readonly ICwCompanyValuator cwCompanyValuator;
         private readonly IEventAggregator eventAggregator;
+        private readonly IHierarchyManager hierarchyManager;
         private BindableInterval cashflowResult;
+        private BindableInterval cashflowLamaResult;
+        private BindableInterval cashflowExpResult;
 
         public string CashflowResult
         {
@@ -24,10 +29,46 @@ namespace BizVal.App.ViewModels
                     return string.Format(IntervalPattern, this.CashflowInterval.LowerBound,
                         this.CashflowInterval.UpperBound);
                 }
-                else
+                return string.Empty;
+            }
+        }
+
+        public string CashflowLamaResult
+        {
+            get
+            {
+                if (this.CashflowLamaInterval != null)
                 {
-                    return string.Empty;
+                    return string.Format(IntervalPattern, this.CashflowLamaInterval.LowerBound,
+                        this.CashflowLamaInterval.UpperBound);
                 }
+                return string.Empty;
+
+            }
+        }
+
+        public string CashflowExpResult
+        {
+            get
+            {
+                if (this.CashflowExpInterval != null)
+                {
+                    return string.Format(IntervalPattern, this.CashflowExpInterval.LowerBound,
+                        this.CashflowExpInterval.UpperBound);
+                }
+                return string.Empty;
+
+            }
+        }
+
+        public BindableInterval CashflowExpInterval
+        {
+            get { return this.cashflowExpResult; }
+            set
+            {
+                this.cashflowExpResult = value;
+                this.NotifyOfPropertyChange(() => this.CashflowExpInterval);
+                this.NotifyOfPropertyChange(() => this.CashflowExpResult);
             }
         }
 
@@ -42,11 +83,24 @@ namespace BizVal.App.ViewModels
             }
         }
 
-        public ResultsViewModel(ICompanyValuator companyValuator, ICwCompanyValuator cwCompanyValuator, IEventAggregator eventAggregator)
+
+        public BindableInterval CashflowLamaInterval
+        {
+            get { return this.cashflowLamaResult; }
+            set
+            {
+                this.cashflowLamaResult = value;
+                this.NotifyOfPropertyChange(() => this.CashflowLamaInterval);
+                this.NotifyOfPropertyChange(() => this.CashflowLamaResult);
+            }
+        }
+
+        public ResultsViewModel(ICompanyValuator companyValuator, ICwCompanyValuator cwCompanyValuator, IEventAggregator eventAggregator, IHierarchyManager hierarchyManager)
         {
             this.companyValuator = companyValuator;
             this.cwCompanyValuator = cwCompanyValuator;
             this.eventAggregator = eventAggregator;
+            this.hierarchyManager = hierarchyManager;
 
             this.eventAggregator.Subscribe(this);
         }
@@ -56,7 +110,8 @@ namespace BizVal.App.ViewModels
             try
             {
                 this.CalculateCashflow(message);
-                // this.CalculateAdjustedCashflow(message);
+                this.CalculateAdjustedCashflowByLama(message);
+                this.CalculateAdjustedCashflowByExpertones(message);
             }
             catch (ValuationException ex)
             {
@@ -68,9 +123,40 @@ namespace BizVal.App.ViewModels
             }
         }
 
-        private void CalculateAdjustedCashflow(CashflowCalculationEvent message)
+        private void CalculateAdjustedCashflowByLama(CashflowCalculationEvent message)
         {
-            throw new NotImplementedException();
+            var cashflowExpertises = this.GetExpertises(message.Cashflows);
+            var waccExpertises = this.GetExpertises(message.Waccs);
+            var result = this.cwCompanyValuator.CashflowWithLama(cashflowExpertises, waccExpertises, this.hierarchyManager.GetCurrentHierarchy());
+            this.CashflowLamaInterval = new BindableInterval(result);
+        }
+
+        private void CalculateAdjustedCashflowByExpertones(CashflowCalculationEvent message)
+        {
+            var cashflowExpertises = this.GetExpertises(message.Cashflows);
+            var waccExpertises = this.GetExpertises(message.Waccs);
+            var result = this.cwCompanyValuator.CashflowWithExpertones(cashflowExpertises, waccExpertises, this.hierarchyManager.GetCurrentHierarchy());
+            this.CashflowExpInterval = new BindableInterval(result);
+        }
+
+        private IList<Expertise> GetExpertises(IList<BindableExpertise> cashflows)
+        {
+            var result = new List<Expertise>();
+            var hierachy = this.hierarchyManager.GetCurrentHierarchy();
+            foreach (var item in cashflows)
+            {
+                var interval = new Interval(item.Interval.LowerBound, item.Interval.UpperBound);
+                var linguisticExpertise = new Expertise(interval);
+                foreach (var opinion in item.Opinions)
+                {
+                    var lowerLabel = hierachy[opinion.LabelSet][opinion.LowerBoundLabel.Index];
+                    var upperLabel = hierachy[opinion.LabelSet][opinion.UpperBoundLabel.Index];
+
+                    linguisticExpertise.Opinions.Add(new Opinion(lowerLabel.Theta(), upperLabel.Theta()));
+                }
+                result.Add(linguisticExpertise);
+            }
+            return result;
         }
 
         private void CalculateCashflow(CashflowCalculationEvent message)
@@ -80,11 +166,7 @@ namespace BizVal.App.ViewModels
             var waccIntervals =
                 message.Waccs.Select(i => new Interval(i.Interval.LowerBound, i.Interval.UpperBound)).ToList();
             var result = this.companyValuator.Cashflow(cashflowIntervals, waccIntervals);
-            this.CashflowInterval = new BindableInterval()
-            {
-                LowerBound = result.LowerBound,
-                UpperBound = result.UpperBound
-            };
+            this.CashflowInterval = new BindableInterval(result);
         }
     }
 

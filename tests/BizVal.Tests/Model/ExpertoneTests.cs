@@ -62,9 +62,9 @@ namespace BizVal.Tests.Model
             Assert.AreEqual(0.04720m, expectedValue.UpperBound);
         }
 
-        private Expertise<string> GetTestExpertise()
+        private CardinalityList<string> GetTestExpertise()
         {
-            var expertise = new Expertise<string>(new Interval(0.04m, 0.05m));
+            var expertise = new CardinalityList<string>(new Interval(0.04m, 0.05m));
             expertise.Cardinalities.Add("k", new Cardinality(3, 5));
             expertise.Cardinalities.Add("j", new Cardinality(0, 1));
             expertise.Cardinalities.Add("i", new Cardinality(0, 1));

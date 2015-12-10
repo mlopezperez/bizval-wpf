@@ -17,8 +17,8 @@ namespace BizVal
         /// <param name="linguisticHierarchy">The linguistic hierarchy.</param>
         /// <returns>An interval containing the probable value of the company.</returns>
         Interval CashflowWithExpertones(
-            IList<LinguisticExpertise> cashflows,
-            IList<LinguisticExpertise> waccs,
+            IList<Expertise> cashflows,
+            IList<Expertise> waccs,
             Hierarchy linguisticHierarchy);
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace BizVal
         /// <param name="linguisticHierarchy">The linguistic hierarchy.</param>
         /// <returns>An interval containing the probable value of the company.</returns>
         Interval CashflowWithLama(
-            IList<LinguisticExpertise> cashflows,
-            IList<LinguisticExpertise> waccs,
+            IList<Expertise> cashflows,
+            IList<Expertise> waccs,
             Hierarchy linguisticHierarchy);
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace BizVal
         /// <returns>An interval containing the probable value of the company.</returns>
         Interval MixedWithWithExpertones(
             decimal substantialValue,
-            IList<LinguisticExpertise> benefits,
-            IList<LinguisticExpertise> interests,
+            IList<Expertise> benefits,
+            IList<Expertise> interests,
             Hierarchy linguisticHierarchy);
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace BizVal
         /// <returns>An interval containing the probable value of the company.</returns>
         Interval MixedWithWithLama(
             decimal substantialValue,
-            IList<LinguisticExpertise> benefits,
-            IList<LinguisticExpertise> interests,
+            IList<Expertise> benefits,
+            IList<Expertise> interests,
             Hierarchy linguisticHierarchy);
     }
 }

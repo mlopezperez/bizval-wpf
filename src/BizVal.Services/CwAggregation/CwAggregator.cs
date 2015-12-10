@@ -34,13 +34,15 @@ namespace BizVal.Services.CwAggregation
         /// <returns>
         /// An adjusted interval aggregating the linguistic information provided in the expertise.
         /// </returns>
-        Interval IAggregator.AggregateByExpertone(LinguisticExpertise expertise, Hierarchy hierarchy, int referenceLevel)
+        Interval IAggregator.AggregateByExpertone(Expertise expertise, Hierarchy hierarchy, int referenceLevel)
         {
             Contract.NotNull(expertise, "expertise");
             Contract.NotNull(hierarchy, "hierarchy");
 
             var standardExpertise = this.standardizer.Standardize(expertise, hierarchy, referenceLevel);
-            var expertone = new Expertone<TwoTuple>(standardExpertise);
+            TwoTupleCardinalities cardinalities = new TwoTupleCardinalities(standardExpertise);
+
+            var expertone = new Expertone<TwoTuple>(cardinalities);
             var expectedInterval = expertone.GetExpectedValue();
             return expectedInterval;
         }
@@ -54,14 +56,15 @@ namespace BizVal.Services.CwAggregation
         /// <returns>
         /// An adjusted interval aggregating the linguistic information provided in the expertise.
         /// </returns>
-        Interval IAggregator.AggregateByLama(LinguisticExpertise expertise, Hierarchy hierarchy, int referenceLevel)
+        Interval IAggregator.AggregateByLama(Expertise expertise, Hierarchy hierarchy, int referenceLevel)
         {
             Contract.NotNull(expertise, "expertise");
             Contract.NotNull(hierarchy, "hierarchy");
             var standardExpertise = this.standardizer.Standardize(expertise, hierarchy, referenceLevel);
+            var cardinalities = new TwoTupleCardinalities(standardExpertise);
 
-            Dictionary<TwoTuple, int> lowerCardinalities = standardExpertise.Cardinalities.ToDictionary(k => k.Key, v => v.Value.Lower);
-            Dictionary<TwoTuple, int> upperCardinalities = standardExpertise.Cardinalities.ToDictionary(k => k.Key, v => v.Value.Upper);
+            Dictionary<TwoTuple, int> lowerCardinalities = cardinalities.Cardinalities.ToDictionary(k => k.Key, v => v.Value.Lower);
+            Dictionary<TwoTuple, int> upperCardinalities = cardinalities.Cardinalities.ToDictionary(k => k.Key, v => v.Value.Upper);
             var aggregatedLowerTuple = this.lamaCalculator.LinguisticLama(lowerCardinalities, hierarchy[referenceLevel]);
             var aggregatedUpperTuple = this.lamaCalculator.LinguisticLama(upperCardinalities, hierarchy[referenceLevel]);
 

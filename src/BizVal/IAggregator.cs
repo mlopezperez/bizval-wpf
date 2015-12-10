@@ -16,7 +16,7 @@ namespace BizVal
         /// <returns>
         /// An adjusted interval aggregating the linguistic information provided in the expertise.
         /// </returns>
-        Interval AggregateByExpertone(LinguisticExpertise expertise, Hierarchy hierarchy, int referenceLevel);
+        Interval AggregateByExpertone(Expertise expertise, Hierarchy hierarchy, int referenceLevel);
 
         /// <summary>
         /// Aggregates the linguistic information privided in the expertise using the LAMA operator.
@@ -27,6 +27,6 @@ namespace BizVal
         /// <returns>
         /// An adjusted interval aggregating the linguistic information provided in the expertise.
         /// </returns>
-        Interval AggregateByLama(LinguisticExpertise expertise, Hierarchy hierarchy, int referenceLevel);
+        Interval AggregateByLama(Expertise expertise, Hierarchy hierarchy, int referenceLevel);
     }
 }

@@ -10,6 +10,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -24,16 +26,31 @@
         </Grid.RowDefinitions>
         <Rectangle Grid.Row="3" Grid.ColumnSpan="3"  Height="2" Fill="DarkGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
         <Rectangle Grid.Row="0" Grid.Column="1" Grid.RowSpan="7"  Width="2" Fill="DarkGray" VerticalAlignment="Stretch" HorizontalAlignment="Center" ></Rectangle>
+        <Rectangle Grid.Row="0" Grid.Column="3" Grid.RowSpan="7"  Width="2" Fill="DarkGray" VerticalAlignment="Stretch" HorizontalAlignment="Center" ></Rectangle>
         <Label Grid.RowSpan="3" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Cashflow:</Label>
         <Label Grid.RowSpan="3" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">MixedAnalysis:</Label>
 
-        <Label x:Name="CashflowResult" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"></Label>
-        <!--<Rectangle Margin="5"  Grid.Row="0" Grid.Column="2" Height="20" Fill="DarkGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>-->
-        <Rectangle Margin="5"  Grid.Row="1" Grid.Column="2" Height="20" Fill="LightSlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
-        <Rectangle Margin="5"  Grid.Row="2" Grid.Column="2" Height="20" Fill="SlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
+        <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center">Regular:</Label>
+        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">Adj. LAMA:</Label>
+        <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">Adj Exp:</Label>
 
-        <Rectangle Margin="5"  Grid.Row="4" Grid.Column="2" Height="20" Fill="DarkGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="20" ></Rectangle>
-        <Rectangle Margin="5"  Grid.Row="5" Grid.Column="2" Height="20" Fill="LightSlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
-        <Rectangle Margin="5"  Grid.Row="6" Grid.Column="2" Height="20" Fill="SlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
+        <Label x:Name="CashflowResult" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"></Label>
+        <Label x:Name="CashflowLamaResult" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"></Label>
+        <Label x:Name="CashflowExpResult" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"></Label>
+        <!--<Rectangle Margin="5"  Grid.Row="0" Grid.Column="2" Height="20" Fill="DarkGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
+        <Rectangle Margin="5"  Grid.Row="1" Grid.Column="2" Height="20" Fill="LightSlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
+        <Rectangle Margin="5"  Grid.Row="2" Grid.Column="2" Height="20" Fill="SlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>-->
+
+        <Label Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">Regular:</Label>
+        <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center">Adj. LAMA:</Label>
+        <Label Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center">Adj Exp:</Label>
+
+        <Label x:Name="MixedResult" Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center"></Label>
+        <Label x:Name="MixedLamaResult" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center"></Label>
+        <Label x:Name="MixedExpResult" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Center"></Label>
+
+        <!--<Rectangle Margin="5"  Grid.Row="4" Grid.Column="3" Height="20" Fill="DarkGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="20" ></Rectangle>
+        <Rectangle Margin="5"  Grid.Row="5" Grid.Column="3" Height="20" Fill="LightSlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
+        <Rectangle Margin="5"  Grid.Row="6" Grid.Column="3" Height="20" Fill="SlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>-->
     </Grid>
 </UserControl>

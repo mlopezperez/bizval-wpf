@@ -36,7 +36,7 @@ namespace BizVal.Services
         /// <returns>
         /// An interval containing the probable value of the company.
         /// </returns>
-        public Interval CashflowWithExpertones(IList<LinguisticExpertise> cashflows, IList<LinguisticExpertise> waccs, Hierarchy linguisticHierarchy)
+        public Interval CashflowWithExpertones(IList<Expertise> cashflows, IList<Expertise> waccs, Hierarchy linguisticHierarchy)
         {
             Contract.NotNull(cashflows, "cashflows");
             Contract.NotNull(waccs, "waccs");
@@ -58,7 +58,7 @@ namespace BizVal.Services
         /// <returns>
         /// An interval containing the probable value of the company.
         /// </returns>
-        public Interval CashflowWithLama(IList<LinguisticExpertise> cashflows, IList<LinguisticExpertise> waccs, Hierarchy linguisticHierarchy)
+        public Interval CashflowWithLama(IList<Expertise> cashflows, IList<Expertise> waccs, Hierarchy linguisticHierarchy)
         {
             Contract.NotNull(cashflows, "cashflows");
             Contract.NotNull(waccs, "waccs");
@@ -81,7 +81,7 @@ namespace BizVal.Services
         /// <returns>
         /// An interval containing the probable value of the company.
         /// </returns>
-        public Interval MixedWithWithExpertones(decimal substantialValue, IList<LinguisticExpertise> benefits, IList<LinguisticExpertise> interests,
+        public Interval MixedWithWithExpertones(decimal substantialValue, IList<Expertise> benefits, IList<Expertise> interests,
             Hierarchy linguisticHierarchy)
         {
             Contract.NotNull(benefits, "benefits");
@@ -105,7 +105,7 @@ namespace BizVal.Services
         /// <returns>
         /// An interval containing the probable value of the company.
         /// </returns>
-        public Interval MixedWithWithLama(decimal substantialValue, IList<LinguisticExpertise> benefits, IList<LinguisticExpertise> interests, Hierarchy linguisticHierarchy)
+        public Interval MixedWithWithLama(decimal substantialValue, IList<Expertise> benefits, IList<Expertise> interests, Hierarchy linguisticHierarchy)
         {
             Contract.NotNull(benefits, "benefits");
             Contract.NotNull(interests, "interests");
@@ -117,7 +117,7 @@ namespace BizVal.Services
             return result;
         }
 
-        private IList<Interval> AdjustByExpertones(IList<LinguisticExpertise> data, Hierarchy hierarchy)
+        private IList<Interval> AdjustByExpertones(IList<Expertise> data, Hierarchy hierarchy)
         {
             var referenceLevel = hierarchy.LastOrDefault();
             if (referenceLevel == null)
@@ -133,7 +133,7 @@ namespace BizVal.Services
             return adjustedData;
         }
 
-        private IList<Interval> AdjustByLama(IList<LinguisticExpertise> data, Hierarchy hierarchy)
+        private IList<Interval> AdjustByLama(IList<Expertise> data, Hierarchy hierarchy)
         {
             var referenceLevel = hierarchy.LastOrDefault();
             if (referenceLevel == null)

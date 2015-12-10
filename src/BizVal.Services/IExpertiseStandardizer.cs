@@ -14,6 +14,6 @@ namespace BizVal.Services
         /// <param name="hierarchy"></param>
         /// <param name="level"></param>
         /// <returns>A standarized expertise.</returns>
-        LinguisticExpertise Standardize(LinguisticExpertise expertise, Hierarchy hierarchy, int level);
+        Expertise Standardize(Expertise expertise, Hierarchy hierarchy, int level);
     }
 }

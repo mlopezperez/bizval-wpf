@@ -77,7 +77,7 @@ namespace BizVal.Model
         /// Initializes a new instance of the <see cref="Expertone{T}"/> class.
         /// </summary>
         /// <param name="expertise">The expertise used to create the expertone.</param>
-        public Expertone(Expertise<T> expertise)
+        public Expertone(CardinalityList<T> expertise)
         {
             Contract.NotNull(expertise, "expertise");
             this.items = new SortedList<T, ExpertoneItem>();
@@ -85,7 +85,7 @@ namespace BizVal.Model
             this.ProcessExpertise(expertise);
         }
 
-        private void ProcessExpertise(Expertise<T> expertise)
+        private void ProcessExpertise(CardinalityList<T> expertise)
         {
             var totalCardinality = expertise.Cardinalities.Sum(c => c.Value.Lower);
             foreach (var item in expertise.Cardinalities)

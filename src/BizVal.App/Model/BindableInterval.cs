@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BizVal.Framework;
+using BizVal.Model;
 using Caliburn.Micro;
 
 namespace BizVal.App.Model
@@ -21,7 +18,7 @@ namespace BizVal.App.Model
             set
             {
                 this.lowerBound = value;
-                this.NotifyOfPropertyChange(() => this.LowerBound); 
+                this.NotifyOfPropertyChange(() => this.LowerBound);
             }
         }
 
@@ -36,6 +33,17 @@ namespace BizVal.App.Model
                 this.upperBound = value;
                 this.NotifyOfPropertyChange(() => this.UpperBound);
             }
+        }
+
+        public BindableInterval()
+        {
+        }
+
+        public BindableInterval(Interval interval)
+        {
+            Contract.NotNull(interval, "interval");
+            this.LowerBound = interval.LowerBound;
+            this.upperBound = interval.UpperBound;
         }
     }
 }
