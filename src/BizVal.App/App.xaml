@@ -3,16 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:app="clr-namespace:BizVal.App">
     <Application.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary>
-                        <app:AppBootstrapper x:Key="bootstrapper" />
-                        
-                    </ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <app:AppBootstrapper x:Key="bootstrapper" />
+
+                </ResourceDictionary>
                 <ResourceDictionary Source="Themes/IG/IG.MSControls.Core.Implicit.xaml" />
                 <ResourceDictionary Source="Themes/IG/IG.MSControls.Toolkit.Implicit.xaml" />
+                <ResourceDictionary Source="Themes/Custom/Theme.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
+        </ResourceDictionary>
 
     </Application.Resources>
 </Application>

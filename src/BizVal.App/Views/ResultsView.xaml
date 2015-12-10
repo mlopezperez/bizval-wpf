@@ -6,7 +6,7 @@
                 x:Class="BizVal.App.Views.ResultsView" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Background="LightGray">
-    <Grid Margin="10">
+    <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -37,10 +37,7 @@
         <Label x:Name="CashflowResult" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"></Label>
         <Label x:Name="CashflowLamaResult" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"></Label>
         <Label x:Name="CashflowExpResult" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"></Label>
-        <!--<Rectangle Margin="5"  Grid.Row="0" Grid.Column="2" Height="20" Fill="DarkGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
-        <Rectangle Margin="5"  Grid.Row="1" Grid.Column="2" Height="20" Fill="LightSlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
-        <Rectangle Margin="5"  Grid.Row="2" Grid.Column="2" Height="20" Fill="SlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>-->
-
+       
         <Label Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">Regular:</Label>
         <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center">Adj. LAMA:</Label>
         <Label Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center">Adj Exp:</Label>
@@ -49,8 +46,5 @@
         <Label x:Name="MixedLamaResult" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center"></Label>
         <Label x:Name="MixedExpResult" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Center"></Label>
 
-        <!--<Rectangle Margin="5"  Grid.Row="4" Grid.Column="3" Height="20" Fill="DarkGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="20" ></Rectangle>
-        <Rectangle Margin="5"  Grid.Row="5" Grid.Column="3" Height="20" Fill="LightSlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>
-        <Rectangle Margin="5"  Grid.Row="6" Grid.Column="3" Height="20" Fill="SlateGray" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Rectangle>-->
     </Grid>
 </UserControl>
