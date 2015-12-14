@@ -34,17 +34,33 @@
         <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">Adj. LAMA:</Label>
         <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">Adj Exp:</Label>
 
-        <Label x:Name="CashflowResult" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"></Label>
-        <Label x:Name="CashflowLamaResult" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"></Label>
-        <Label x:Name="CashflowExpResult" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"></Label>
-       
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="CashflowResult"  HorizontalAlignment="Center"></Label>
+            <Label Content="{Binding CashflowInterval.Width}"  HorizontalAlignment="Center" FontSize="12" FontWeight="Normal" FontStyle="Italic"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="CashflowLamaResult"  HorizontalAlignment="Center"></Label>
+            <Label Content="{Binding CashflowLamaInterval.Width}"  HorizontalAlignment="Center" FontSize="12" FontWeight="Normal" FontStyle="Italic"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="CashflowExpResult"  HorizontalAlignment="Center"></Label>
+            <Label Content="{Binding CashflowExpInterval.Width}"  HorizontalAlignment="Center" FontSize="12" FontWeight="Normal" FontStyle="Italic"></Label>
+        </StackPanel>
         <Label Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">Regular:</Label>
         <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center">Adj. LAMA:</Label>
         <Label Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center">Adj Exp:</Label>
 
-        <Label x:Name="MixedResult" Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center"></Label>
-        <Label x:Name="MixedLamaResult" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center"></Label>
-        <Label x:Name="MixedExpResult" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Center"></Label>
-
+        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="MixedResult"  HorizontalAlignment="Center"></Label>
+            <Label Content="{Binding MixedInterval.Width}"  HorizontalAlignment="Center" FontSize="12" FontWeight="Normal" FontStyle="Italic"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="MixedLamaResult"  HorizontalAlignment="Center"></Label>
+            <Label Content="{Binding MixedLamaInterval.Width}"  HorizontalAlignment="Center" FontSize="12" FontWeight="Normal" FontStyle="Italic"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="MixedExpResult"  HorizontalAlignment="Center"></Label>
+            <Label Content="{Binding MixedExpInterval.Width}"  HorizontalAlignment="Center" FontSize="12" FontWeight="Normal" FontStyle="Italic"></Label>
+        </StackPanel>
     </Grid>
 </UserControl>

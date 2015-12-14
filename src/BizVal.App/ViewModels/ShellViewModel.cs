@@ -1,3 +1,4 @@
+using BizVal.App.Events;
 using BizVal.App.Interfaces;
 using BizVal.Framework;
 using Caliburn.Micro;
@@ -32,6 +33,8 @@ namespace BizVal.App.ViewModels
             this.Cashflow = Contract.NotNull(casflowViewModel, "casflowViewModel");
             this.MixedAnalysis = Contract.NotNull(mixedAnalysisViewModel, "mixedAnalysisViewModel");
             this.Results = Contract.NotNull(resultsViewModel, "resultsViewModel");
+
+            this.eventAggregator.PublishOnUIThread(new DataChangedEvent());
         }
 
         public void DefineHierarchy()

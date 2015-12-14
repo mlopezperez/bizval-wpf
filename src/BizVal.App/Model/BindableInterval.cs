@@ -8,6 +8,7 @@ namespace BizVal.App.Model
     {
         private decimal lowerBound;
         private decimal upperBound;
+        private decimal width;
 
         public decimal LowerBound
         {
@@ -19,6 +20,7 @@ namespace BizVal.App.Model
             {
                 this.lowerBound = value;
                 this.NotifyOfPropertyChange(() => this.LowerBound);
+                this.NotifyOfPropertyChange(() => this.Width);
             }
         }
 
@@ -32,7 +34,18 @@ namespace BizVal.App.Model
             {
                 this.upperBound = value;
                 this.NotifyOfPropertyChange(() => this.UpperBound);
+                this.NotifyOfPropertyChange(() => this.Width);
             }
+        }
+
+        public string Width
+        {
+            get
+            {
+                var val = this.upperBound - this.lowerBound;
+                return val.ToString("N2");
+            }
+
         }
 
         public BindableInterval()
