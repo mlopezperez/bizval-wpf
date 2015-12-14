@@ -4,7 +4,7 @@ using System.Linq;
 using BizVal.Framework;
 using BizVal.Model;
 
-namespace BizVal.Services.CwAggregation
+namespace BizVal.Services.Cw
 {
     internal sealed class ExpertoneExpertiseAdjuster : IExpertoneExpertiseAdjuster
     {

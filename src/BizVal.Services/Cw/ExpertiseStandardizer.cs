@@ -1,7 +1,7 @@
 ﻿using BizVal.Framework;
 using BizVal.Model;
 
-namespace BizVal.Services.CwAggregation
+namespace BizVal.Services.Cw
 {
     /// <summary>
     /// Implementation of a standardizer for linguistic expertise.

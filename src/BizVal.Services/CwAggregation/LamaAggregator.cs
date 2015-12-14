@@ -12,6 +12,7 @@ namespace BizVal.Services.CwAggregation
     /// <seealso cref="BizVal.ILamaAggregator" />
     internal sealed class LamaAggregator : ILamaAggregator
     {
+        private readonly ITwoTupleDecimalConverter decimalConverter;
         private readonly ILamaCalculator lamaCalculator;
         private readonly IExpertiseStandardizer standardizer;
 
@@ -20,8 +21,10 @@ namespace BizVal.Services.CwAggregation
         /// </summary>
         /// <param name="standardizer">The standardizer.</param>
         /// <param name="lamaCalculator">The lama calculator.</param>
-        public LamaAggregator(IExpertiseStandardizer standardizer, ILamaCalculator lamaCalculator)
+        /// <param name="decimalConverter"></param>
+        public LamaAggregator(IExpertiseStandardizer standardizer, ILamaCalculator lamaCalculator, ITwoTupleDecimalConverter decimalConverter)
         {
+            this.decimalConverter = Contract.NotNull(decimalConverter, "decimalConverter");
             this.lamaCalculator = Contract.NotNull(lamaCalculator, "lamaCalculator");
             this.standardizer = Contract.NotNull(standardizer, "standardizer");
         }
@@ -54,8 +57,8 @@ namespace BizVal.Services.CwAggregation
 
         private Interval AdjustInterval(Interval interval, TwoTuple aggregatedLowerTuple, TwoTuple aggregatedUpperTuple)
         {
-            var lowerTupleFactor = this.GetFactor(aggregatedLowerTuple);
-            var upperTupleFactor = this.GetFactor(aggregatedUpperTuple);
+            var lowerTupleFactor = this.decimalConverter.ConvertToDecimal(aggregatedLowerTuple);
+            var upperTupleFactor = this.decimalConverter.ConvertToDecimal(aggregatedUpperTuple);
 
             Interval adjustedInterval = lowerTupleFactor < upperTupleFactor ?
                 new Interval(lowerTupleFactor, upperTupleFactor) :
@@ -63,23 +66,6 @@ namespace BizVal.Services.CwAggregation
 
             var result = interval.LowerBound + (interval.Width * adjustedInterval);
             return result;
-        }
-
-        private decimal GetFactor(TwoTuple tuple)
-        {
-            var set = tuple.Label.LabelSet;
-            var beta = set.DeltaInv(tuple);
-            decimal k = 1m;
-            if (beta < set.G)
-            {
-                int h = (int)Math.Truncate(beta);
-                var sigma = beta - h;
-                var membershipTuple1 = new TwoTuple(set[h], 1 - sigma);
-                var membershipTuple2 = new TwoTuple(set[h + 1], sigma);
-                k = (membershipTuple1.Label.M * membershipTuple1.Alpha) +
-                        (membershipTuple2.Label.M * membershipTuple2.Alpha);
-            }
-            return k;
         }
     }
 }

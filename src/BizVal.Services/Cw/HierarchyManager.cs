@@ -1,6 +1,6 @@
 ﻿using BizVal.Model;
 
-namespace BizVal.Services.CwAggregation
+namespace BizVal.Services.Cw
 {
     internal class HierarchyManager : IHierarchyManager
     {

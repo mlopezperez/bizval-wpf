@@ -1,4 +1,5 @@
 ﻿using BizVal.Framework.DependencyInjection;
+using BizVal.Services.Cw;
 using BizVal.Services.CwAggregation;
 using BizVal.Services.Valuation;
 
@@ -26,6 +27,7 @@ namespace BizVal.Services.Module
             container.RegisterType<ILamaCalculator, LamaCalculator>(LifeTimeManagerType.ContainerControlled);
             container.RegisterType<ICwCompanyValuator, CwCompanyValuator>(LifeTimeManagerType.ContainerControlled);
             container.RegisterType<IHierarchyManager, HierarchyManager>(LifeTimeManagerType.ContainerControlled);
+            container.RegisterType<ITwoTupleDecimalConverter, TwoTupleDecimalConverter>(LifeTimeManagerType.ContainerControlled);
         }
     }
 }
