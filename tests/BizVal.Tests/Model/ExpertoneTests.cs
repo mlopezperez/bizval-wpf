@@ -51,15 +51,14 @@ namespace BizVal.Tests.Model
         }
 
         [Test]
-        [Ignore("Check results and methodology")]
         public void GetExpectedValueRetursProperInterval()
         {
             var expertone = new Expertone<string>(this.GetTestExpertise());
             var expectedValue = expertone.GetExpectedValue();
 
             Assert.NotNull(expectedValue);
-            Assert.AreEqual(0.04610m, expectedValue.LowerBound);
-            Assert.AreEqual(0.04720m, expectedValue.UpperBound);
+            Assert.AreEqual(0.67m, expectedValue.LowerBound);
+            Assert.AreEqual(0.8m, expectedValue.UpperBound);
         }
 
         private CardinalityList<string> GetTestExpertise()

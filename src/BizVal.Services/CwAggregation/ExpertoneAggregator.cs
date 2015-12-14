@@ -38,10 +38,11 @@ namespace BizVal.Services.CwAggregation
             TwoTupleCardinalities cardinalities = new TwoTupleCardinalities(standardExpertise);
 
             var expertone = new Expertone<TwoTuple>(cardinalities);
-            var expectedInterval = expertone.GetExpectedValue();
+            var expectedValue = expertone.GetExpectedValue();
+            var expectedInterval = expertone.Interval.LowerBound + ((expertone.Interval.Width) * expectedValue);
             return expectedInterval;
         }
 
-      
+
     }
 }

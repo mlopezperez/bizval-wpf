@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using BizVal.Framework;
 
 namespace BizVal.Model
@@ -108,11 +109,12 @@ namespace BizVal.Model
         /// <returns>An interval containing the expected value of the expertone.</returns>
         public Interval GetExpectedValue()
         {
-            var result = new Interval()
-            {
-                LowerBound = this.GetExpectedValue(this.LowerRValues),
-                UpperBound = this.GetExpectedValue(this.UpperRValues)
-            };
+            var lowerBound = this.GetExpectedValue(this.LowerValues);
+            var upperBound = this.GetExpectedValue(this.UpperValues);
+            var result = lowerBound <= upperBound
+                ? new Interval(lowerBound, upperBound)
+                : new Interval(upperBound, lowerBound);
+
             return result;
         }
 
