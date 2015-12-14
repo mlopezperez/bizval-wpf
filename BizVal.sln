@@ -12,12 +12,22 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BDA6FED0-6D31-47EF-BBFA-E587F0652812}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal.Services.Tests", "tests\BizVal.Services.Tests\BizVal.Services.Tests.csproj", "{765C6085-7E12-4009-9E58-BCE2D49E8D99}"
+	ProjectSection(ProjectDependencies) = postProject
+		{191EAC2A-9364-4E57-A3A7-386AEAC5CD43} = {191EAC2A-9364-4E57-A3A7-386AEAC5CD43}
+		{795DA232-6083-48B6-9E49-17ED6A67E6AA} = {795DA232-6083-48B6-9E49-17ED6A67E6AA}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal", "src\BizVal\BizVal.csproj", "{795DA232-6083-48B6-9E49-17ED6A67E6AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal.App", "src\BizVal.App\BizVal.App.csproj", "{035055B3-EEF0-4D5A-8240-FE22F894F6BE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{191EAC2A-9364-4E57-A3A7-386AEAC5CD43} = {191EAC2A-9364-4E57-A3A7-386AEAC5CD43}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizVal.Services", "src\BizVal.Services\BizVal.Services.csproj", "{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0659840A-E7FD-462B-B866-7DBF64841BC3} = {0659840A-E7FD-462B-B866-7DBF64841BC3}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{25C4F260-7271-442E-B567-5CC88DF8A672}"
 EndProject

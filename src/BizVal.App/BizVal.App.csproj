@@ -286,7 +286,7 @@
       <Name>BizVal.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\BizVal.Services\BizVal.Services.csproj">
-      <Project>{191EAC2A-9364-4E57-A3A7-386AEAC5CD43}</Project>
+      <Project>{191eac2a-9364-4e57-a3a7-386aeac5cd43}</Project>
       <Name>BizVal.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\BizVal\BizVal.csproj">
